@@ -1,0 +1,22 @@
+export const BUSINESS_CONFIG = {
+  name: "TheBusyGrowth",
+  email: "thebusygrowth@gmail.com",
+  phone: "+919079315929",
+  phoneFormatted: "+91 90793 15929",
+  whatsapp: "+919079315929",
+  whatsappFormatted: "+91 90793 15929",
+  whatsappLink: "https://wa.me/919079315929?text=Hi%20TheBusyGrowth%2C%20I'm%20interested%20in%20your%20services!",
+  address: "Jaipur, Rajasthan, India",
+  city: "Jaipur",
+  state: "Rajasthan",
+  country: "India",
+  postalCode: "302001",
+  socials: {
+    instagram: "https://www.instagram.com/busygrowth?igsh=MWw3bmF6dmx0NDgzZg%3D%3D",
+    facebook: "https://www.facebook.com/people/Busy-Growth/61585734320392/",
+    youtube: "https://youtube.com/@busygrowth?si=8-vqgoQnR2COGrAn",
+  },
+  websiteUrl: "https://thebusygrowth.com",
+  tagline: "Predictable Digital Growth & Performance Agency",
+  description: "Jaipur-based performance marketing team scaling founders and creators with Reels, Ads, and AI automation. No fluff — just real growth.",
+};
