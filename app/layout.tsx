@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import JSONLD from "@/components/JSONLD";
 import { BUSINESS_CONFIG } from "@/components/businessConfig";
@@ -82,21 +81,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      suppressHydrationWarning
+      className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-800 dark:bg-[#050c1a] dark:text-slate-100 selection:bg-[#00a651]/20 selection:text-[#0d60c4] transition-colors duration-300">
-        <ThemeProvider>
-          <JSONLD type="Organization" />
-          <JSONLD type="LocalBusiness" />
-          <JSONLD type="WebSite" />
-          <ClientLayout>
-            <Navbar />
-            <main className="flex-1 pt-20">{children}</main>
-            <Footer />
-            <WhatsAppButton />
-          </ClientLayout>
-        </ThemeProvider>
+      <body className="min-h-full flex flex-col bg-[#050c1a] text-slate-100 selection:bg-[#00a651]/20 selection:text-[#0d60c4] transition-colors duration-300">
+        <JSONLD type="Organization" />
+        <JSONLD type="LocalBusiness" />
+        <JSONLD type="WebSite" />
+        <ClientLayout>
+          <Navbar />
+          <main className="flex-1 pt-20">{children}</main>
+          <Footer />
+          <WhatsAppButton />
+        </ClientLayout>
       </body>
     </html>
   );

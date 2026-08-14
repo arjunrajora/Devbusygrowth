@@ -2,12 +2,17 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { BUSINESS_CONFIG } from "@/components/businessConfig";
 import BubbleEffect from "@/components/BubbleEffect";
 import ParallaxScroll from "@/components/ParallaxScroll";
-import CaseStudySlider from "@/components/CaseStudySlider";
+import ActiveCampaignsSection from "@/components/ActiveCampaignsSection";
+import TechPartnersSection from "@/components/TechPartnersSection";
+import BlueprintSection from "@/components/BlueprintSection";
+import RealEstateLeadSection from "@/components/RealEstateLeadSection";
 import {
   Megaphone,
   BarChart3,
@@ -18,7 +23,6 @@ import {
   Search,
   Layers,
   CreditCard,
-  Image,
   DollarSign,
   Sparkles,
   ArrowRight,
@@ -27,7 +31,11 @@ import {
   Mail,
   Settings,
   ShieldAlert,
-  MessageCircle
+  MessageCircle,
+  CheckCircle2,
+  ChevronRight,
+  User,
+  Image as ImageIcon
 } from "lucide-react";
 
 // ----------------------------------------------------
@@ -35,60 +43,72 @@ import {
 // ----------------------------------------------------
 
 const STATS = [
-  { value: 80, prefix: "", suffix: "+", label: "Campaigns", color: "text-[#071a3d]" },
-  { value: 1, prefix: "₹", suffix: "Cr+", label: "Ad Spend", color: "text-[#0d60c4]" },
-  { value: 3.2, prefix: "", suffix: "x", label: "Avg ROAS", color: "text-[#00a651]", decimals: 1 },
-  { value: 100, prefix: "", suffix: "+", label: "Clients", color: "text-[#0b2857]" },
+  { value: 80, prefix: "", suffix: "+", label: "Campaigns" },
+  { value: 1, prefix: "₹", suffix: "Cr+", label: "Ad Spend" },
+  { value: 3.2, prefix: "", suffix: "x", label: "Avg ROAS", decimals: 1 },
+  { value: 100, prefix: "", suffix: "+", label: "Clients" },
 ];
 
 const SERVICES = [
   {
     num: "01",
-    title: "Social Media",
-    desc: "Strategy, content, management & influencer marketing.",
-    link: "/services#social-media",
-    color: "group-hover:border-[#00a651]/30 group-hover:bg-[#00a651]/5 text-[#00a651]",
+    title: "Reels & Content",
+    desc: "Hook-first video scripting, custom video editing, dynamic captioning & platform SEO.",
+    link: "/services#video-editing",
+    img: "/images/services/reels-content.webp",
+    color: "from-[#00a651]/10 to-transparent border-[#00a651]/10"
   },
   {
     num: "02",
-    title: "Meta Ads",
-    desc: "Campaign setup, creative, A/B testing & scaling.",
+    title: "Paid Ads",
+    desc: "Meta & Google Ads structures, creative testing grids, pixel tracking & scaling budgets.",
     link: "/services#meta-ads",
-    color: "group-hover:border-[#0d60c4]/30 group-hover:bg-[#0d60c4]/5 text-[#0d60c4]",
+    img: "/images/services/ads-growth.webp",
+    color: "from-[#0d60c4]/10 to-transparent border-[#0d60c4]/10"
   },
   {
     num: "03",
-    title: "AI & Automation",
-    desc: "Chatbots, lead gen, email & WhatsApp flows.",
+    title: "AI Automation",
+    desc: "Autonomous workflow pipelines, WhatsApp APIs, custom n8n nodes & CRM integrations.",
     link: "/services#ai-automation",
-    color: "group-hover:border-[#00a651]/30 group-hover:bg-[#00a651]/5 text-[#00a651]",
+    img: "/images/services/ai-automation.webp",
+    color: "from-[#00a651]/10 to-transparent border-[#00a651]/10"
   },
   {
     num: "04",
-    title: "Video Editing",
-    desc: "Reels, YouTube, ad videos & color grading.",
-    link: "/services#video-editing",
-    color: "group-hover:border-[#0d60c4]/30 group-hover:bg-[#0d60c4]/5 text-[#0d60c4]",
+    title: "Lead Generation",
+    desc: "High-converting landing pages, interactive lead capture forms, lead routing & email automation.",
+    link: "/services#social-media",
+    img: "/images/services/lead-generation.webp",
+    color: "from-[#0d60c4]/10 to-transparent border-[#0d60c4]/10"
   },
+  {
+    num: "05",
+    title: "Website Development",
+    desc: "Premium Next.js/React websites, modern UI interfaces, fast rendering & responsive components.",
+    link: "/services#web-development",
+    img: "/images/services/web-development.jpg",
+    color: "from-[#00a651]/10 to-transparent border-[#00a651]/10"
+  },
+  {
+    num: "06",
+    title: "SEO / AEO",
+    desc: "Search engine visibility, keyword intent strategy & AI answer engine optimization.",
+    link: "/services#social-media",
+    img: "/images/services/seo-aeo.jpg",
+    color: "from-[#0d60c4]/10 to-transparent border-[#0d60c4]/10"
+  }
 ];
 
 const INDUSTRIES = [
-  { name: "D2C Brands", img: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=600&q=80", desc: "Scaling Shopify & Woocommerce revenue" },
-  { name: "Real Estate", img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80", desc: "Generating qualified site-visit leads" },
-  { name: "Education", img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80", desc: "Mentorship & admission campaigns" },
-  { name: "B2B SaaS", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80", desc: "Driving product signups & bookings" },
-  { name: "Creator Economy", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80", desc: "Personal branding & channel growth" },
-  { name: "Finance & Wealth", img: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=600&q=80", desc: "High-ticket lead funnels" },
-  { name: "Healthcare", img: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80", desc: "Patient acquisition & automation" },
-  { name: "Fashion & Retail", img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80", desc: "High engagement video creatives" },
-];
-
-const PROCESS_STEPS = [
-  { num: "01", name: "Discover", desc: "Understand your unit economics, audience personas, and bottleneck areas." },
-  { num: "02", name: "Strategize", desc: "Map exact traffic channels, high-converting offer hooks, and lead flows." },
-  { num: "03", name: "Build", desc: "Produce video creatives, configure campaign architectures, and build nodes." },
-  { num: "04", name: "Launch", desc: "Go live with structured A/B tests, pixel tracking, and workflow automation." },
-  { num: "05", name: "Scale", desc: "Analyze campaign snapshots hourly and allocate budgets to winning creatives." },
+  { name: "D2C Brands", img: "/images/industries/d2c-brands.webp", desc: "Scaling Shopify & Woocommerce revenue" },
+  { name: "Real Estate", img: "/images/industries/real-estate.webp", desc: "Generating qualified site-visit leads" },
+  { name: "Education", img: "/images/industries/education.svg", desc: "Mentorship & admission campaigns" },
+  { name: "B2B SaaS", img: "/images/industries/b2b-saas.webp", desc: "Driving product signups & bookings" },
+  { name: "Creator Economy", img: "/images/industries/creator-economy.webp", desc: "Personal branding & channel growth" },
+  { name: "Finance & Wealth", img: "/images/industries/finance.webp", desc: "High-ticket lead funnels" },
+  { name: "Healthcare", img: "/images/industries/healthcare.webp", desc: "Patient acquisition & automation" },
+  { name: "Fashion & Retail", img: "/images/industries/fashion.webp", desc: "High engagement video creatives" },
 ];
 
 const COURSE_MODULES = [
@@ -97,40 +117,35 @@ const COURSE_MODULES = [
     title: "Foundation & AI",
     subtitle: "Websites, funnels & AI mindset",
     topics: ["Digital ecosystem", "ICP & personas", "WordPress", "AI funnel planning"],
-    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
-    color: "group-hover:border-[#071a3d]/40 text-[#071a3d]",
+    img: "/images/courses/foundation-ai.webp",
   },
   {
     num: "M2",
     title: "SEO & AEO",
     subtitle: "Search dominance in the AI era",
     topics: ["Keyword strategy", "Technical SEO", "AI-search mapping", "AEO optimization"],
-    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
-    color: "group-hover:border-[#00a651]/40 text-[#00a651]",
+    img: "/images/courses/seo-aeo.webp",
   },
   {
     num: "M3",
     title: "Social & Content",
     subtitle: "Platform-led growth engines",
     topics: ["Algorithms", "Short-form hooks", "Content planning", "Influencer deals"],
-    img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80",
-    color: "group-hover:border-[#0d60c4]/40 text-[#0d60c4]",
+    img: "/images/courses/social-content.webp",
   },
   {
     num: "M4",
     title: "Meta & Google Ads",
     subtitle: "Performance marketing scaling",
     topics: ["Meta setup", "Search campaigns", "A/B creative test", "Budget scaling"],
-    img: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=600&q=80",
-    color: "group-hover:border-[#0b2857]/40 text-[#0b2857]",
+    img: "/images/courses/meta-google-ads.webp",
   },
   {
     num: "M5",
     title: "Automation & AI",
     subtitle: "Workflows & WhatsApp funnels",
     topics: ["n8n workflows", "WhatsApp APIs", "Email automation", "CRM triggers"],
-    img: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
-    color: "group-hover:border-[#00a651]/40 text-[#00a651]",
+    img: "/images/courses/automation-ai.webp",
   },
 ];
 
@@ -141,95 +156,41 @@ const FAQS = [
   { q: "Which course is right for me?", a: "Our Full Digital Marketing Course covers the complete stack in 20 weeks. If you only want to focus on advertising and media buying, the 12-week Performance Marketing Course is recommended." },
 ];
 
-const PARTNER_LOGOS = [
-  { name: "Meta Ads" },
-  { name: "Google Ads" },
-  { name: "n8n" },
-  { name: "WhatsApp API" },
-  { name: "Shopify" },
-  { name: "WordPress" },
-  { name: "GA4" },
-  { name: "Razorpay" },
-  { name: "Canva" },
-  { name: "ChatGPT" },
+const TESTIMONIALS = [
+  {
+    name: "Karan Sharma",
+    role: "Founder",
+    company: "BloomD2C",
+    text: "TheBusyGrowth scaled our Meta Ads performance to 3.8x ROAS in 90 days. Their video editors are creative genius, and response times are unmatched.",
+    img: "/images/testimonials/profile_1.jpg"
+  },
+  {
+    name: "Priya Mehta",
+    role: "CEO",
+    company: "Jaipur Stones",
+    text: "Their WhatsApp API and lead routing automation changed our sales efficiency entirely. Verified buyer leads land on our phones within seconds.",
+    img: "/images/testimonials/profile_2.jpg"
+  },
+  {
+    name: "Rahul Verma",
+    role: "Director",
+    company: "Apex Academy",
+    text: "The funnel they built converts traffic automatically. Working with active performance operators rather than generic account executives is a game changer.",
+    img: "/images/testimonials/profile_3.jpg"
+  }
 ];
 
 export default function Home() {
-  // ----------------------------------------------------
-  // Interactive States
-  // ----------------------------------------------------
-  
-  // WhatsApp Chat Simulator States
-  const [messages, setMessages] = useState<Array<{ sender: string; text: string; time: string; avatar: string }>>([]);
+  const [activeFaq, setActiveFaq] = useState<number | null>(0);
+  const [messages, setMessages] = useState<Array<{ sender: string; text: string; time: string; avatar?: string }>>([]);
   const [isTyping, setIsTyping] = useState(true);
 
-  // Active FAQ Accordion index
-  const [activeFaq, setActiveFaq] = useState<number | null>(0);
-
-  // Blueprint Active Step Index
-  const [activeStep, setActiveStep] = useState(0);
-
-  // ----------------------------------------------------
-  // Helpers
-  // ----------------------------------------------------
-  const getServiceIcon = (title: string) => {
-    const size = 32;
-    switch (title) {
-      case "Social Media":
-        return <Megaphone size={size} className="text-[#00a651]" />;
-      case "Meta Ads":
-        return <BarChart3 size={size} className="text-[#0d60c4]" />;
-      case "AI & Automation":
-        return <Bot size={size} className="text-[#00a651]" />;
-      case "Video Editing":
-        return <Video size={size} className="text-[#0d60c4]" />;
-      default:
-        return null;
-    }
-  };
-
-  const getPartnerIcon = (name: string) => {
-    const size = 18;
-    switch (name) {
-      case "Meta Ads":
-        return <BarChart3 size={size} className="text-[#0d60c4]" />;
-      case "Google Ads":
-        return <Search size={size} className="text-[#00a651]" />;
-      case "n8n":
-        return <Layers size={size} className="text-[#0d60c4]" />;
-      case "WhatsApp API":
-        return (
-          <svg className="h-4.5 w-4.5 text-[#00a651]" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M19.077 4.928C17.191 3.041 14.683 2 12.006 2 6.499 2 2.006 6.493 2.006 12c0 1.76.46 3.483 1.333 5l-1.333 4.86 5.013-1.313c1.452.793 3.087 1.207 4.78 1.207h.004c5.507 0 10-4.493 10-10 0-2.677-1.041-5.185-2.926-7.072z"></path>
-          </svg>
-        );
-      case "Shopify":
-        return <Globe size={size} className="text-[#0d60c4]" />;
-      case "WordPress":
-        return <Globe size={size} className="text-[#00a651]" />;
-      case "GA4":
-        return <TrendingUp size={size} className="text-[#0d60c4]" />;
-      case "Razorpay":
-        return <DollarSign size={size} className="text-[#00a651]" />;
-      case "Canva":
-        return <Sparkles size={size} className="text-[#0d60c4]" />;
-      case "ChatGPT":
-        return <Bot size={size} className="text-[#00a651]" />;
-      default:
-        return null;
-    }
-  };
-
-  // ----------------------------------------------------
-  // Effects
-  // ----------------------------------------------------
-  
-  // WhatsApp Chat Simulator Loop
+  // WhatsApp Simulation Effect
   useEffect(() => {
     const scenario = [
       { sender: "user", text: "Hey! I want to scale my store but my current ROAS is stuck at 1.5x. Can you help?", time: "11:02 AM", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" },
-      { sender: "system", text: "⚡ AI Routing Node: Assigning lead to performance manager...", time: "11:02 AM", avatar: "" },
-      { sender: "agent", text: "Hi! Absolutely, we usually see that due to fatigued creatives. Let's set up a custom strategy call to map a 3x funnel for your catalog.", time: "11:03 AM", avatar: "" }
+      { sender: "system", text: "⚡ AI Routing Node: Assigning lead to performance manager...", time: "11:02 AM" },
+      { sender: "agent", text: "Hi! Absolutely, we usually see that due to fatigued creatives. Let's set up a custom strategy call to map a 3x funnel for your catalog.", time: "11:03 AM" }
     ];
 
     setMessages([scenario[0]]);
@@ -246,7 +207,6 @@ export default function Home() {
       setMessages(prev => [...prev, scenario[2]]);
     }, 5500);
 
-    // Loop the simulation every 15 seconds
     const repeatTimer = setInterval(() => {
       setMessages([scenario[0]]);
       setIsTyping(true);
@@ -276,32 +236,23 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-800 dark:bg-[#050c1a] dark:text-slate-100 transition-colors duration-300">
-      {/* Background Grids & Ambient Lights */}
-      <div className="fixed inset-0 -z-50 bg-grid-pattern opacity-80"></div>
-      <div className="fixed inset-0 -z-50 bg-dot-pattern opacity-40"></div>
-      <div className="fixed -right-40 top-20 -z-50 h-[500px] w-[500px] rounded-full bg-[#0d60c4]/10 dark:bg-[#0d60c4]/15 blur-3xl"></div>
-      <div className="fixed -left-40 bottom-20 -z-50 h-[500px] w-[500px] rounded-full bg-[#00a651]/10 dark:bg-[#00a651]/15 blur-3xl"></div>
+    <div className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-800 dark:bg-[#050c1a] dark:text-slate-100 transition-colors duration-300 font-sans">
+      
+      {/* Background Gradients */}
+      <div className="fixed inset-0 -z-50 bg-grid-pattern opacity-80 pointer-events-none"></div>
+      <div className="fixed inset-0 -z-50 bg-dot-pattern opacity-40 pointer-events-none"></div>
+      <div className="fixed -right-40 top-20 -z-50 h-[500px] w-[500px] rounded-full bg-[#0d60c4]/10 dark:bg-[#0d60c4]/15 blur-3xl pointer-events-none"></div>
+      <div className="fixed -left-40 bottom-20 -z-50 h-[500px] w-[500px] rounded-full bg-[#00a651]/10 dark:bg-[#00a651]/15 blur-3xl pointer-events-none"></div>
 
       {/* ====================================================
-          1. HERO SECTION
+          1. HERO SECTION WITH PREMIUM IMAGE OVERLAYS
           ==================================================== */}
-      <section className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16 overflow-hidden">
+      <section className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-20 overflow-hidden">
         <BubbleEffect />
         
-        {/* Parallax Background Blob */}
-        <ParallaxScroll speed={-0.12} className="absolute right-10 top-1/4 -z-10 opacity-30 pointer-events-none">
-          <div className="h-48 w-48 rounded-full bg-[#00a651]/15 blur-3xl animate-pulse"></div>
-        </ParallaxScroll>
-        <ParallaxScroll speed={0.15} className="absolute left-1/4 bottom-10 -z-10 opacity-35 pointer-events-none">
-          <div className="h-64 w-64 rounded-full bg-[#0d60c4]/10 blur-3xl"></div>
-        </ParallaxScroll>
-
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12 relative z-10">
-          
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-center relative z-10">
           {/* Left Content */}
           <div className="space-y-6 lg:col-span-6">
-            {/* Badge */}
             <ScrollReveal direction="fade" delay={100}>
               <div className="inline-flex items-center gap-2 rounded-full border border-[#00a651]/30 bg-[#00a651]/10 px-3.5 py-1 text-xs font-bold tracking-wide text-[#00a651] shadow-sm animate-bounce [animation-duration:4s]">
                 <Zap size={12} className="text-[#00a651] shrink-0" />
@@ -309,7 +260,6 @@ export default function Home() {
               </div>
             </ScrollReveal>
             
-            {/* Main Heading */}
             <ScrollReveal direction="up" delay={200}>
               <h1 className="font-sans text-4xl font-extrabold leading-[1.12] tracking-tight text-[#071a3d] dark:text-white sm:text-5xl lg:text-6xl xl:text-[62px]">
                 We build digital experiences that generate{" "}
@@ -319,14 +269,13 @@ export default function Home() {
               </h1>
             </ScrollReveal>
 
-            {/* Subtitle */}
             <ScrollReveal direction="up" delay={300}>
               <p className="max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
                 A hands-on performance marketing team in Jaipur. We run Meta &amp; Google Ads, edit high-converting Reels, and build 24/7 AI automation nodes for scaling brands.
               </p>
             </ScrollReveal>
 
-            {/* Call to Actions */}
+            {/* CTAs */}
             <ScrollReveal direction="up" delay={400}>
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link
@@ -338,7 +287,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="/services"
-                  className="group inline-flex items-center justify-center rounded-full border border-[#071a3d] dark:border-slate-600 bg-white dark:bg-slate-800 px-7 py-3.5 text-sm font-bold text-[#071a3d] dark:text-slate-100 transition-all hover:bg-slate-100 dark:hover:bg-slate-700 hover:shadow-md gap-1.5"
+                  className="group inline-flex items-center justify-center rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 px-7 py-3.5 text-sm font-bold text-[#071a3d] dark:text-slate-100 transition-all hover:bg-slate-100 dark:hover:bg-slate-700 hover:shadow-md gap-1.5"
                 >
                   <span>Explore Services</span>
                   <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -346,158 +295,131 @@ export default function Home() {
               </div>
             </ScrollReveal>
 
-            {/* Feature Badges */}
             <ScrollReveal direction="fade" delay={500}>
               <div className="flex flex-wrap gap-2.5 pt-2">
-                <span className="rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 px-3.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 hover:border-[#00a651]/40 shadow-sm transition-colors">Video Editing &amp; Reels</span>
-                <span className="rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 px-3.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 hover:border-[#0d60c4]/40 shadow-sm transition-colors">Meta &amp; Google Ads</span>
-                <span className="rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 px-3.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 hover:border-[#00a651]/40 shadow-sm transition-colors">WhatsApp &amp; Email Automation</span>
+                <span className="rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800/80 px-3.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 hover:border-[#00a651]/40 shadow-sm transition-colors">Video Editing &amp; Reels</span>
+                <span className="rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800/80 px-3.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 hover:border-[#0d60c4]/40 shadow-sm transition-colors">Meta &amp; Google Ads</span>
+                <span className="rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800/80 px-3.5 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 hover:border-[#00a651]/40 shadow-sm transition-colors">WhatsApp &amp; Email Automation</span>
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Right Content - Visual Dashboard Mockup */}
+          {/* Right Visual Composition */}
           <div className="lg:col-span-6">
             <ScrollReveal direction="scale" delay={300}>
-              <div className="relative rounded-3xl border border-white/10 bg-[#071a3d] p-6 shadow-2xl backdrop-blur-md text-white">
+              <div className="relative rounded-3xl border border-white/10 bg-[#071a3d] overflow-hidden shadow-2xl group min-h-[380px] sm:min-h-[480px]">
                 
-                {/* Ambient glows behind dashboard */}
-                <div className="absolute -top-10 -left-10 -z-10 h-36 w-36 rounded-full bg-[#00a651]/20 blur-2xl animate-float"></div>
-                <div className="absolute -bottom-10 -right-10 -z-10 h-36 w-36 rounded-full bg-[#0d60c4]/20 blur-2xl animate-float-reverse"></div>
+                {/* Background Image of Entrepreneur */}
+                <Image
+                  src="/images/hero_visual.jpg"
+                  alt="Modern Digital Creator & Business Owner"
+                  fill
+                  className="object-cover opacity-60 transition-transform duration-700 transform group-hover:scale-105"
+                  priority
+                />
                 
-                {/* Header elements */}
-                <div className="mb-5 flex items-center justify-between border-b border-white/10 pb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="relative flex h-2.5 w-2.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00a651] opacity-75"></span>
-                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#00a651]"></span>
-                    </span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-200">Live Campaign Performance</span>
-                  </div>
-                  <span className="rounded-md bg-[#00a651]/20 px-2.5 py-1 text-[10px] font-extrabold text-[#00a651]">
-                    AI Engine Active
-                  </span>
-                </div>
+                {/* Overlay gradients for dark, premium look */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a] via-[#050c1a]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#050c1a]/50 via-transparent to-[#050c1a]/30" />
 
-                {/* Grid of Metric Cards */}
-                <div className="grid gap-4 sm:grid-cols-2">
+                {/* Floating HUD Cards representing AI Growth Engine */}
+                <div className="absolute inset-0 p-6 flex flex-col justify-between z-10 pointer-events-none">
                   
-                  {/* Card 1: Leads Counting */}
-                  <div className="rounded-2xl border border-white/10 bg-[#0b2857] p-4 transition-all hover:bg-white/10">
-                    <p className="text-xs font-medium text-slate-300">Live Leads Generated</p>
-                    <div className="mt-1 flex items-baseline gap-2">
-                      <span className="text-3xl font-extrabold text-[#00a651] tracking-tight">
-                        <AnimatedCounter targetValue={850} suffix="+" />
+                  {/* Top Bar Info */}
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#050c1a]/95 border border-white/10 text-[10px] font-extrabold uppercase tracking-widest text-slate-200 shadow-md">
+                      <span className="h-2 w-2 rounded-full bg-[#00a651] animate-ping shrink-0" />
+                      <span>AI Growth Engine</span>
+                    </span>
+                    <span className="rounded-md bg-[#00a651]/20 px-2 py-0.5 text-[9px] font-bold text-[#00a651] border border-[#00a651]/30">
+                      Live Scaling
+                    </span>
+                  </div>
+
+                  {/* Overlaid Stats Dashboard (3 Grid Cards) */}
+                  <div className="grid grid-cols-3 gap-2.5 sm:gap-4 my-auto">
+                    {/* Leads Card */}
+                    <motion.div
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.6 }}
+                      className="rounded-2xl border border-white/10 bg-[#050c1a]/95 p-3 shadow-lg flex flex-col justify-between"
+                    >
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Leads</span>
+                      <span className="text-lg sm:text-xl font-extrabold text-[#00a651] mt-1">1,284</span>
+                      <span className="text-[9px] font-semibold text-[#00a651] mt-0.5">↑ 18.4%</span>
+                    </motion.div>
+
+                    {/* AI Automation Active */}
+                    <motion.div
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.8 }}
+                      className="rounded-2xl border border-white/10 bg-[#050c1a]/95 p-3 shadow-lg flex flex-col justify-between"
+                    >
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">AI Node</span>
+                      <span className="text-xs sm:text-sm font-extrabold text-blue-400 mt-1.5 truncate">ACTIVE</span>
+                      <span className="text-[9px] font-semibold text-slate-400 mt-0.5">Online</span>
+                    </motion.div>
+
+                    {/* Sales Growth */}
+                    <motion.div
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 1.0 }}
+                      className="rounded-2xl border border-white/10 bg-[#050c1a]/95 p-3 shadow-lg flex flex-col justify-between"
+                    >
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Sales</span>
+                      <span className="text-lg sm:text-xl font-extrabold text-emerald-400 mt-1">+42%</span>
+                      <span className="text-[9px] font-semibold text-slate-400 mt-0.5">MoM Boost</span>
+                    </motion.div>
+                  </div>
+
+                  {/* Bottom: Simulated Realtime Chat Box */}
+                  <div className="w-full rounded-2xl border border-white/10 bg-[#050c1a]/95 p-3 shadow-lg pointer-events-auto">
+                    <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2 text-[10px] text-slate-400">
+                      <span className="font-bold flex items-center gap-1.5">
+                        <MessageCircle size={12} className="text-[#00a651]" />
+                        WhatsApp Lead Routing
                       </span>
-                      <span className="text-xs font-semibold text-[#00a651]">↑ 18.4%</span>
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#00a651]" />
                     </div>
-                    <div className="mt-2.5 h-1.5 w-full rounded-full bg-slate-800 overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-[#0d60c4] to-[#00a651] transition-all duration-1000" style={{ width: "85%" }}></div>
-                    </div>
-                  </div>
-
-                  {/* Card 2: ROAS */}
-                  <div className="rounded-2xl border border-white/10 bg-[#0b2857] p-4 transition-all hover:bg-white/10">
-                    <p className="text-xs font-medium text-slate-300">Average Campaign ROAS</p>
-                    <div className="mt-1 flex items-baseline gap-2">
-                      <span className="text-3xl font-extrabold text-[#0d60c4] tracking-tight">
-                        <AnimatedCounter targetValue={3.8} suffix="x" decimals={1} />
-                      </span>
-                      <span className="text-xs font-semibold text-[#00a651]">D2C Brand</span>
-                    </div>
-                    <div className="mt-2.5 text-[10px] text-slate-400 font-medium">Targeted Meta &amp; Google Ads</div>
-                  </div>
-
-                  {/* Card 3: Interactive SVG Growth Graph */}
-                  <div className="rounded-2xl border border-white/10 bg-[#0b2857] p-4 sm:col-span-2">
-                    <div className="mb-2 flex items-center justify-between">
-                      <p className="text-xs font-medium text-slate-300">Campaign Scaling Trend</p>
-                      <span className="text-xs font-bold text-[#00a651]">Growth Stage: 4x</span>
-                    </div>
-                    {/* SVG Graph */}
-                    <div className="h-28 w-full bg-[#071a3d]/60 rounded-xl p-2">
-                      <svg className="h-full w-full overflow-visible" viewBox="0 0 300 100">
-                        <defs>
-                          <linearGradient id="gradient-hero-dark" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#00a651" stopOpacity="0.4" />
-                            <stop offset="100%" stopColor="#00a651" stopOpacity="0.0" />
-                          </linearGradient>
-                        </defs>
-                        <path
-                          d="M 0 90 Q 50 80, 80 50 T 150 40 T 220 20 T 300 10 L 300 100 L 0 100 Z"
-                          fill="url(#gradient-hero-dark)"
-                        />
-                        <path
-                          d="M 0 90 Q 50 80, 80 50 T 150 40 T 220 20 T 300 10"
-                          fill="none"
-                          stroke="#00a651"
-                          strokeWidth="3.5"
-                          className="animate-draw-graph"
-                        />
-                        <line x1="0" y1="50" x2="300" y2="50" stroke="rgba(255,255,255,0.06)" />
-                        <line x1="0" y1="20" x2="300" y2="20" stroke="rgba(255,255,255,0.06)" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Card 4: WhatsApp Leads Real-time Simulator */}
-                  <div className="rounded-2xl border border-white/10 bg-[#0b2857] p-4 sm:col-span-2 overflow-hidden">
-                    <div className="mb-3 flex items-center justify-between border-b border-white/10 pb-2">
-                      <div className="flex items-center gap-2">
-                        <MessageCircle size={16} className="text-[#00a651]" />
-                        <span className="text-xs font-semibold text-slate-200">WhatsApp Lead Automation Flow</span>
-                      </div>
-                      <span className="h-2 w-2 rounded-full bg-[#00a651] animate-pulse"></span>
-                    </div>
-                    
-                    {/* Messages Panel */}
-                    <div className="space-y-2.5 min-h-[130px] flex flex-col justify-end">
-                      {messages.map((msg, i) => (
-                        <div key={i} className={`flex items-start gap-2.5 transition-all duration-500 translate-y-0 opacity-100 ${
-                          msg.sender === 'agent' ? 'justify-end' : 'justify-start'
-                        }`}>
-                          {msg.sender !== 'agent' && msg.avatar && (
-                            <img src={msg.avatar} alt="User" className="h-6 w-6 rounded-full object-cover border border-white/10" />
+                    <div className="space-y-1.5 max-h-[85px] overflow-y-auto pr-1">
+                      {messages.map((msg, idx) => (
+                        <div key={idx} className={`flex items-start gap-2 ${msg.sender === 'agent' ? 'justify-end' : 'justify-start'}`}>
+                          {msg.sender === 'user' && msg.avatar && (
+                            <img src={msg.avatar} className="h-5 w-5 rounded-full object-cover border border-white/10" alt="client" />
                           )}
-                          <div className={`rounded-xl px-3 py-2 text-xs max-w-[82%] ${
+                          <div className={`rounded-xl px-2.5 py-1.5 text-[10px] max-w-[85%] ${
                             msg.sender === 'agent' 
-                              ? 'bg-[#00a651] text-white rounded-tr-none font-medium' 
-                              : msg.sender === 'system' 
-                                ? 'bg-slate-800/90 text-slate-300 font-mono text-[10px]' 
-                                : 'bg-[#071a3d] text-slate-200 rounded-tl-none border border-white/10'
+                              ? 'bg-[#00a651] text-white font-medium rounded-tr-none' 
+                              : msg.sender === 'system'
+                                ? 'bg-slate-900 text-slate-400 font-mono text-[8px]'
+                                : 'bg-[#071a3d] text-slate-200 border border-white/10 rounded-tl-none'
                           }`}>
-                            <p>{msg.text}</p>
-                            <span className="mt-0.5 block text-[8px] text-slate-300 text-right">{msg.time}</span>
+                            {msg.text}
                           </div>
                         </div>
                       ))}
-
-                      {/* Typing Indicator */}
                       {isTyping && (
-                        <div className="flex items-center gap-2 pl-2">
-                          <span className="h-1.5 w-1.5 rounded-full bg-[#00a651] animate-bounce"></span>
-                          <span className="h-1.5 w-1.5 rounded-full bg-[#00a651] animate-bounce [animation-delay:150ms]"></span>
-                          <span className="h-1.5 w-1.5 rounded-full bg-[#00a651] animate-bounce [animation-delay:300ms]"></span>
+                        <div className="flex items-center gap-1 pl-1">
+                          <span className="h-1 w-1 rounded-full bg-[#00a651] animate-bounce" />
+                          <span className="h-1 w-1 rounded-full bg-[#00a651] animate-bounce [animation-delay:150ms]" />
+                          <span className="h-1 w-1 rounded-full bg-[#00a651] animate-bounce [animation-delay:300ms]" />
                         </div>
                       )}
                     </div>
                   </div>
 
                 </div>
-
-                <div className="mt-4 border-t border-white/10 pt-3 text-center text-xs text-slate-300 font-medium">
-                  ⚡ "Scaled D2C brand from 0 to ₹5L/mo revenue in 90 days."
-                </div>
-
               </div>
             </ScrollReveal>
           </div>
-
         </div>
       </section>
 
       {/* INFINITE RUNNING SERVICE TICKER */}
-      <div className="relative py-4 border-y border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-[#071a3d]/50 overflow-hidden w-full select-none">
+      <div className="relative py-4 border-y border-white/10 bg-slate-100 dark:bg-[#071a3d]/50 overflow-hidden w-full select-none">
         <div className="flex animate-marquee whitespace-nowrap gap-10 text-xs font-bold uppercase tracking-widest text-[#00a651]/80 dark:text-[#00a651]/70">
           <span>Reels & Video Editing ⚡</span>
           <span>Meta & Google Ads ⚡</span>
@@ -516,13 +438,13 @@ export default function Home() {
       {/* ====================================================
           2. TRUST / PERFORMANCE STRIP
           ==================================================== */}
-      <section className="relative my-8 border-y border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] py-8 shadow-sm transition-colors duration-300">
+      <section className="relative my-8 border-y border-white/10 bg-white dark:bg-[#0b1c3d] py-6 shadow-sm transition-colors duration-300">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-6 text-center sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-4 text-center sm:grid-cols-2 lg:grid-cols-4">
             {STATS.map((stat, i) => (
               <ScrollReveal direction="scale" delay={i * 100} key={i}>
                 <div className="flex flex-col items-center justify-center p-2 group">
-                  <span className={`text-3xl sm:text-4xl font-extrabold text-[#0d60c4] dark:text-[#00a651] tracking-tight transition-transform duration-300 group-hover:scale-105`}>
+                  <span className="text-3xl sm:text-4xl font-extrabold text-[#0d60c4] dark:text-[#00a651] tracking-tight transition-transform duration-300 group-hover:scale-105">
                     <AnimatedCounter
                       targetValue={stat.value}
                       prefix={stat.prefix}
@@ -541,16 +463,47 @@ export default function Home() {
       </section>
 
       {/* ====================================================
-          3. SERVICES SECTION
+          3. NEW SEAMLESS IMAGE / GROWTH VISUAL BREAK
           ==================================================== */}
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:px-8 lg:py-20">
+      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <ScrollReveal direction="up">
+          <div className="relative rounded-3xl border border-white/10 bg-[#071a3d] p-4 sm:p-6 shadow-xl overflow-hidden aspect-[21/9] min-h-[220px]">
+            <Image
+              src="/images/growth_engine.jpg"
+              alt="Predictable Revenue Growth Systems Dashboard"
+              fill
+              className="object-cover opacity-80"
+              sizes="(max-w-1280px) 100vw, 1280px"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a] via-[#050c1a]/40 to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 z-10 text-white">
+              <div>
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#00a651]">Growth Visualization</span>
+                <h3 className="text-lg sm:text-2xl font-black mt-1">Predictable Revenue Models</h3>
+                <p className="text-xs text-slate-300 mt-1 max-w-md hidden sm:block">
+                  We wire automated dashboards and conversion metrics to scale budgets based on unit economics.
+                </p>
+              </div>
+              <span className="rounded-full bg-[#00a651]/20 border border-[#00a651]/30 px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-wider text-[#00a651] backdrop-blur-md">
+                Active Client Node
+              </span>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* ====================================================
+          4. SERVICES SECTION
+          ==================================================== */}
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:px-8">
         
         {/* Heading */}
         <ScrollReveal direction="up">
-          <div className="mb-12 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-            <div className="space-y-4">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">What We Do</span>
-              <h2 className="text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl lg:text-[40px] tracking-tight">
+          <div className="mb-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+            <div className="space-y-3">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Our Services</span>
+              <h2 className="text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl tracking-tight font-sans">
                 Our core pillars of growth.
               </h2>
             </div>
@@ -565,30 +518,45 @@ export default function Home() {
         </ScrollReveal>
 
         {/* Services Cards */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((srv, i) => (
-            <ScrollReveal direction="up" delay={i * 100} key={i}>
+            <ScrollReveal direction="up" delay={i * 80} key={i}>
               <Link
                 href={srv.link}
-                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-6 shadow-sm card-lift"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white dark:bg-[#0b1c3d] shadow-sm transition-all duration-300 hover:scale-[1.03] hover:border-white/20 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div>
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="transition-transform duration-500 group-hover:scale-110">{getServiceIcon(srv.title)}</span>
-                    <span className="text-xs font-bold tracking-widest text-slate-400 dark:text-slate-500">{srv.num}</span>
-                  </div>
-
-                  <h3 className="mb-2 text-xl font-bold text-[#071a3d] dark:text-white transition-colors group-hover:text-[#00a651]">
-                    {srv.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                    {srv.desc}
-                  </p>
+                {/* Service Card Image */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden">
+                  <Image
+                    src={srv.img}
+                    alt={srv.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
+                    loading="lazy"
+                  />
+                  {/* Subtle hover gradient + category label */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a] via-[#050c1a]/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+                  <span className="absolute top-3 left-3 rounded-md bg-[#050c1a]/90 px-2 py-0.5 text-[9px] font-bold tracking-widest text-[#00a651] border border-white/10 uppercase">
+                    {srv.num}
+                  </span>
                 </div>
 
-                <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-[#00a651] transition-all duration-300 group-hover:translate-x-1">
-                  <span>Explore service</span>
-                  <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                {/* Content */}
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="mb-2 text-lg font-bold text-[#071a3d] dark:text-white transition-colors group-hover:text-[#00a651]">
+                      {srv.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                      {srv.desc}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 flex items-center gap-1 text-xs font-bold text-[#00a651]">
+                    <span>Explore Service</span>
+                    <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </div>
                 </div>
               </Link>
             </ScrollReveal>
@@ -597,46 +565,236 @@ export default function Home() {
       </section>
 
       {/* ====================================================
-          4. PERFORMANCE / CASE STUDY SECTION
+          5. AI AUTOMATION SECTION (MAJOR VISUAL UPGRADE & SPACE FIX)
           ==================================================== */}
-      <section className="relative mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:px-8 lg:py-20 overflow-hidden">
-        <BubbleEffect />
+      <section className="relative mx-auto max-w-7xl px-4 py-8 sm:py-12 lg:px-8">
         <ScrollReveal direction="up">
-          <CaseStudySlider />
+          <div className="rounded-3xl border border-white/10 bg-white dark:bg-[#0b1c3d] p-6 sm:p-10 md:p-12 overflow-hidden relative shadow-sm transition-colors duration-300">
+            
+            {/* Reduced bottom margin from mb-12 to mb-6 to pull content upwards */}
+            <div className="text-center mb-6">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">AI Integration</span>
+              <h2 className="mt-1.5 text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl tracking-tight font-sans">
+                AI-powered growth &amp; automation.
+              </h2>
+              <p className="mx-auto mt-2 max-w-2xl text-slate-600 dark:text-slate-300 text-sm sm:text-base">
+                We sync lead captures to AI models, instant WhatsApp sequences, and CRM triggers to maximize conversion rates on auto-pilot.
+              </p>
+            </div>
+
+            {/* Layout Box */}
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+              
+              {/* Left Column: Visual Workflow Backdrop (7 Cols) */}
+              <div className="lg:col-span-7 relative">
+                
+                {/* Automation graphic backdrop */}
+                <div className="relative rounded-2xl border border-white/10 bg-[#071a3d] overflow-hidden aspect-[16/10] shadow-xl">
+                  <Image
+                    src="/images/automation_workflow.jpg"
+                    alt="AI Operations workflow backdrop"
+                    fill
+                    className="object-cover opacity-60"
+                    sizes="(max-w-1024px) 100vw, 700px"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a] via-[#050c1a]/30 to-transparent" />
+                  
+                  {/* Floating Framer Motion status indicators inside stage */}
+                  <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-between z-10 pointer-events-none">
+                    
+                    {/* Floating Badge 1 */}
+                    <motion.div
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                      className="self-start rounded-xl border border-white/10 bg-[#050c1a]/95 px-3 py-2 shadow-lg flex items-center gap-2 pointer-events-auto"
+                    >
+                      <span className="h-2 w-2 rounded-full bg-[#00a651] animate-ping" />
+                      <span className="text-[10px] font-bold text-slate-200">AI Agent Active • Online</span>
+                    </motion.div>
+
+                    {/* Floating Badge 2 */}
+                    <motion.div
+                      animate={{ y: [0, 5, 0] }}
+                      transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
+                      className="self-end rounded-xl border border-white/10 bg-[#050c1a]/95 px-3 py-2 shadow-lg flex items-center gap-2 pointer-events-auto"
+                    >
+                      <Bot size={12} className="text-[#00a651]" />
+                      <div className="text-left">
+                        <p className="text-[9px] font-bold text-slate-200">Lead Qualified</p>
+                        <p className="text-[8px] text-[#00a651] font-semibold">+1 New Lead</p>
+                      </div>
+                    </motion.div>
+
+                    {/* Floating Badge 3 */}
+                    <motion.div
+                      animate={{ y: [0, -4, 0] }}
+                      transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+                      className="self-start rounded-xl border border-white/10 bg-[#050c1a]/95 px-3 py-2 shadow-lg flex items-center gap-2 pointer-events-auto"
+                    >
+                      <MessageCircle size={12} className="text-blue-400" />
+                      <div className="text-left">
+                        <p className="text-[9px] font-bold text-slate-200">WhatsApp Sent</p>
+                        <p className="text-[8px] text-slate-400">2 sec ago</p>
+                      </div>
+                    </motion.div>
+
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Right Column: Workflow path (5 Cols) */}
+              <div className="lg:col-span-5 space-y-4">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Automation Pipeline</h3>
+                
+                {/* Vertical Workflow Nodes */}
+                <div className="space-y-2 font-semibold">
+                  {[
+                    { title: "NEW LEAD", desc: "User fills inquiry form or clicks advertisement hook." },
+                    { title: "AI QUALIFICATION", desc: "Automated agent analyzes lead intent & profile info." },
+                    { title: "CRM UPDATE", desc: "Values synchronized instantly to Google Sheets & CRM." },
+                    { title: "WHATSAPP FLOW", desc: "Instant follow-up catalog sent directly to user phone." },
+                    { title: "FOLLOW-UP", desc: "24h notification trigger to maximize booking rate." },
+                    { title: "SALES", desc: "Hot conversion achieved under 3 minutes." }
+                  ].map((step, idx, arr) => (
+                    <div key={idx} className="flex gap-3">
+                      <div className="flex flex-col items-center">
+                        <span className="h-6 w-6 rounded-full bg-[#050c1a] border border-white/10 text-[10px] flex items-center justify-center font-bold text-[#00a651]">
+                          {idx + 1}
+                        </span>
+                        {idx < arr.length - 1 && (
+                          <span className="w-px h-8 bg-gradient-to-b from-[#00a651] to-[#0d60c4] my-0.5" />
+                        )}
+                      </div>
+                      <div className="text-left">
+                        <h4 className="text-xs font-extrabold text-slate-700 dark:text-slate-100">{step.title}</h4>
+                        <p className="text-[10px] text-slate-400 font-medium">{step.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
         </ScrollReveal>
       </section>
 
       {/* ====================================================
-          5. INDUSTRIES SECTION
+          6. LEAD GENERATION SECTION
+          ==================================================== */}
+      <section className="relative mx-auto max-w-7xl px-4 py-8 sm:py-12 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          
+          {/* Left Column: Visual Pipeline (6 Cols) */}
+          <div className="lg:col-span-6 space-y-6">
+            <ScrollReveal direction="up">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Lead Funnels</span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#071a3d] dark:text-white tracking-tight leading-tight mt-1 font-sans">
+                From Attention to Enquiry. Automatically.
+              </h2>
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                We engineer user acquisition paths that guide attention into conversion. Below is our visual client blueprint framework:
+              </p>
+            </ScrollReveal>
+
+            {/* Horizontal Workflow Flow Grid */}
+            <ScrollReveal direction="up" delay={150}>
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 text-center">
+                {[
+                  { node: "REELS", desc: "Short video" },
+                  { node: "ADS", desc: "Meta paid" },
+                  { node: "LANDING", desc: "Fast UI" },
+                  { node: "ENQUIRY", desc: "Lead form" },
+                  { node: "WHATSAPP", desc: "Instant flow" },
+                  { node: "SALES", desc: "ROAS gain" }
+                ].map((item, idx) => (
+                  <div key={idx} className="rounded-xl border border-white/10 bg-[#071a3d]/5 dark:bg-[#071a3d]/50 p-2 group hover:border-[#00a651]/30">
+                    <span className="text-[9px] font-extrabold text-[#00a651] tracking-wide block">{item.node}</span>
+                    <span className="text-[8px] text-slate-400 mt-0.5 block">{item.desc}</span>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+            
+            <ScrollReveal direction="up" delay={200}>
+              <div className="flex gap-4">
+                <Link
+                  href="/contact"
+                  className="group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#0d60c4] to-[#00a651] px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-md hover:scale-105 transition-all"
+                >
+                  <span>Build your funnel</span>
+                  <ArrowRight size={14} />
+                </Link>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Right Column: CRM Screenshot Visual (6 Cols) */}
+          <div className="lg:col-span-6">
+            <ScrollReveal direction="scale" delay={200}>
+              <div className="relative rounded-3xl border border-white/10 bg-[#071a3d] overflow-hidden aspect-[16/10] shadow-2xl">
+                <Image
+                  src="/images/lead_gen_funnel.jpg"
+                  alt="CRM Sales Funnel and Analytics Dashboard"
+                  fill
+                  className="object-cover"
+                  sizes="(max-w-1024px) 100vw, 600px"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a]/90 via-[#050c1a]/20 to-transparent" />
+                
+                {/* Small indicator label */}
+                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#050c1a]/95 border border-white/10 flex items-center justify-between text-[10px] text-slate-300">
+                  <span className="font-bold flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-[#00a651] animate-ping" />
+                    Inbound Pipeline Sync
+                  </span>
+                  <span className="font-extrabold text-[#00a651]">Meta Pixel Enabled</span>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ====================================================
+          7. INDUSTRIES SECTION
           ==================================================== */}
       <section id="industries" className="relative py-12 sm:py-16 overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 text-center mb-10 sm:px-6 lg:px-8">
           <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Who We Work With</span>
-          <h2 className="mt-2 text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl lg:text-[40px] tracking-tight">
+          <h2 className="mt-2 text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl tracking-tight font-sans">
             Built for ambitious businesses across industries.
           </h2>
         </div>
 
-        {/* Infinite Horizontal Industry Scrolling Carousel */}
+        {/* Infinite Scrolling Carousel */}
         <div className="relative flex overflow-x-hidden">
           <div className="animate-marquee flex gap-6 whitespace-nowrap py-4">
             {[...INDUSTRIES, ...INDUSTRIES].map((ind, i) => (
               <div
                 key={i}
-                className="relative h-64 w-80 shrink-0 overflow-hidden rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-[#0b1c3d] p-5 shadow-sm transition-all duration-300 hover:scale-[1.01] hover:border-[#00a651]/30 hover:shadow-md"
+                className="relative h-64 w-80 shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#071a3d] p-6 shadow-xl transition-all duration-300 hover:scale-[1.03] hover:border-white/20"
               >
                 <div className="absolute inset-0 z-0">
-                  <img
+                  <Image
                     src={ind.img}
                     alt={ind.name}
-                    className="h-full w-full object-cover opacity-15 dark:opacity-10 transition-transform duration-500 hover:scale-105"
+                    fill
+                    className="object-cover opacity-60 transition-transform duration-500 hover:scale-105"
+                    sizes="320px"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#0b1c3d] via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#071a3d] via-[#071a3d]/60 to-transparent"></div>
                 </div>
 
-                <div className="relative z-10 flex h-full flex-col justify-end">
-                  <h3 className="text-xl font-bold text-[#071a3d] dark:text-white">{ind.name}</h3>
-                  <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                <div className="relative z-10 flex h-full flex-col justify-end text-white">
+                  <h3 className="text-xl font-extrabold">{ind.name}</h3>
+                  <p className="mt-1.5 text-xs text-slate-300 font-medium leading-relaxed">
                     {ind.desc}
                   </p>
                 </div>
@@ -647,131 +805,29 @@ export default function Home() {
       </section>
 
       {/* ====================================================
-          6. HOW WE WORK (BLUEPRINT)
+          8. CASE STUDIES / ACTIVE CAMPAIGNS SECTION
           ==================================================== */}
-      <section id="about" className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:px-8 lg:py-20">
-        <ScrollReveal direction="up">
-          <div className="mb-12 text-center">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Our Blueprint</span>
-            <h2 className="mt-2 text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl lg:text-[40px] tracking-tight">
-              The growth pipeline. Step by step.
-            </h2>
-          </div>
-        </ScrollReveal>
-
-        {/* Process Grid */}
-        <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-          {PROCESS_STEPS.map((step, i) => (
-            <ScrollReveal direction="up" delay={i * 100} key={i}>
-              <div
-                onMouseEnter={() => setActiveStep(i)}
-                className={`relative h-full flex flex-col justify-between rounded-2xl border p-6 transition-all duration-500 ${
-                  activeStep === i
-                    ? "bg-[#071a3d] border-[#00a651] text-white shadow-xl -translate-y-1.5"
-                    : "bg-white dark:bg-[#0b1c3d] border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 shadow-sm"
-                }`}
-              >
-                <div>
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className={`text-xs font-bold tracking-widest transition-colors ${activeStep === i ? 'text-[#00a651]' : 'text-slate-400'}`}>
-                      {step.num}
-                    </span>
-                    <span className={`h-2.5 w-2.5 rounded-full transition-all duration-500 ${
-                      activeStep >= i ? 'bg-[#00a651] scale-125' : 'bg-slate-300 dark:bg-slate-700'
-                    }`}></span>
-                  </div>
-                  <h3 className={`text-lg font-bold mb-2 ${activeStep === i ? 'text-white' : 'text-[#071a3d] dark:text-white'}`}>{step.name}</h3>
-                  <p className={`text-xs leading-relaxed ${activeStep === i ? 'text-slate-300' : 'text-slate-600 dark:text-slate-300'}`}>{step.desc}</p>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
+      <ActiveCampaignsSection />
 
       {/* ====================================================
-          7. AI + AUTOMATION SECTION
+          9. HOW WE WORK (BLUEPRINT SCROLL SHOWCASE)
           ==================================================== */}
-      <section className="relative mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:px-8 lg:py-20">
-        <ScrollReveal direction="up">
-          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-8 md:p-12 overflow-hidden relative shadow-sm transition-colors duration-300">
-            
-            <div className="text-center mb-12">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">AI Integration</span>
-              <h2 className="mt-2 text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl lg:text-[40px] tracking-tight">
-                AI-powered growth &amp; automation.
-              </h2>
-              <p className="mx-auto mt-3 max-w-2xl text-slate-600 dark:text-slate-300 text-base">
-                We sync lead captures to AI models, instant WhatsApp sequences, and CRM triggers to maximize conversion rates on auto-pilot.
-              </p>
-            </div>
-
-            {/* Central AI diagram */}
-            <div className="flex flex-col items-center justify-center gap-8 lg:flex-row lg:gap-12">
-              
-              {/* Connected Node Visualizer */}
-              <div className="relative flex flex-wrap items-center justify-center gap-4 py-6 max-w-2xl">
-                {[
-                  { label: "Lead", icon: <Mail size={20} className="text-[#0d60c4]" /> },
-                  { label: "AI Routing", icon: <Bot size={20} className="text-[#00a651]" />, active: true },
-                  { label: "WhatsApp", icon: (
-                    <svg className="h-5 w-5 text-[#00a651]" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19.077 4.928C17.191 3.041 14.683 2 12.006 2 6.499 2 2.006 6.493 2.006 12c0 1.76.46 3.483 1.333 5l-1.333 4.86 5.013-1.313c1.452.793 3.087 1.207 4.78 1.207h.004c5.507 0 10-4.493 10-10 0-2.677-1.041-5.185-2.926-7.072z"></path>
-                    </svg>
-                  ) },
-                  { label: "CRM Sync", icon: <Settings size={20} className="text-slate-400" /> },
-                  { label: "Email Seq", icon: <Mail size={20} className="text-[#0d60c4]" /> },
-                  { label: "Conversion", icon: <Zap size={20} className="text-[#00a651]" />, active: true },
-                ].map((node, i) => (
-                  <div
-                    key={i}
-                    className={`flex flex-col items-center gap-2.5 rounded-2xl border p-4 bg-[#071a3d] text-white min-w-[100px] transition-all duration-500 hover:border-[#00a651]/60 hover:-translate-y-1 ${
-                      node.active ? "border-[#00a651] shadow-lg shadow-[#00a651]/20 animate-pulse-node" : "border-white/10"
-                    }`}
-                  >
-                    <span className="transition-transform duration-500 hover:scale-110">{node.icon}</span>
-                    <span className="text-xs font-bold text-slate-200">{node.label}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Float badges detail */}
-              <div className="space-y-3.5 max-w-sm">
-                <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 p-4 transition-all hover:bg-white dark:hover:bg-slate-800 hover:border-[#00a651]/40 shadow-sm flex gap-3">
-                  <Bot size={16} className="text-[#00a651] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-xs font-bold text-[#00a651]">AI Lead Agent</span>
-                    <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">Instantly drafts context-aware replies to incoming WhatsApp inquiries.</p>
-                  </div>
-                </div>
-                <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 p-4 transition-all hover:bg-white dark:hover:bg-slate-800 hover:border-[#0d60c4]/40 shadow-sm flex gap-3">
-                  <TrendingUp size={16} className="text-[#0d60c4] dark:text-[#00a651] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-xs font-bold text-[#0d60c4] dark:text-[#00a651]">n8n Automated CRM</span>
-                    <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">Saves lead coordinates directly to spreadsheets and client panels.</p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </ScrollReveal>
-      </section>
+      <BlueprintSection />
 
       {/* ====================================================
-          8. COURSES / MENTORSHIP SECTION
+          10. COURSES / MENTORSHIP SECTION
           ==================================================== */}
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:px-8 lg:py-20">
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
           
-          {/* Course Details Left */}
+          {/* Details Left */}
           <div className="lg:col-span-5 space-y-6">
             <ScrollReveal direction="left">
               <div className="space-y-6">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">
                   20+ Week Mentorship Program
                 </span>
-                <h2 className="text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl lg:text-[40px] tracking-tight">
+                <h2 className="text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl tracking-tight font-sans">
                   Learn the same playbooks we run on client accounts.
                 </h2>
                 <p className="text-base leading-relaxed text-slate-600 dark:text-slate-300">
@@ -780,19 +836,19 @@ export default function Home() {
 
                 {/* Course mini stats */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-4 shadow-sm">
+                  <div className="rounded-xl border border-white/10 bg-white dark:bg-[#0b1c3d] p-4 shadow-sm">
                     <p className="text-2xl font-bold text-[#00a651]">47+</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Live Sessions</p>
                   </div>
-                  <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-4 shadow-sm">
+                  <div className="rounded-xl border border-white/10 bg-white dark:bg-[#0b1c3d] p-4 shadow-sm">
                     <p className="text-2xl font-bold text-[#071a3d] dark:text-white">20+</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Real Projects</p>
                   </div>
-                  <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-4 shadow-sm">
+                  <div className="rounded-xl border border-white/10 bg-white dark:bg-[#0b1c3d] p-4 shadow-sm">
                     <p className="text-2xl font-bold text-[#0d60c4] dark:text-[#00a651]">5</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Milestones</p>
                   </div>
-                  <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-4 shadow-sm">
+                  <div className="rounded-xl border border-white/10 bg-white dark:bg-[#0b1c3d] p-4 shadow-sm">
                     <p className="text-2xl font-bold text-[#00a651]">Lifetime</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Access</p>
                   </div>
@@ -808,7 +864,7 @@ export default function Home() {
                   </Link>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-[#071a3d] dark:border-slate-600 bg-white dark:bg-slate-800 px-6 py-3 text-sm font-semibold text-[#071a3d] dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 shadow-sm"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 px-6 py-3 text-sm font-semibold text-[#071a3d] dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 shadow-sm"
                   >
                     Reserve Your Seat
                   </Link>
@@ -817,35 +873,54 @@ export default function Home() {
             </ScrollReveal>
           </div>
 
-          {/* Module Cards Right */}
+          {/* Module Cards Right with imagery overlays */}
           <div className="lg:col-span-7 space-y-4">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
-              Program Modules (Click to compare)
+              Program Modules
             </h3>
             
             <div className="grid gap-4 sm:grid-cols-2">
               {COURSE_MODULES.map((mod, i) => (
                 <ScrollReveal direction="up" delay={i * 100} key={i}>
-                  <div className="group relative block overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-5 shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-[#00a651]/40 hover:shadow-md">
-                    <div className="mb-3 flex items-center justify-between">
-                      <span className="rounded-md bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-xs font-bold text-[#071a3d] dark:text-slate-200 transition-colors">
-                        {mod.num}
-                      </span>
-                      <span className="text-xs text-slate-400 font-medium">Module</span>
+                  <div className="group relative block overflow-hidden rounded-2xl border border-white/10 bg-white dark:bg-[#0b1c3d] min-h-[220px] shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20">
+                    
+                    {/* Backdrop background image of course module */}
+                    <div className="absolute inset-0 z-0">
+                      <Image
+                        src={mod.img}
+                        alt={mod.title}
+                        fill
+                        className="object-cover opacity-15 transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-w-768px) 100vw, 350px"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#0b1c3d] via-white/90 dark:via-[#0b1c3d]/90 to-transparent" />
                     </div>
 
-                    <h4 className="text-base font-bold text-[#071a3d] dark:text-white group-hover:text-[#00a651] transition-colors">
-                      {mod.title}
-                    </h4>
-                    <p className="mt-1 text-xs text-slate-600 dark:text-slate-300 mb-3">{mod.subtitle}</p>
+                    <div className="relative z-10 p-5 flex flex-col justify-between h-full">
+                      <div>
+                        <div className="mb-2 flex items-center justify-between">
+                          <span className="rounded-md bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-xs font-bold text-[#071a3d] dark:text-slate-200">
+                            {mod.num}
+                          </span>
+                          <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Module</span>
+                        </div>
 
-                    <div className="flex flex-wrap gap-1.5">
-                      {mod.topics.map((t, idx) => (
-                        <span key={idx} className="rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[10px] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium">
-                          {t}
-                        </span>
-                      ))}
+                        <h4 className="text-base font-extrabold text-[#071a3d] dark:text-white group-hover:text-[#00a651] transition-colors">
+                          {mod.title}
+                        </h4>
+                        <p className="mt-1 text-xs text-slate-600 dark:text-slate-300 mb-3">{mod.subtitle}</p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-1.5 mt-auto">
+                        {mod.topics.map((t, idx) => (
+                          <span key={idx} className="rounded-full bg-slate-100/50 dark:bg-slate-900/60 px-2.5 py-0.5 text-[9px] text-slate-700 dark:text-slate-300 border border-white/5 font-semibold">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
                     </div>
+
                   </div>
                 </ScrollReveal>
               ))}
@@ -856,41 +931,148 @@ export default function Home() {
       </section>
 
       {/* ====================================================
-          9. TOOLS & TECHNOLOGY PARTNERS (MARQUEE)
+          11. TOOLS / TECHNOLOGY SECTION (LOGO STRIP)
           ==================================================== */}
-      <section className="relative py-12 overflow-hidden border-y border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] shadow-sm transition-colors duration-300">
-        <div className="text-center mb-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Integrations</span>
-          <h3 className="text-base font-bold text-[#071a3d] dark:text-white">Tools &amp; Technology Partners</h3>
-        </div>
+      <TechPartnersSection />
 
-        <div className="relative flex overflow-x-hidden">
-          <div className="animate-marquee flex gap-8 whitespace-nowrap items-center">
-            {[...PARTNER_LOGOS, ...PARTNER_LOGOS].map((p, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 px-5 py-2.5 transition-all duration-300 hover:scale-105 hover:border-[#00a651]/40 hover:bg-white dark:hover:bg-slate-800 shadow-sm"
-              >
-                {getPartnerIcon(p.name)}
-                <span className="text-xs font-bold text-[#071a3d] dark:text-slate-200">{p.name}</span>
+      {/* ====================================================
+          12. REAL PEOPLE SECTION ("BUILT FOR PEOPLE WHO WANT TO GROW")
+          ==================================================== */}
+      <section className="relative mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:px-8">
+        <ScrollReveal direction="up">
+          <div className="rounded-3xl border border-white/10 bg-white dark:bg-[#0b1c3d] p-6 sm:p-10 md:p-12 overflow-hidden relative shadow-sm">
+            
+            <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
+              
+              {/* Left Column: Image with floating badges (7 Cols) */}
+              <div className="lg:col-span-7 relative">
+                <div className="relative rounded-2xl border border-white/10 bg-[#071a3d] overflow-hidden aspect-[16/10] shadow-xl">
+                  <Image
+                    src="/images/built_for_growth.jpg"
+                    alt="Business Owner scaling operations using analytics"
+                    fill
+                    className="object-cover"
+                    sizes="(max-w-1024px) 100vw, 700px"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a] via-transparent to-transparent opacity-80" />
+
+                  {/* Overlaid Floating Metrics */}
+                  <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-between z-10 pointer-events-none">
+                    
+                    {/* Leads floating card */}
+                    <motion.div
+                      animate={{ y: [0, -4, 0] }}
+                      transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                      className="self-start rounded-xl border border-white/10 bg-[#050c1a]/95 px-3 py-2 shadow-lg flex items-center gap-2 pointer-events-auto"
+                    >
+                      <span className="text-[10px] font-extrabold text-[#00a651]">+284 Leads</span>
+                    </motion.div>
+
+                    {/* ROAS card */}
+                    <motion.div
+                      animate={{ y: [0, 4, 0] }}
+                      transition={{ repeat: Infinity, duration: 3.8, ease: "easeInOut" }}
+                      className="self-end rounded-xl border border-white/10 bg-[#050c1a]/95 px-3 py-2 shadow-lg flex items-center gap-2 pointer-events-auto"
+                    >
+                      <span className="text-[10px] font-extrabold text-[#0d60c4] dark:text-[#00a651]">3.8X ROAS Achieved</span>
+                    </motion.div>
+
+                    {/* AI Automation Active */}
+                    <motion.div
+                      animate={{ y: [0, -3.5, 0] }}
+                      transition={{ repeat: Infinity, duration: 4.2, ease: "easeInOut" }}
+                      className="self-start rounded-xl border border-white/10 bg-[#050c1a]/95 px-3 py-2 shadow-lg flex items-center gap-2 pointer-events-auto"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#00a651] animate-ping" />
+                      <span className="text-[9px] font-bold text-slate-200">AI Automation Active</span>
+                    </motion.div>
+
+                  </div>
+                </div>
               </div>
-            ))}
+
+              {/* Right Column: Narrative (5 Cols) */}
+              <div className="lg:col-span-5 space-y-4">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Built for People Who Want to Grow.</span>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#071a3d] dark:text-white tracking-tight leading-tight font-sans">
+                  For Founders, Creators &amp; Builders.
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  We build tools, ad campaigns, and content playbooks specifically for operators who look at unit economics rather than vanity impressions. Our workflow connects tech frameworks to actual revenue maps.
+                </p>
+                <div className="pt-2">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#00a651] hover:underline"
+                  >
+                    <span>Partner with active operators</span>
+                    <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+
+            </div>
+
           </div>
+        </ScrollReveal>
+      </section>
+
+      {/* ====================================================
+          13. TESTIMONIALS SECTION WITH PROFILE IMAGES
+          ==================================================== */}
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:px-8">
+        <ScrollReveal direction="up">
+          <div className="text-center mb-10 max-w-2xl mx-auto space-y-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Testimonials</span>
+            <h2 className="text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl tracking-tight font-sans">
+              Real founders. True growth stories.
+            </h2>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {TESTIMONIALS.map((t, idx) => (
+            <ScrollReveal direction="up" delay={idx * 80} key={idx}>
+              <div className="rounded-2xl border border-white/10 bg-white dark:bg-[#0b1c3d] p-6 shadow-sm flex flex-col justify-between h-full hover:border-white/20 transition-all">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 italic leading-relaxed text-left">
+                  "{t.text}"
+                </p>
+                
+                <div className="flex items-center gap-3.5 mt-6 pt-4 border-t border-white/5">
+                  <div className="relative h-10 w-10 overflow-hidden rounded-full border border-white/10 shrink-0">
+                    <Image
+                      src={t.img}
+                      alt={t.name}
+                      fill
+                      className="object-cover"
+                      sizes="40px"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="text-xs font-extrabold text-slate-800 dark:text-white leading-tight">{t.name}</h4>
+                    <p className="text-[10px] font-bold text-slate-400 mt-0.5">{t.role}, {t.company}</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
       {/* ====================================================
-          10. FAQ SECTION
+          14. FAQ SECTION
           ==================================================== */}
-      <section id="faq" className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:px-8 lg:py-20">
+      <section id="faq" className="mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-12">
           
           {/* FAQ Headline Left */}
           <div className="lg:col-span-5 space-y-4">
             <ScrollReveal direction="left">
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">FAQ</span>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-[#071a3d] dark:text-white tracking-tight">
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-[#071a3d] dark:text-white tracking-tight font-sans">
                   Straight answers.
                   <span className="block text-slate-400 dark:text-slate-500 mt-1">Zero fluff.</span>
                 </h2>
@@ -914,14 +1096,12 @@ export default function Home() {
           <div className="lg:col-span-7 space-y-4">
             {FAQS.map((faq, i) => (
               <ScrollReveal direction="up" delay={i * 100} key={i}>
-                <div
-                  className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] shadow-sm overflow-hidden transition-all duration-300 hover:border-[#00a651]/40"
-                >
+                <div className="rounded-2xl border border-white/10 bg-white dark:bg-[#0b1c3d] shadow-sm overflow-hidden transition-all duration-300 hover:border-white/20">
                   <button
                     onClick={() => setActiveFaq(activeFaq === i ? null : i)}
-                    className="flex w-full items-center justify-between px-6 py-4.5 text-left transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50"
+                    className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/30"
                   >
-                    <span className="text-base font-bold text-[#071a3d] dark:text-white">{faq.q}</span>
+                    <span className="text-sm sm:text-base font-bold text-[#071a3d] dark:text-white">{faq.q}</span>
                     <ChevronDown
                       size={18}
                       className={`text-slate-400 transition-transform duration-300 ${
@@ -932,10 +1112,10 @@ export default function Home() {
                   
                   <div
                     className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      activeFaq === i ? "max-h-40 border-t border-slate-100 dark:border-slate-800 py-4 px-6" : "max-h-0"
+                      activeFaq === i ? "max-h-40 border-t border-white/5 py-4 px-6" : "max-h-0"
                     }`}
                   >
-                    <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    <p className="text-xs sm:text-sm leading-relaxed text-slate-600 dark:text-slate-300 text-left">
                       {faq.a}
                     </p>
                   </div>
@@ -948,20 +1128,18 @@ export default function Home() {
       </section>
 
       {/* ====================================================
-          11. FINAL CTA BANNER
+          15. FINAL CTA BANNER
           ==================================================== */}
       <section className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <ScrollReveal direction="scale">
           <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#071a3d] via-[#0b2857] to-[#071a3d] px-6 py-12 text-center shadow-2xl md:px-12 md:py-16 text-white">
             <BubbleEffect />
             
-            {/* Background Grid */}
             <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-            {/* Glow spots */}
             <div className="absolute top-1/2 left-1/2 -z-10 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00a651]/20 blur-3xl"></div>
 
             <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Let's Work Together</span>
-            <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-extrabold text-white sm:text-4xl md:text-5xl leading-tight relative z-10">
+            <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-extrabold text-white sm:text-4xl md:text-5xl leading-tight relative z-10 font-sans">
               Ready to turn attention into growth?
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-sm text-slate-300 relative z-10">

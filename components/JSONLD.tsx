@@ -11,7 +11,6 @@ export default function JSONLD({ type, data }: JSONLDProps) {
 
   const baseSameAs = [
     BUSINESS_CONFIG.socials.instagram,
-    BUSINESS_CONFIG.socials.facebook,
     BUSINESS_CONFIG.socials.youtube,
   ];
 

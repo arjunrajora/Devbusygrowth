@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
-import ThemeToggle from "./ThemeToggle";
 import { BUSINESS_CONFIG } from "./businessConfig";
 import { Menu, X, ChevronDown, ArrowRight, Megaphone, BarChart3, Bot, Video, Globe } from "lucide-react";
 
@@ -16,10 +16,15 @@ const SERVICES_DROPDOWN = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -184,9 +189,8 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* Desktop CTA & Theme Toggle */}
+          {/* Desktop CTA */}
           <div className="hidden items-center gap-4 md:flex">
-            <ThemeToggle />
             <Link
               href="/contact"
               className="relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#0d60c4] to-[#00a651] px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#0d60c4]/20 transition-all hover:scale-105 hover:shadow-[#00a651]/30 active:scale-95 btn-shimmer"
@@ -195,9 +199,8 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Menu Toggle, Theme Toggle & Direct Call */}
+          {/* Mobile Menu Toggle & Direct Call */}
           <div className="flex items-center gap-2.5 md:hidden">
-            <ThemeToggle />
             <a
               href={`tel:${BUSINESS_CONFIG.phone}`}
               className="rounded-full bg-[#00a651]/10 border border-[#00a651]/20 px-3.5 py-1.5 text-xs font-semibold text-[#00a651] shadow-sm"

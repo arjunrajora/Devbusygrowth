@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { BUSINESS_CONFIG } from "./businessConfig";
 
 export default function WhatsAppButton() {
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -16,7 +18,7 @@ export default function WhatsAppButton() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted || pathname?.startsWith("/admin")) return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
