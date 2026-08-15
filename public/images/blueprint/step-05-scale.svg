@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050c1a"/>
+      <stop offset="50%" stop-color="#071a3d"/>
+      <stop offset="100%" stop-color="#00a651"/>
+    </linearGradient>
+    <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00a651" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00a651" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" rx="20" fill="url(#bg5)"/>
+  
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="500"/>
+    <line x1="400" y1="0" x2="400" y2="500"/>
+    <line x1="600" y1="0" x2="600" y2="500"/>
+  </g>
+
+  <circle cx="600" cy="200" r="160" fill="#00a651" opacity="0.18" filter="blur(45px)"/>
+
+  <rect x="40" y="40" width="150" height="32" rx="16" fill="#00a651" fill-opacity="0.15" stroke="#00a651" stroke-opacity="0.4"/>
+  <text x="55" y="61" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="12" letter-spacing="1">STEP 05 • SCALE</text>
+  
+  <text x="40" y="110" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="900" font-size="24">High-ROAS Budget &amp; Performance Scaling</text>
+
+  <!-- Left: Revenue Growth Chart -->
+  <rect x="40" y="140" width="460" height="310" rx="16" fill="#071a3d" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="60" y="175" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="13">CUMULATIVE REVENUE &amp; ROAS GROWTH</text>
+
+  <g transform="translate(60, 200)">
+    <!-- Area Chart Path -->
+    <path d="M 0 180 Q 80 160 140 120 T 260 70 T 380 10 L 380 190 L 0 190 Z" fill="url(#chartGrad)"/>
+    <path d="M 0 180 Q 80 160 140 120 T 260 70 T 380 10" fill="none" stroke="#00a651" stroke-width="4"/>
+
+    <!-- Data Points -->
+    <circle cx="0" cy="180" r="5" fill="#00a651"/>
+    <circle cx="140" cy="120" r="5" fill="#00a651"/>
+    <circle cx="260" cy="70" r="5" fill="#00a651"/>
+    <circle cx="380" cy="10" r="7" fill="#ffffff" stroke="#00a651" stroke-width="3"/>
+
+    <text x="320" y="0" fill="#00a651" font-family="system-ui, sans-serif" font-weight="900" font-size="14">3.8x ROAS Peak</text>
+  </g>
+
+  <!-- Right: Scaling Metrics Column -->
+  <g transform="translate(520, 140)">
+    <rect x="0" y="0" width="240" height="95" rx="16" fill="#071a3d" stroke="#00a651" stroke-opacity="0.4"/>
+    <text x="20" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-weight="700" font-size="11">TOTAL AD SPEND DIRECTED</text>
+    <text x="20" y="65" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="900" font-size="24">₹1.2 Cr+</text>
+
+    <rect x="0" y="110" width="240" height="95" rx="16" fill="#071a3d" stroke="#38bdf8" stroke-opacity="0.4"/>
+    <text x="20" y="140" fill="#94a3b8" font-family="system-ui, sans-serif" font-weight="700" font-size="11">AVERAGE BLENDED ROAS</text>
+    <text x="20" y="175" fill="#38bdf8" font-family="system-ui, sans-serif" font-weight="900" font-size="24">3.52x</text>
+
+    <rect x="0" y="220" width="240" height="90" rx="16" fill="#050c1a" stroke="#00a651" stroke-opacity="0.4"/>
+    <text x="20" y="250" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="11">HOURLY OPTIMIZATION NODE</text>
+    <text x="20" y="275" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="12">Winning Creatives Scaled 2x</text>
+  </g>
+</svg>

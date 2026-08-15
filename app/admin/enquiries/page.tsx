@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search, Filter, Mail, Phone, Calendar, CheckCircle2, Clock, Sparkles } from "lucide-react";
 
 interface Enquiry {
@@ -48,16 +48,42 @@ const SAMPLE_ENQUIRIES: Enquiry[] = [
 ];
 
 export default function AdminEnquiriesPage() {
-  const [enquiries, setEnquiries] = useState<Enquiry[]>(SAMPLE_ENQUIRIES);
+  const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState<string>("All");
   const [selectedEnquiry, setSelectedEnquiry] = useState<Enquiry | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/admin/enquiries")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.enquiries) {
+          const mapped = data.enquiries.map((item: any) => ({
+            id: item.id || item._id,
+            name: item.name,
+            email: item.email,
+            phone: item.phone,
+            service: item.interest || item.service || "",
+            message: item.message,
+            status: item.status || "New",
+            date: item.createdAt ? new Date(item.createdAt).toISOString().split("T")[0] : "",
+          }));
+          setEnquiries(mapped);
+        }
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load admin enquiries:", err);
+        setIsLoading(false);
+      });
+  }, []);
 
   const filteredEnquiries = enquiries.filter((item) => {
     const matchesSearch =
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.service.toLowerCase().includes(searchTerm.toLowerCase());
+      (item.service && item.service.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const matchesStatus = filterStatus === "All" || item.status === filterStatus;
 
@@ -142,7 +168,13 @@ export default function AdminEnquiriesPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 font-medium">
-              {filteredEnquiries.length === 0 ? (
+              {isLoading ? (
+                <tr>
+                  <td colSpan={5} className="py-8 text-center text-slate-400">
+                    Loading enquiries...
+                  </td>
+                </tr>
+              ) : filteredEnquiries.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="py-8 text-center text-slate-400">
                     No enquiries found matching your search.

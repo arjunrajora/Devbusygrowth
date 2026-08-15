@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="trBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050c1a"/>
+      <stop offset="50%" stop-color="#071a3d"/>
+      <stop offset="100%" stop-color="#0d60c4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="20" fill="url(#trBg)"/>
+  <circle cx="500" cy="200" r="140" fill="#0d60c4" opacity="0.2" filter="blur(40px)"/>
+  
+  <rect x="50" y="50" width="180" height="30" rx="15" fill="#0d60c4" fill-opacity="0.2" stroke="#0d60c4"/>
+  <text x="65" y="70" fill="#38bdf8" font-family="system-ui, sans-serif" font-weight="800" font-size="11">WEEKS 11-12 MODULE</text>
+  
+  <text x="50" y="120" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="900" font-size="28">Pixel CAPI Tracking &amp; ROAS Budget Scaling</text>
+
+  <rect x="50" y="160" width="700" height="290" rx="16" fill="#071a3d" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="80" y="200" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="14">ADVANCED TRACKING &amp; SCALING MODULE</text>
+  
+  <text x="80" y="240" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="13">• Meta Conversions API (CAPI) Server-Side Signal Integration</text>
+  <text x="80" y="275" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="13">• GA4 Custom Event &amp; E-Commerce Conversion Mappings</text>
+  <text x="80" y="310" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="13">• Google Performance Max (PMax) Asset Group Scaling</text>
+  <text x="80" y="345" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="13">• Hourly Campaign Snapshot Audits &amp; Budget Allocation Rules</text>
+
+  <rect x="80" y="375" width="640" height="50" rx="12" fill="#050c1a" stroke="#00a651" stroke-opacity="0.4"/>
+  <circle cx="105" cy="400" r="6" fill="#00a651"/>
+  <text x="125" y="405" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="13">Outcome: Scale Winning Campaigns Up to 5x Daily Spend</text>
+</svg>

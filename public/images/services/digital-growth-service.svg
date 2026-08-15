@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="dgsBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050c1a"/>
+      <stop offset="50%" stop-color="#071a3d"/>
+      <stop offset="100%" stop-color="#00a651"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" rx="20" fill="url(#dgsBg)"/>
+  <circle cx="400" cy="250" r="160" fill="#00a651" opacity="0.18" filter="blur(45px)"/>
+
+  <rect x="50" y="45" width="220" height="30" rx="15" fill="#00a651" fill-opacity="0.2" stroke="#00a651"/>
+  <text x="65" y="65" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="11">DIGITAL GROWTH SERVICES</text>
+
+  <text x="50" y="115" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="900" font-size="28">Performance Strategy &amp; Revenue Operations</text>
+
+  <rect x="50" y="150" width="700" height="300" rx="16" fill="#071a3d" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="75" y="190" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="14">AGENCY PERFORMANCE FRAMEWORK</text>
+
+  <g transform="translate(75, 210)">
+    <rect x="0" y="0" width="630" height="50" rx="10" fill="#050c1a" stroke="#00a651" stroke-opacity="0.4"/>
+    <circle cx="25" cy="25" r="5" fill="#00a651"/>
+    <text x="40" y="30" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="12">1. Data-Driven Customer Acquisition Strategy &amp; Persona Audits</text>
+
+    <rect x="0" y="65" width="630" height="50" rx="10" fill="#050c1a" stroke="#0d60c4" stroke-opacity="0.4"/>
+    <circle cx="25" cy="90" r="5" fill="#0d60c4"/>
+    <text x="40" y="95" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="12">2. High-Converting Visual Creatives, Reels &amp; Web Funnel Production</text>
+
+    <rect x="0" y="130" width="630" height="50" rx="10" fill="#050c1a" stroke="#00a651" stroke-opacity="0.4"/>
+    <circle cx="25" cy="155" r="5" fill="#00a651"/>
+    <text x="40" y="160" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="12">3. 24/7 AI Automation Nodes, WhatsApp Routing &amp; CAPI Signal Sync</text>
+  </g>
+</svg>

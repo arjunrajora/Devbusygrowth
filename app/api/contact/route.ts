@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
     // 2. Persist Enquiry to system store for Admin Portal & Dashboard
     let savedRecord;
     try {
-      savedRecord = saveEnquiry({
+      savedRecord = await saveEnquiry({
         name: cleanName,
         email: cleanEmail,
         phone: cleanPhone,

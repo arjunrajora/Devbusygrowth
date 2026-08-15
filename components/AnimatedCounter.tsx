@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
 interface AnimatedCounterProps {
-  targetValue: number; // Target number to reach (e.g. 5000, 50, 4.8, 650)
+  targetValue?: number; // Target number to reach (e.g. 5000, 50, 4.8, 650)
+  value?: number; // Alias for targetValue
   prefix?: string; // e.g. "₹"
   suffix?: string; // e.g. "+", "Cr+", "x"
   duration?: number; // In milliseconds
@@ -12,12 +13,14 @@ interface AnimatedCounterProps {
 
 export default function AnimatedCounter({
   targetValue,
+  value,
   prefix = "",
   suffix = "",
   duration = 2000,
   decimals = 0,
 }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0);
+  const finalTarget = targetValue ?? value ?? 0;
+  const [count, setCount] = useState<number>(0);
   const elementRef = useRef<HTMLSpanElement>(null);
   const hasAnimated = useRef(false);
 
@@ -47,7 +50,7 @@ export default function AnimatedCounter({
         observer.unobserve(currentRef);
       }
     };
-  }, [targetValue]);
+  }, [finalTarget]);
 
   const startCountUp = () => {
     let startTimestamp: number | null = null;
@@ -58,25 +61,28 @@ export default function AnimatedCounter({
       
       // Easing function: easeOutQuad
       const easedProgress = progress * (2 - progress);
-      const currentValue = easedProgress * targetValue;
+      const currentValue = easedProgress * finalTarget;
       
       setCount(currentValue);
       
       if (progress < 1) {
         window.requestAnimationFrame(step);
       } else {
-        setCount(targetValue);
+        setCount(finalTarget);
       }
     };
     
     window.requestAnimationFrame(step);
   };
 
+  const safeCount = typeof count === "number" && !isNaN(count) ? count : 0;
+
   return (
     <span ref={elementRef} className="inline-block transition-transform duration-300 hover:scale-105">
       {prefix}
-      {count.toFixed(decimals)}
+      {safeCount.toFixed(decimals)}
       {suffix}
     </span>
   );
 }
+

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="finBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050c1a"/>
+      <stop offset="50%" stop-color="#071a3d"/>
+      <stop offset="100%" stop-color="#00a651"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="20" fill="url(#finBg)"/>
+  <circle cx="250" cy="200" r="140" fill="#00a651" opacity="0.18" filter="blur(40px)"/>
+  
+  <rect x="50" y="50" width="170" height="30" rx="15" fill="#00a651" fill-opacity="0.2" stroke="#00a651"/>
+  <text x="65" y="70" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="11">FINANCE CASE STUDY</text>
+  
+  <text x="50" y="120" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="900" font-size="28">High-Ticket Investor Lead Funnel</text>
+
+  <rect x="50" y="160" width="210" height="90" rx="16" fill="#071a3d" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="70" y="190" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">INVESTOR LEADS</text>
+  <text x="70" y="225" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="900" font-size="24">520+ Qualified</text>
+
+  <rect x="285" y="160" width="210" height="90" rx="16" fill="#071a3d" stroke="#00a651" stroke-opacity="0.4"/>
+  <text x="305" y="190" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="11">VERIFIED PHONE SYNC</text>
+  <text x="305" y="225" fill="#00a651" font-family="system-ui, sans-serif" font-weight="900" font-size="24">91% OTP Verified</text>
+
+  <rect x="520" y="160" width="230" height="90" rx="16" fill="#071a3d" stroke="#38bdf8" stroke-opacity="0.4"/>
+  <text x="540" y="190" fill="#38bdf8" font-family="system-ui, sans-serif" font-weight="800" font-size="11">AVG TICKET SIZE</text>
+  <text x="540" y="225" fill="#38bdf8" font-family="system-ui, sans-serif" font-weight="900" font-size="24">₹2.5 Lakh+</text>
+
+  <rect x="50" y="280" width="700" height="170" rx="16" fill="#050c1a" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="75" y="320" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="800" font-size="16">Finance Strategy Nodes</text>
+  <text x="75" y="350" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="13">• High Security Custom Lead Capture Form with OTP Phone Verification</text>
+  <text x="75" y="380" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="13">• Direct Google Search Intent Keyword Stacking for Wealth Advisors</text>
+  <text x="75" y="410" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="13">• 24/7 Automated CRM Sync to Senior Wealth Managers</text>
+</svg>

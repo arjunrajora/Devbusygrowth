@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="masBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050c1a"/>
+      <stop offset="50%" stop-color="#071a3d"/>
+      <stop offset="100%" stop-color="#0d60c4"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" rx="20" fill="url(#masBg)"/>
+  <circle cx="200" cy="250" r="150" fill="#0d60c4" opacity="0.2" filter="blur(45px)"/>
+
+  <rect x="50" y="45" width="210" height="30" rx="15" fill="#0d60c4" fill-opacity="0.2" stroke="#0d60c4"/>
+  <text x="65" y="65" fill="#38bdf8" font-family="system-ui, sans-serif" font-weight="800" font-size="11">META &amp; GOOGLE ADS SCALING</text>
+
+  <text x="50" y="115" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="900" font-size="28">High-ROAS Media Buying &amp; Campaign Engine</text>
+
+  <rect x="50" y="150" width="700" height="300" rx="16" fill="#071a3d" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="75" y="190" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="14">CAMPAIGN PERFORMANCE METRICS</text>
+
+  <g transform="translate(75, 210)">
+    <rect x="0" y="0" width="190" height="110" rx="12" fill="#050c1a" stroke="#00a651" stroke-opacity="0.4"/>
+    <text x="20" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">BLENDED ROAS</text>
+    <text x="20" y="65" fill="#00a651" font-family="system-ui, sans-serif" font-weight="900" font-size="28">3.85x</text>
+    <text x="20" y="90" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="10">Target Exceeded</text>
+
+    <rect x="220" y="0" width="190" height="110" rx="12" fill="#050c1a" stroke="#0d60c4" stroke-opacity="0.4"/>
+    <text x="240" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">COST PER CPA</text>
+    <text x="240" y="65" fill="#38bdf8" font-family="system-ui, sans-serif" font-weight="900" font-size="28">-34%</text>
+    <text x="240" y="90" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="10">CPA Reduced</text>
+
+    <rect x="440" y="0" width="190" height="110" rx="12" fill="#050c1a" stroke="#00a651" stroke-opacity="0.4"/>
+    <text x="460" y="30" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">PIXEL MATCH</text>
+    <text x="460" y="65" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="900" font-size="28">9.4/10</text>
+    <text x="460" y="90" fill="#00a651" font-family="system-ui, sans-serif" font-size="10">CAPI 100% Match</text>
+
+    <rect x="0" y="135" width="630" height="75" rx="12" fill="#050c1a" stroke="#0d60c4" stroke-opacity="0.3"/>
+    <text x="20" y="160" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="800" font-size="13">Dynamic A/B Testing Matrix + High Intent Retargeting</text>
+    <text x="20" y="185" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Scaling budget into winning creative hooks while pruning high CPA ad sets.</text>
+  </g>
+</svg>

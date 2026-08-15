@@ -1,5 +1,4 @@
-import fs from "fs";
-import path from "path";
+import clientPromise from "./mongodb";
 
 export interface SystemEnquiry {
   id: string;
@@ -10,45 +9,71 @@ export interface SystemEnquiry {
   interest: string;
   message: string;
   createdAt: string;
+  status?: string;
+  updatedAt?: string;
 }
 
-const DATA_FILE_PATH = path.join(process.cwd(), "data", "enquiries.json");
-
-export function getAllEnquiries(): SystemEnquiry[] {
+export async function getAllEnquiries(): Promise<SystemEnquiry[]> {
   try {
-    if (!fs.existsSync(DATA_FILE_PATH)) {
-      return [];
-    }
-    const content = fs.readFileSync(DATA_FILE_PATH, "utf-8");
-    return JSON.parse(content) as SystemEnquiry[];
+    const client = await clientPromise;
+    const db = client.db();
+    const collection = db.collection("enquiries");
+    const docs = await collection.find({}).sort({ createdAt: -1 }).toArray();
+
+    return docs.map((doc) => ({
+      id: doc.id || doc._id.toString(),
+      name: doc.name || "",
+      email: doc.email || "",
+      phone: doc.phone || "",
+      businessType: doc.businessType || doc.company || "",
+      interest: doc.interest || doc.service || "",
+      message: doc.message || "",
+      status: doc.status || "New",
+      createdAt: doc.createdAt ? new Date(doc.createdAt).toISOString() : new Date().toISOString(),
+      updatedAt: doc.updatedAt ? new Date(doc.updatedAt).toISOString() : undefined,
+    })) as SystemEnquiry[];
   } catch (error) {
-    console.error("Error reading enquiries data:", error);
+    console.error("Error reading enquiries data from MongoDB:", error);
     return [];
   }
 }
 
-export function saveEnquiry(newEntry: Omit<SystemEnquiry, "id" | "createdAt">): SystemEnquiry {
-  const currentEnquiries = getAllEnquiries();
-  const nextIdNumber = 1000 + currentEnquiries.length + 1;
-  const createdRecord: SystemEnquiry = {
-    ...newEntry,
-    id: `ENQ-${nextIdNumber}`,
-    createdAt: new Date().toISOString(),
+export async function saveEnquiry(newEntry: Omit<SystemEnquiry, "id" | "createdAt">): Promise<SystemEnquiry> {
+  const client = await clientPromise;
+  const db = client.db();
+  const collection = db.collection("enquiries");
+
+  // Get next sequential ID number
+  const totalCount = await collection.countDocuments();
+  const nextIdNumber = 1000 + totalCount + 1;
+  const id = `ENQ-${nextIdNumber}`;
+  const now = new Date();
+
+  // Construct MongoDB document, preserving both requested schema and existing form fields
+  const document = {
+    id,
+    name: newEntry.name,
+    email: newEntry.email,
+    phone: newEntry.phone,
+    businessType: newEntry.businessType,
+    company: newEntry.businessType, // map to company
+    interest: newEntry.interest,
+    service: newEntry.interest, // map to service
+    message: newEntry.message,
+    status: "New",
+    createdAt: now,
+    updatedAt: now,
   };
 
-  const updatedList = [createdRecord, ...currentEnquiries];
+  await collection.insertOne(document);
 
-  try {
-    const dir = path.dirname(DATA_FILE_PATH);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(updatedList, null, 2), "utf-8");
-  } catch (error) {
-    console.error("Error writing enquiry data:", error);
-  }
-
-  return createdRecord;
+  return {
+    ...newEntry,
+    id,
+    status: "New",
+    createdAt: now.toISOString(),
+    updatedAt: now.toISOString(),
+  };
 }
 
 export interface MonthlyChartPoint {
@@ -57,8 +82,8 @@ export interface MonthlyChartPoint {
   count: number;
 }
 
-export function getMonthlyEnquiriesChartData(): MonthlyChartPoint[] {
-  const enquiries = getAllEnquiries();
+export async function getMonthlyEnquiriesChartData(): Promise<MonthlyChartPoint[]> {
+  const enquiries = await getAllEnquiries();
   
   const monthNames = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
@@ -80,9 +105,6 @@ export function getMonthlyEnquiriesChartData(): MonthlyChartPoint[] {
       }
     }
   });
-
-  // Current year month list (up to current month or full year)
-  const currentMonthIndex = new Date().getMonth(); // 7 for Aug
 
   return monthNames.map((name, idx) => ({
     month: name,

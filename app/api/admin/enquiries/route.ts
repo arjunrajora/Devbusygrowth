@@ -3,8 +3,8 @@ import { getAllEnquiries, getMonthlyEnquiriesChartData } from "@/lib/enquiries-s
 
 export async function GET() {
   try {
-    const enquiries = getAllEnquiries();
-    const monthlyStats = getMonthlyEnquiriesChartData();
+    const enquiries = await getAllEnquiries();
+    const monthlyStats = await getMonthlyEnquiriesChartData();
 
     return NextResponse.json({
       totalCount: enquiries.length,

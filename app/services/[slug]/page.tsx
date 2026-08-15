@@ -65,7 +65,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "📱",
     title: "Social Media Strategy",
     tagline: "Data-driven, algorithm-proof social strategies aligned with your revenue goals.",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/social-media-strategy.svg",
     description:
       "We craft comprehensive social media roadmaps that analyze your competitive landscape, define target audience personas, map content funnels, and pinpoint high-converting content hooks. No guesswork — just structured execution built for predictable brand growth.",
     deliverables: [
@@ -135,7 +135,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "⚙️",
     title: "Account Setup & Optimization",
     tagline: "Convert casual profile visitors into loyal followers and paying leads.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/account-setup-optimization.svg",
     description:
       "Transform your social profiles into high-converting digital storefronts. We optimize your bio copy, highlight covers, link tree funnels, branding assets, and verification settings across Instagram, Facebook, LinkedIn, and YouTube.",
     deliverables: [
@@ -204,7 +204,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🎨",
     title: "Content Creation",
     tagline: "High-performing graphics, carousels, and visual assets designed to capture attention.",
-    image: "https://images.unsplash.com/photo-1542744094-3a3172720188?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/content-creation.svg",
     description:
       "Attention is the currency of the digital age. Our creative team designs scroll-stopping carousels, sleek infographics, motion graphics, and brand-aligned visual assets engineered for maximum engagement and viral reach.",
     deliverables: [
@@ -271,7 +271,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "📅",
     title: "Content Calendar Planning",
     tagline: "Never run out of ideas with strategic 30-day organized content roadmaps.",
-    image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/social-media-strategy.svg",
     description:
       "Consistency is key to social media growth. We plan, structure, and schedule your entire content calendar 30 days in advance, matching industry trends, product launches, seasonal campaigns, and your sales funnel objectives.",
     deliverables: [
@@ -338,7 +338,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "📈",
     title: "Social Media Management",
     tagline: "Complete end-to-end management of your social channels so you can build your business.",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/reels-content.webp",
     description:
       "Hand off your daily social media operations to dedicated growth managers. From publishing and community moderation to active engagement and performance tracking, we run your accounts like clockwork.",
     deliverables: [
@@ -405,7 +405,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🤝",
     title: "Audience Engagement",
     tagline: "Build an active, thriving community around your brand with proactive interaction.",
-    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/account-setup-optimization.svg",
     description:
       "Turn passive lurkers into passionate brand advocates. We conduct outbound engagement, interact with target niche communities, reply to DMs, and spark meaningful conversations that build trust and authority.",
     deliverables: [
@@ -471,7 +471,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🌟",
     title: "Influencer Marketing",
     tagline: "Amplify your reach with vetted creator partnerships and authentic brand endorsements.",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/content-creation.svg",
     description:
       "Harness creator authority to scale your brand. We identify, negotiate with, and manage high-ROI creators and micro-influencers whose followers match your ideal customer profile.",
     deliverables: [
@@ -538,7 +538,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "📊",
     title: "Analytics & Reporting",
     tagline: "Transparent, data-driven reporting that tracks revenue, engagement, and growth metrics.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/ads-growth.webp",
     description:
       "Cut through vanity metrics and see what actually drives ROI. We deliver clear, actionable monthly dashboards breaking down reach, follower growth, website click-throughs, and campaign performance.",
     deliverables: [
@@ -604,7 +604,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🛡️",
     title: "Brand Monitoring",
     tagline: "Protect your online reputation and track brand mentions across the web 24/7.",
-    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/digital-growth-service.svg",
     description:
       "Stay informed on what customers and competitors are saying about your brand. We monitor brand mentions, hashtags, product feedback, and industry discussions in real-time to mitigate risks and capitalize on positive PR.",
     deliverables: [
@@ -670,7 +670,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🔥",
     title: "Hashtag & Trend Research",
     tagline: "Ride viral trends early and expand organic reach with data-backed keyword strategies.",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/social-media-strategy.svg",
     description:
       "Don't let algorithms leave you behind. We continuously research viral audio, trending formats, and low-competition niche hashtags to give your posts maximum organic visibility.",
     deliverables: [
@@ -736,7 +736,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🔍",
     title: "Social Media Audit",
     tagline: "Deep-dive audit of your existing accounts to uncover hidden leaks and growth opportunities.",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/services/account-setup-optimization.svg",
     description:
       "Uncover why your social growth has stalled. We perform an exhaustive 40-point audit evaluating your bio, content performance, posting frequency, visual aesthetics, audience sentiment, and funnel conversion bottlenecks.",
     deliverables: [
@@ -804,11 +804,76 @@ function getServiceBySlug(slug: string): ServiceDetail {
     return SERVICES_DETAILS_DATABASE[slug];
   }
 
-  // Generate fallback details gracefully
   const cleanTitle = slug
     .split("-")
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
+
+  // Master Title-Matched Unique Image Catalog (Every Service Slug Maps to a Local 100% Unique Image)
+  const UNIQUE_SERVICE_IMAGE_MAP: Record<string, string> = {
+    // Social Media Mastery
+    "social-media-strategy": "/images/services/social-media-strategy.svg",
+    "account-setup-optimization": "/images/services/account-setup-optimization.svg",
+    "content-creation": "/images/services/content-creation.svg",
+    "content-calendar-planning": "/images/services/social-media-strategy.svg",
+    "social-media-management": "/images/services/reels-content.webp",
+    "audience-engagement": "/images/services/account-setup-optimization.svg",
+    "influencer-marketing": "/images/services/content-creation.svg",
+    "analytics-reporting": "/images/services/ads-growth.webp",
+    "brand-monitoring": "/images/services/digital-growth-service.svg",
+    "hashtag-trend-research": "/images/services/social-media-strategy.svg",
+    "social-media-audit": "/images/services/account-setup-optimization.svg",
+
+    // Meta & Google Ads Scaling
+    "meta-ads-strategy-planning": "/images/services/meta-ads-scaling.svg",
+    "campaign-setup-structure": "/images/services/ads-growth.webp",
+    "audience-research-targeting": "/images/services/lead-generation.webp",
+    "creative-design": "/images/services/content-creation.svg",
+    "a-b-testing": "/images/showcase/ads-showcase.svg",
+    "pixel-setup-tracking": "/images/services/meta-ads-scaling.svg",
+    "retargeting-campaigns": "/images/services/ads-growth.webp",
+    "lead-generation-ads": "/images/services/lead-generation.webp",
+    "e-commerce-ads": "/images/campaigns/d2c-case-study.svg",
+
+    // AI & Automation Nodes
+    "ai-automation": "/images/services/ai-automation.webp",
+    "ai-chatbot-development": "/images/showcase/ai-showcase.svg",
+    "lead-generation-automation": "/images/services/lead-generation.webp",
+    "email-whatsapp-automation": "/images/services/ai-automation.webp",
+    "ai-content-generation": "/images/showcase/ai-showcase.svg",
+    "workflow-integration": "/images/services/ai-automation.webp",
+
+    // Video Editing & Reels
+    "video-editing": "/images/showcase/reels-showcase.svg",
+    "social-media-video-editing": "/images/services/reels-content.webp",
+    "reels-shorts-editing": "/images/showcase/reels-showcase.svg",
+    "youtube-video-editing": "/images/video/thebusygrowth-video-poster.webp",
+    "ad-video-editing": "/images/services/reels-content.webp",
+
+    // Web & Funnel Development
+    "web-development": "/images/services/web-development.jpg",
+    "landing-page-design": "/images/services/web-development.jpg",
+    "business-website-5-7-pages": "/images/services/web-development.jpg",
+    "e-commerce-website": "/images/campaigns/d2c-case-study.svg",
+    "ui-ux-design": "/images/services/web-development.jpg",
+  };
+
+  const lowerSlug = slug.toLowerCase();
+  let topicImage = UNIQUE_SERVICE_IMAGE_MAP[lowerSlug];
+
+  if (!topicImage) {
+    if (lowerSlug.includes("ai") || lowerSlug.includes("automation") || lowerSlug.includes("bot") || lowerSlug.includes("workflow")) {
+      topicImage = "/images/services/ai-automation.webp";
+    } else if (lowerSlug.includes("video") || lowerSlug.includes("reel") || lowerSlug.includes("edit") || lowerSlug.includes("short")) {
+      topicImage = "/images/showcase/reels-showcase.svg";
+    } else if (lowerSlug.includes("web") || lowerSlug.includes("land") || lowerSlug.includes("site") || lowerSlug.includes("funnel") || lowerSlug.includes("dev")) {
+      topicImage = "/images/services/web-development.jpg";
+    } else if (lowerSlug.includes("ad") || lowerSlug.includes("meta") || lowerSlug.includes("google") || lowerSlug.includes("lead")) {
+      topicImage = "/images/services/meta-ads-scaling.svg";
+    } else {
+      topicImage = "/images/services/digital-growth-service.svg";
+    }
+  }
 
   return {
     slug,
@@ -817,7 +882,7 @@ function getServiceBySlug(slug: string): ServiceDetail {
     icon: "🚀",
     title: cleanTitle,
     tagline: `Professional ${cleanTitle} designed to scale your business predictability.`,
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    image: topicImage,
     description: `Our ${cleanTitle} service provides data-driven strategies, premium execution, and transparent reporting to help your brand stand out and convert qualified traffic into revenue.`,
     deliverables: [
       `Custom ${cleanTitle} Strategy & Execution Plan`,
@@ -927,125 +992,164 @@ export default async function ServiceDetailPage({ params }: Props) {
       <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           
-          {/* Breadcrumb Navigation */}
-          <div className="mb-8">
-            <Link
-              href={`/services#${service.categorySlug}`}
-              className="inline-flex items-center gap-1 text-xs font-bold text-[#0d60c4] dark:text-[#00a651] hover:underline group"
-            >
-              <ArrowLeft size={12} className="transition-transform duration-350 group-hover:-translate-x-0.5" />
-              <span>Back to {service.category}</span>
-            </Link>
-          </div>
+          <nav className="mb-8 flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+            <Link href="/" className="hover:text-[#00a651] transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/services" className="hover:text-[#00a651] transition-colors">Services</Link>
+            <span>/</span>
+            <span className="text-[#071a3d] dark:text-white font-bold">{service.title}</span>
+          </nav>
 
-          {/* Hero Section */}
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center mb-16">
-            <div className="lg:col-span-7 space-y-6">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#00a651]/30 bg-[#00a651]/10 px-3.5 py-1 text-xs font-bold text-[#00a651]">
+          <div className="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-slate-200 dark:border-slate-800">
+            <div className="space-y-3 max-w-2xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#00a651]/30 bg-[#00a651]/10 px-3.5 py-1 text-xs font-bold text-[#00a651]">
                 {getSlugIcon(service.icon)}
                 <span>{service.category}</span>
-              </span>
-
+              </div>
               <h1 className="text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl lg:text-5xl tracking-tight leading-tight">
                 {service.title}
               </h1>
-
-              <p className="text-base font-semibold text-[#0d60c4] dark:text-[#00a651]">
+              <p className="text-base sm:text-lg font-medium text-slate-600 dark:text-slate-300 leading-relaxed">
                 {service.tagline}
               </p>
+            </div>
 
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-                {service.description}
-              </p>
+            <div className="shrink-0 flex flex-col sm:flex-row md:flex-col gap-3">
+              <Link
+                href={`/contact?service=${service.slug}`}
+                className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#0d60c4] to-[#00a651] px-6 py-3 text-xs font-bold text-white shadow-md transition-all hover:scale-105 btn-shimmer"
+              >
+                <span>Book Free Growth Call</span>
+                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Link>
+              <Link
+                href="/services"
+                className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] px-5 py-3 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+              >
+                <ArrowLeft size={14} />
+                <span>All Services</span>
+              </Link>
+            </div>
+          </div>
 
-              <div className="pt-2 flex flex-wrap items-center gap-4">
-                <Link
-                  href={`/contact?service=${service.slug}`}
-                  className="rounded-full bg-gradient-to-r from-[#0d60c4] to-[#00a651] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#0d60c4]/20 transition-all hover:scale-105 active:scale-95 btn-shimmer"
-                >
-                  Book a Strategy Call
-                </Link>
-                <a
-                  href={`https://wa.me/${BUSINESS_CONFIG.whatsapp}?text=${encodeURIComponent(
-                    `Hi ${BUSINESS_CONFIG.name}, I want to learn more about ${service.title}!`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-6 py-3.5 text-sm font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all"
-                >
-                  WhatsApp Inquiry
-                </a>
+          {/* Premium Hero Visual Showcase Container (Agency Style matching Reference Design) */}
+          <div className="mb-16 rounded-3xl border border-slate-200 dark:border-white/10 bg-[#071a3d] p-4 sm:p-8 shadow-2xl relative overflow-hidden group">
+            {/* Ambient Gradient Background Accents */}
+            <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-gradient-to-br from-[#00a651]/25 to-[#0d60c4]/25 blur-3xl pointer-events-none" />
+            <div className="absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-gradient-to-tr from-[#0d60c4]/25 to-[#00a651]/25 blur-3xl pointer-events-none" />
+
+            {/* Header Info Bar inside Visual Container */}
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
+              <div className="flex items-center gap-3">
+                <span className="flex h-3 w-3 rounded-full bg-[#00a651] animate-pulse" />
+                <span className="text-xs font-extrabold uppercase tracking-wider text-slate-200">
+                  {service.title} • Premium Visual Showcase
+                </span>
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-3.5 py-1 text-[11px] font-bold text-emerald-400 border border-white/10">
+                <span>Domain Solution Architecture</span>
               </div>
             </div>
 
-            {/* Featured Image */}
-            <div className="lg:col-span-5">
-              <div className="relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl group">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="h-80 sm:h-96 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#071a3d]/60 via-transparent to-transparent"></div>
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/90 dark:bg-[#071a3d]/90 backdrop-blur-md border border-white/20">
-                  <p className="text-xs font-bold text-[#0d60c4] dark:text-[#00a651]">
-                    Why choose {service.title}?
-                  </p>
-                  <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">
-                    Engineered for maximum reach, brand authority, and revenue conversion.
-                  </p>
+            {/* Prominent Visual Image Area */}
+            <div className="relative aspect-video sm:aspect-[21/9] w-full rounded-2xl overflow-hidden border border-white/10 shadow-inner bg-slate-950">
+              <img
+                src={service.image}
+                alt={`${service.title} visual showcase`}
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              
+              {/* Glassmorphic Overlay Badge */}
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto max-w-md rounded-xl bg-[#050c1a]/85 backdrop-blur-md p-3.5 sm:p-4 border border-white/10 shadow-xl">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-r from-[#0d60c4] to-[#00a651] text-white shadow-md">
+                    {getSlugIcon(service.icon)}
+                  </div>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-extrabold text-white leading-tight">
+                      {service.title}
+                    </h4>
+                    <p className="text-[11px] text-slate-300 font-medium line-clamp-1">
+                      {service.tagline}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Key Deliverables & Benefits Grid */}
-          <div className="grid gap-8 md:grid-cols-2 mb-20">
-            {/* Deliverables */}
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-8 shadow-sm">
-              <div className="flex items-center gap-3 mb-6">
-                <ClipboardList size={20} className="text-[#0d60c4] dark:text-[#00a651]" />
-                <h2 className="text-xl font-bold text-[#071a3d] dark:text-white">
-                  What's Included & Deliverables
-                </h2>
+          <div className="mb-20 grid gap-12 lg:grid-cols-12">
+            
+            <div className="lg:col-span-7 space-y-6">
+              <h2 className="text-2xl font-bold text-[#071a3d] dark:text-white">
+                Detailed Service Scope
+              </h2>
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                {service.description}
+              </p>
+
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-[#00a651]">
+                  Strategic Growth Deliverables
+                </h3>
+                <div className="space-y-3">
+                  {service.deliverables.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-3 rounded-xl border border-slate-100 dark:border-slate-800/80 bg-white dark:bg-[#0b1c3d] p-3.5 shadow-sm">
+                      <div className="rounded-lg bg-[#00a651]/10 p-1 text-[#00a651] shrink-0 mt-0.5">
+                        <Check size={14} />
+                      </div>
+                      <span className="text-xs font-semibold text-slate-700 dark:text-slate-200">
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <ul className="space-y-4">
-                {service.deliverables.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
-                    <Check size={12} className="text-[#00a651] shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
 
-            {/* Key Benefits */}
-            <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-8 shadow-sm">
-              <div className="flex items-center gap-3 mb-6">
-                <TrendingUp size={20} className="text-[#00a651]" />
-                <h2 className="text-xl font-bold text-[#071a3d] dark:text-white">
-                  Expected Business Benefits
-                </h2>
+            <div className="lg:col-span-5">
+              <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-6 sm:p-8 shadow-sm">
+                <h3 className="text-lg font-bold text-[#071a3d] dark:text-white mb-4">
+                  Expected Business Impact
+                </h3>
+                <div className="space-y-4">
+                  {service.benefits.map((b, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      <div className="h-2 w-2 rounded-full bg-[#00a651] shrink-0 mt-2" />
+                      <p className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-300">
+                        {b}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 rounded-2xl bg-slate-50 dark:bg-slate-800/50 p-4 border border-slate-100 dark:border-slate-700">
+                  <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                    Need Custom Scope?
+                  </p>
+                  <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">
+                    We tailor our media buying and creative packages for specific revenue targets.
+                  </p>
+                  <Link
+                    href={`/contact?service=${service.slug}`}
+                    className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-[#00a651] hover:underline"
+                  >
+                    <span>Request Custom Proposal</span>
+                    <ArrowRight size={12} />
+                  </Link>
+                </div>
               </div>
-              <ul className="space-y-4">
-                {service.benefits.map((benefit, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
-                    <Star size={12} className="text-[#0d60c4] dark:text-[#00a651] fill-[#0d60c4] dark:fill-[#00a651] shrink-0 mt-0.5" />
-                    <span>{benefit}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
+
           </div>
 
-          {/* Pricing & Packages Section */}
           <div className="mb-20">
             <div className="text-center mb-12">
               <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">
                 Transparent Pricing
               </span>
               <h2 className="mt-2 text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl">
-                Choose Your {service.title} Package
+                Choose Your Content Creation Package
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-sm text-slate-600 dark:text-slate-300">
                 Fixed deliverables, zero hidden fees. Scale as your business grows.
@@ -1053,7 +1157,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             </div>
 
             <div className="grid gap-8 md:grid-cols-3">
-              {service.plans.map((plan, i) => (
+              {service.plans.map((plan) => (
                 <div
                   key={plan.name}
                   className={`relative flex flex-col justify-between rounded-3xl border p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
@@ -1072,16 +1176,10 @@ export default async function ServiceDetailPage({ params }: Props) {
                   )}
 
                   <div>
-                    <div className="mb-6 border-b border-slate-100 dark:border-slate-800 pb-6">
+                    <div className="mb-6 border-b border-slate-100 dark:border-slate-800 pb-5">
                       <h3 className="text-xl font-bold text-[#071a3d] dark:text-white">
                         {plan.name}
                       </h3>
-                      <div className="mt-3 flex items-baseline gap-1">
-                        <span className="text-3xl font-extrabold text-[#0d60c4] dark:text-[#00a651]">
-                          {plan.price}
-                        </span>
-                        <span className="text-xs text-slate-500">{plan.period}</span>
-                      </div>
                       <p className="mt-2 text-xs text-slate-600 dark:text-slate-300">
                         {plan.description}
                       </p>
@@ -1111,7 +1209,6 @@ export default async function ServiceDetailPage({ params }: Props) {
             </div>
           </div>
 
-          {/* Bottom CTA Card */}
           <div className="rounded-3xl bg-gradient-to-r from-[#071a3d] via-[#0b2857] to-[#071a3d] p-8 sm:p-12 text-center text-white shadow-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 -z-10 h-64 w-64 rounded-full bg-[#00a651]/20 blur-3xl"></div>
             <h2 className="text-2xl font-extrabold sm:text-3xl lg:text-4xl">

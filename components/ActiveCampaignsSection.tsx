@@ -45,7 +45,7 @@ const CAMPAIGNS: CampaignData[] = [
     tabLabel: "E-Commerce",
     title: "Scaling D2C Beauty & Fashion Catalog Spend",
     description: "Implemented a dynamic creative testing matrix combined with conversion-focused customer funnels, resulting in optimized ad spend and massive Shopify sales growth.",
-    img: "/images/lead_gen_funnel.jpg",
+    img: "/images/campaigns/d2c-case-study.svg",
     badge: "D2C Scaling Node",
     metrics: [
       { label: "Ad Spend Return (ROAS)", value: 3.8, suffix: "x", decimals: 1 },
@@ -59,7 +59,7 @@ const CAMPAIGNS: CampaignData[] = [
     tabLabel: "Education",
     title: "Admission & Mentorship Enrolment Scaling",
     description: "Scaled leads for national educational coaching and personal mentoring programs using structured lead generation funnels and live web discovery sessions.",
-    img: "/images/services/courses-growth.webp",
+    img: "/images/campaigns/edtech-case-study.svg",
     badge: "Education Funnel Node",
     metrics: [
       { label: "Qualified Enrolments", value: 1200, suffix: "+" },
@@ -71,12 +71,12 @@ const CAMPAIGNS: CampaignData[] = [
   {
     id: "local-business",
     tabLabel: "Local Business",
-    title: "Jaipur Retail Store Storefront Traffic Funnel",
-    description: "Mapped hyper-local visual advertising creatives on Meta & Google Maps targeting regional demographics to drive physically foot-traffic & store enquiries.",
-    img: "/images/hero_visual.jpg",
-    badge: "Foot Traffic Node",
+    title: "Jaipur Storefront & High-Ticket Finance Lead Funnel",
+    description: "Mapped hyper-local visual advertising creatives & wealth advisory funnels targeting verified regional demographics for high conversion.",
+    img: "/images/campaigns/finance-case-study.svg",
+    badge: "High-Ticket Lead Node",
     metrics: [
-      { label: "Walk-in Customers", value: 500, suffix: "+" },
+      { label: "Qualified Leads", value: 520, suffix: "+" },
       { label: "Customer Acquisition Cost (CAC)", value: 28, prefix: "-", suffix: "%" },
       { label: "Inbound Local Calls", value: 320, suffix: "+" },
       { label: "Google Profile CTR Boost", value: 142, prefix: "+", suffix: "%" }
@@ -87,7 +87,7 @@ const CAMPAIGNS: CampaignData[] = [
     tabLabel: "B2B SaaS",
     title: "SaaS Sales Demos & Enterprise Bookings Pipeline",
     description: "Constructed auto-scrapers and auto-responders that parse inbound queries, sync directories across Google Sheets & Notion, and deploy ChatGPT agents to support client inquiries.",
-    img: "/images/automation_workflow.jpg",
+    img: "/images/campaigns/saas-case-study.svg",
     badge: "Enterprise Pipeline Node",
     metrics: [
       { label: "Booked Strategy Demos", value: 150, suffix: "+" },
