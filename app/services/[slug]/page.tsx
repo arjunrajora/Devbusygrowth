@@ -65,7 +65,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "📱",
     title: "Social Media Strategy",
     tagline: "Data-driven, algorithm-proof social strategies aligned with your revenue goals.",
-    image: "/images/services/social-media-strategy.svg",
+    image: "/images/services/social-media-strategy.jpg",
     description:
       "We craft comprehensive social media roadmaps that analyze your competitive landscape, define target audience personas, map content funnels, and pinpoint high-converting content hooks. No guesswork — just structured execution built for predictable brand growth.",
     deliverables: [
@@ -135,7 +135,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "⚙️",
     title: "Account Setup & Optimization",
     tagline: "Convert casual profile visitors into loyal followers and paying leads.",
-    image: "/images/services/account-setup-optimization.svg",
+    image: "/images/services/social-media-strategy.jpg",
     description:
       "Transform your social profiles into high-converting digital storefronts. We optimize your bio copy, highlight covers, link tree funnels, branding assets, and verification settings across Instagram, Facebook, LinkedIn, and YouTube.",
     deliverables: [
@@ -204,7 +204,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🎨",
     title: "Content Creation",
     tagline: "High-performing graphics, carousels, and visual assets designed to capture attention.",
-    image: "/images/services/content-creation.svg",
+    image: "/images/services/content-creation.jpg",
     description:
       "Attention is the currency of the digital age. Our creative team designs scroll-stopping carousels, sleek infographics, motion graphics, and brand-aligned visual assets engineered for maximum engagement and viral reach.",
     deliverables: [
@@ -271,7 +271,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "📅",
     title: "Content Calendar Planning",
     tagline: "Never run out of ideas with strategic 30-day organized content roadmaps.",
-    image: "/images/services/social-media-strategy.svg",
+    image: "/images/services/social-media-strategy.jpg",
     description:
       "Consistency is key to social media growth. We plan, structure, and schedule your entire content calendar 30 days in advance, matching industry trends, product launches, seasonal campaigns, and your sales funnel objectives.",
     deliverables: [
@@ -405,7 +405,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🤝",
     title: "Audience Engagement",
     tagline: "Build an active, thriving community around your brand with proactive interaction.",
-    image: "/images/services/account-setup-optimization.svg",
+    image: "/images/services/content-creation.jpg",
     description:
       "Turn passive lurkers into passionate brand advocates. We conduct outbound engagement, interact with target niche communities, reply to DMs, and spark meaningful conversations that build trust and authority.",
     deliverables: [
@@ -471,7 +471,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🌟",
     title: "Influencer Marketing",
     tagline: "Amplify your reach with vetted creator partnerships and authentic brand endorsements.",
-    image: "/images/services/content-creation.svg",
+    image: "/images/services/content-creation.jpg",
     description:
       "Harness creator authority to scale your brand. We identify, negotiate with, and manage high-ROI creators and micro-influencers whose followers match your ideal customer profile.",
     deliverables: [
@@ -604,7 +604,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🛡️",
     title: "Brand Monitoring",
     tagline: "Protect your online reputation and track brand mentions across the web 24/7.",
-    image: "/images/services/digital-growth-service.svg",
+    image: "/images/services/social-media-strategy.jpg",
     description:
       "Stay informed on what customers and competitors are saying about your brand. We monitor brand mentions, hashtags, product feedback, and industry discussions in real-time to mitigate risks and capitalize on positive PR.",
     deliverables: [
@@ -670,7 +670,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🔥",
     title: "Hashtag & Trend Research",
     tagline: "Ride viral trends early and expand organic reach with data-backed keyword strategies.",
-    image: "/images/services/social-media-strategy.svg",
+    image: "/images/services/social-media-strategy.jpg",
     description:
       "Don't let algorithms leave you behind. We continuously research viral audio, trending formats, and low-competition niche hashtags to give your posts maximum organic visibility.",
     deliverables: [
@@ -736,7 +736,7 @@ const SERVICES_DETAILS_DATABASE: Record<string, ServiceDetail> = {
     icon: "🔍",
     title: "Social Media Audit",
     tagline: "Deep-dive audit of your existing accounts to uncover hidden leaks and growth opportunities.",
-    image: "/images/services/account-setup-optimization.svg",
+    image: "/images/services/social-media-strategy.jpg",
     description:
       "Uncover why your social growth has stalled. We perform an exhaustive 40-point audit evaluating your bio, content performance, posting frequency, visual aesthetics, audience sentiment, and funnel conversion bottlenecks.",
     deliverables: [
@@ -812,50 +812,73 @@ function getServiceBySlug(slug: string): ServiceDetail {
   // Master Title-Matched Unique Image Catalog (Every Service Slug Maps to a Local 100% Unique Image)
   const UNIQUE_SERVICE_IMAGE_MAP: Record<string, string> = {
     // Social Media Mastery
-    "social-media-strategy": "/images/services/social-media-strategy.svg",
-    "account-setup-optimization": "/images/services/account-setup-optimization.svg",
-    "content-creation": "/images/services/content-creation.svg",
-    "content-calendar-planning": "/images/services/social-media-strategy.svg",
+    "social-media-strategy": "/images/services/social-media-strategy.jpg",
+    "account-setup-optimization": "/images/services/social-media-strategy.jpg",
+    "content-creation": "/images/services/content-creation.jpg",
+    "content-calendar-planning": "/images/services/social-media-strategy.jpg",
     "social-media-management": "/images/services/reels-content.webp",
-    "audience-engagement": "/images/services/account-setup-optimization.svg",
-    "influencer-marketing": "/images/services/content-creation.svg",
-    "analytics-reporting": "/images/services/ads-growth.webp",
-    "brand-monitoring": "/images/services/digital-growth-service.svg",
-    "hashtag-trend-research": "/images/services/social-media-strategy.svg",
-    "social-media-audit": "/images/services/account-setup-optimization.svg",
+    "audience-engagement": "/images/services/content-creation.jpg",
+    "influencer-marketing": "/images/services/content-creation.jpg",
+    "analytics-reporting": "/images/services/meta-google-ads.jpg",
+    "brand-monitoring": "/images/services/social-media-strategy.jpg",
+    "hashtag-trend-research": "/images/services/social-media-strategy.jpg",
+    "social-media-audit": "/images/services/social-media-strategy.jpg",
 
     // Meta & Google Ads Scaling
-    "meta-ads-strategy-planning": "/images/services/meta-ads-scaling.svg",
-    "campaign-setup-structure": "/images/services/ads-growth.webp",
+    "meta-ads-strategy-planning": "/images/services/meta-google-ads.jpg",
+    "campaign-setup-structure": "/images/services/meta-google-ads.jpg",
     "audience-research-targeting": "/images/services/lead-generation.webp",
-    "creative-design": "/images/services/content-creation.svg",
-    "a-b-testing": "/images/showcase/ads-showcase.svg",
-    "pixel-setup-tracking": "/images/services/meta-ads-scaling.svg",
-    "retargeting-campaigns": "/images/services/ads-growth.webp",
+    "creative-design": "/images/services/content-creation.jpg",
+    "a-b-testing": "/images/services/meta-google-ads.jpg",
+    "pixel-setup-tracking": "/images/services/meta-google-ads.jpg",
+    "retargeting-campaigns": "/images/services/meta-google-ads.jpg",
     "lead-generation-ads": "/images/services/lead-generation.webp",
-    "e-commerce-ads": "/images/campaigns/d2c-case-study.svg",
+    "e-commerce-ads": "/images/industries/ecommerce-card.jpg",
+    "budget-management": "/images/services/meta-google-ads.jpg",
+    "performance-monitoring": "/images/services/meta-google-ads.jpg",
+    "detailed-reporting": "/images/services/meta-google-ads.jpg",
 
     // AI & Automation Nodes
     "ai-automation": "/images/services/ai-automation.webp",
-    "ai-chatbot-development": "/images/showcase/ai-showcase.svg",
+    "ai-chatbot-development": "/images/services/ai-automation.webp",
     "lead-generation-automation": "/images/services/lead-generation.webp",
     "email-whatsapp-automation": "/images/services/ai-automation.webp",
-    "ai-content-generation": "/images/showcase/ai-showcase.svg",
+    "ai-content-generation": "/images/services/ai-automation.webp",
     "workflow-integration": "/images/services/ai-automation.webp",
 
     // Video Editing & Reels
-    "video-editing": "/images/showcase/reels-showcase.svg",
+    "video-editing": "/images/services/video-editing.jpg",
     "social-media-video-editing": "/images/services/reels-content.webp",
-    "reels-shorts-editing": "/images/showcase/reels-showcase.svg",
-    "youtube-video-editing": "/images/video/thebusygrowth-video-poster.webp",
+    "reels-shorts-editing": "/images/services/video-editing.jpg",
+    "youtube-video-editing": "/images/services/video-editing.jpg",
     "ad-video-editing": "/images/services/reels-content.webp",
+    "corporate-videos": "/images/services/video-editing.jpg",
+    "color-correction": "/images/services/video-editing.jpg",
+    "sound-design": "/images/services/video-editing.jpg",
+    "subtitle-captioning": "/images/services/video-editing.jpg",
+    "platform-optimization": "/images/services/reels-content.webp",
+    "raw-footage-editing": "/images/services/video-editing.jpg",
+    "bulk-video-editing": "/images/services/video-editing.jpg",
 
     // Web & Funnel Development
     "web-development": "/images/services/web-development.jpg",
     "landing-page-design": "/images/services/web-development.jpg",
     "business-website-5-7-pages": "/images/services/web-development.jpg",
-    "e-commerce-website": "/images/campaigns/d2c-case-study.svg",
+    "e-commerce-website": "/images/industries/ecommerce-card.jpg",
+    "custom-web-applications": "/images/industries/tech-saas-card.jpg",
     "ui-ux-design": "/images/services/web-development.jpg",
+    "front-end-development": "/images/services/web-development.jpg",
+    "back-end-integration": "/images/industries/tech-saas-card.jpg",
+    "cms-setup": "/images/services/web-development.jpg",
+    "website-maintenance": "/images/services/web-development.jpg",
+    "performance-optimization": "/images/services/web-development.jpg",
+    "security-audits": "/images/services/web-development.jpg",
+
+    // Branding & Creative Design
+    "branding": "/images/services/branding-design.jpg",
+    "brand-identity": "/images/services/branding-design.jpg",
+    "graphic-design": "/images/services/branding-design.jpg",
+    "creative-direction": "/images/services/branding-design.jpg",
   };
 
   const lowerSlug = slug.toLowerCase();
@@ -865,13 +888,15 @@ function getServiceBySlug(slug: string): ServiceDetail {
     if (lowerSlug.includes("ai") || lowerSlug.includes("automation") || lowerSlug.includes("bot") || lowerSlug.includes("workflow")) {
       topicImage = "/images/services/ai-automation.webp";
     } else if (lowerSlug.includes("video") || lowerSlug.includes("reel") || lowerSlug.includes("edit") || lowerSlug.includes("short")) {
-      topicImage = "/images/showcase/reels-showcase.svg";
+      topicImage = "/images/services/video-editing.jpg";
     } else if (lowerSlug.includes("web") || lowerSlug.includes("land") || lowerSlug.includes("site") || lowerSlug.includes("funnel") || lowerSlug.includes("dev")) {
       topicImage = "/images/services/web-development.jpg";
     } else if (lowerSlug.includes("ad") || lowerSlug.includes("meta") || lowerSlug.includes("google") || lowerSlug.includes("lead")) {
-      topicImage = "/images/services/meta-ads-scaling.svg";
+      topicImage = "/images/services/meta-google-ads.jpg";
+    } else if (lowerSlug.includes("brand") || lowerSlug.includes("design") || lowerSlug.includes("logo")) {
+      topicImage = "/images/services/branding-design.jpg";
     } else {
-      topicImage = "/images/services/digital-growth-service.svg";
+      topicImage = "/images/services/social-media-strategy.jpg";
     }
   }
 
@@ -1000,82 +1025,85 @@ export default async function ServiceDetailPage({ params }: Props) {
             <span className="text-[#071a3d] dark:text-white font-bold">{service.title}</span>
           </nav>
 
-          <div className="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-slate-200 dark:border-slate-800">
-            <div className="space-y-3 max-w-2xl">
+          {/* 2-Column Desktop / Responsive Mobile Hero Section */}
+          <div className="mb-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:items-center pb-12 border-b border-slate-200 dark:border-slate-800/80">
+            
+            {/* Left Column: Title, Tagline, CTAs (7 Cols = ~55%) */}
+            <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#00a651]/30 bg-[#00a651]/10 px-3.5 py-1 text-xs font-bold text-[#00a651]">
                 {getSlugIcon(service.icon)}
                 <span>{service.category}</span>
               </div>
+
               <h1 className="text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl lg:text-5xl tracking-tight leading-tight">
                 {service.title}
               </h1>
-              <p className="text-base sm:text-lg font-medium text-slate-600 dark:text-slate-300 leading-relaxed">
+
+              <p className="text-lg sm:text-xl font-medium text-slate-600 dark:text-slate-300 leading-relaxed">
                 {service.tagline}
               </p>
-            </div>
 
-            <div className="shrink-0 flex flex-col sm:flex-row md:flex-col gap-3">
-              <Link
-                href={`/contact?service=${service.slug}`}
-                className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#0d60c4] to-[#00a651] px-6 py-3 text-xs font-bold text-white shadow-md transition-all hover:scale-105 btn-shimmer"
-              >
-                <span>Book Free Growth Call</span>
-                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex items-center justify-center gap-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] px-5 py-3 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-              >
-                <ArrowLeft size={14} />
-                <span>All Services</span>
-              </Link>
-            </div>
-          </div>
+              <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed max-w-xl">
+                {service.description}
+              </p>
 
-          {/* Premium Hero Visual Showcase Container (Agency Style matching Reference Design) */}
-          <div className="mb-16 rounded-3xl border border-slate-200 dark:border-white/10 bg-[#071a3d] p-4 sm:p-8 shadow-2xl relative overflow-hidden group">
-            {/* Ambient Gradient Background Accents */}
-            <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-gradient-to-br from-[#00a651]/25 to-[#0d60c4]/25 blur-3xl pointer-events-none" />
-            <div className="absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-gradient-to-tr from-[#0d60c4]/25 to-[#00a651]/25 blur-3xl pointer-events-none" />
-
-            {/* Header Info Bar inside Visual Container */}
-            <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
-              <div className="flex items-center gap-3">
-                <span className="flex h-3 w-3 rounded-full bg-[#00a651] animate-pulse" />
-                <span className="text-xs font-extrabold uppercase tracking-wider text-slate-200">
-                  {service.title} • Premium Visual Showcase
-                </span>
-              </div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-3.5 py-1 text-[11px] font-bold text-emerald-400 border border-white/10">
-                <span>Domain Solution Architecture</span>
+              {/* CTAs */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <Link
+                  href={`/contact?service=${service.slug}`}
+                  className="btn-primary-green text-sm sm:text-base px-7 py-3.5 shadow-[0_0_20px_rgba(0,166,81,0.4)] group"
+                >
+                  <span>Book Free Growth Call</span>
+                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/services"
+                  className="btn-secondary-glass text-sm sm:text-base px-6 py-3.5 group"
+                >
+                  <ArrowLeft size={16} className="transition-transform duration-300 group-hover:-translate-x-1" />
+                  <span>All Services</span>
+                </Link>
               </div>
             </div>
 
-            {/* Prominent Visual Image Area */}
-            <div className="relative aspect-video sm:aspect-[21/9] w-full rounded-2xl overflow-hidden border border-white/10 shadow-inner bg-slate-950">
-              <img
-                src={service.image}
-                alt={`${service.title} visual showcase`}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              
-              {/* Glassmorphic Overlay Badge */}
-              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto max-w-md rounded-xl bg-[#050c1a]/85 backdrop-blur-md p-3.5 sm:p-4 border border-white/10 shadow-xl">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-r from-[#0d60c4] to-[#00a651] text-white shadow-md">
-                    {getSlugIcon(service.icon)}
-                  </div>
-                  <div>
-                    <h4 className="text-xs sm:text-sm font-extrabold text-white leading-tight">
-                      {service.title}
-                    </h4>
-                    <p className="text-[11px] text-slate-300 font-medium line-clamp-1">
-                      {service.tagline}
-                    </p>
+            {/* Right Column: Service-Specific Photograph (5 Cols = ~45%) */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-[22px] border border-white/10 bg-[#071a3d] p-3.5 sm:p-4 shadow-2xl overflow-hidden group">
+                {/* Ambient Glow */}
+                <div className="absolute -right-16 -top-16 h-60 w-60 rounded-full bg-[#00a651]/20 blur-3xl pointer-events-none" />
+                
+                {/* Image Container */}
+                <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] w-full rounded-2xl overflow-hidden border border-white/10 bg-slate-950">
+                  <img
+                    src={service.image}
+                    alt={`${service.title} visual showcase`}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  
+                  {/* Subtle Dark Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a]/90 via-[#050c1a]/30 to-transparent pointer-events-none" />
+
+                  {/* Glassmorphic Overlay Badge */}
+                  <div className="absolute bottom-3 left-3 right-3 rounded-xl bg-[#050c1a]/85 backdrop-blur-md p-3 border border-white/10 shadow-xl">
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#00a651] text-white shadow-md">
+                        {getSlugIcon(service.icon)}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h4 className="text-xs font-extrabold text-white leading-tight truncate">
+                          {service.title}
+                        </h4>
+                        <span className="text-[10px] font-bold text-[#00a651] block uppercase tracking-wider">
+                          Active Solution Architecture
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
               </div>
             </div>
+
           </div>
 
           <div className="mb-20 grid gap-12 lg:grid-cols-12">

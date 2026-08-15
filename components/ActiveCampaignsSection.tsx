@@ -219,7 +219,7 @@ export default function ActiveCampaignsSection() {
                   onClick={() => setSelectedIdx(idx)}
                   className={`flex-1 min-w-[100px] text-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 ${
                     isActive
-                      ? "bg-gradient-to-r from-[#0d60c4] to-[#00a651] text-white shadow-lg shadow-[#00a651]/15 scale-105"
+                      ? "bg-[#00a651] text-white shadow-[0_0_20px_rgba(0,166,81,0.35)] scale-105"
                       : "text-slate-400 hover:text-white hover:bg-white/5"
                   }`}
                 >

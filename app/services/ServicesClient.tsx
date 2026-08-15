@@ -24,7 +24,7 @@ const SERVICES_DATA = [
     title: "Social Media Mastery & Strategy",
     color: "from-[#00a651]/10 to-[#0d60c4]/10 border-[#00a651]/20 text-[#00a651]",
     description: "Social media management, strategy, content design, and platform-specific audits to drive high-impact engagement.",
-    image: "/images/services/reels-content.webp",
+    image: "/images/services/social-media-strategy.jpg",
     services: [
       "Social Media Strategy",
       "Account Setup & Optimization",
@@ -44,7 +44,7 @@ const SERVICES_DATA = [
     title: "Meta & Google Ads Scaling",
     color: "from-[#0d60c4]/10 to-[#071a3d]/10 border-[#0d60c4]/20 text-[#0d60c4]",
     description: "Paid advertising campaigns designed to decrease customer acquisition costs (CPA) and print predictable growth.",
-    image: "/images/services/ads-growth.webp",
+    image: "/images/services/meta-google-ads.jpg",
     services: [
       "Meta Ads Strategy & Planning",
       "Campaign Setup & Structure",
@@ -79,7 +79,7 @@ const SERVICES_DATA = [
     title: "Video Editing & Reels",
     color: "from-[#0d60c4]/10 to-[#00a651]/10 border-[#0d60c4]/20 text-[#0d60c4]",
     description: "Short-form video editing, ad creatives, subtitle synchronization, sound design, and bulk post-production.",
-    image: "/images/showcase/reels-showcase.svg",
+    image: "/images/services/video-editing.jpg",
     services: [
       "Social Media Video Editing",
       "Reels & Shorts Editing",

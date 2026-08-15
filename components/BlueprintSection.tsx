@@ -120,7 +120,7 @@ export default function BlueprintSection() {
                     onClick={() => setActiveStepIndex(idx)}
                     className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all duration-300 ${
                       isActive
-                        ? "bg-gradient-to-r from-[#0d60c4] to-[#00a651] text-white shadow-md shadow-[#00a651]/30 scale-105 ring-1 ring-[#00a651]"
+                        ? "bg-[#00a651] text-white shadow-[0_0_15px_rgba(0,166,81,0.4)] scale-105"
                         : "text-slate-400 hover:text-white hover:bg-white/5"
                     }`}
                     aria-label={`Jump to Step ${step.num} ${step.name}`}

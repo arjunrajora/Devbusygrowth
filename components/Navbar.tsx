@@ -193,7 +193,7 @@ export default function Navbar() {
           <div className="hidden items-center gap-4 md:flex">
             <Link
               href="/contact"
-              className="relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#0d60c4] to-[#00a651] px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#0d60c4]/20 transition-all hover:scale-105 hover:shadow-[#00a651]/30 active:scale-95 btn-shimmer"
+              className="btn-primary-green text-sm px-6 py-2.5 shadow-[0_0_20px_rgba(0,166,81,0.4)]"
             >
               Book a Strategy Call
             </Link>
@@ -323,7 +323,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="mt-4 rounded-full bg-gradient-to-r from-[#0d60c4] to-[#00a651] px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-[#0d60c4]/30 btn-shimmer"
+            className="mt-4 btn-primary-green text-base px-8 py-3.5 shadow-[0_0_25px_rgba(0,166,81,0.5)]"
           >
             Book a Strategy Call
           </Link>

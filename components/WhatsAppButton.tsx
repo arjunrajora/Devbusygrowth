@@ -21,10 +21,10 @@ export default function WhatsAppButton() {
   if (!mounted || pathname?.startsWith("/admin")) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
-      {/* Tooltip */}
+    <div className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center gap-3">
+      {/* Tooltip - hidden on extra small mobile screens to prevent overlap */}
       <div
-        className={`rounded-2xl bg-white dark:bg-[#071a3d] border border-slate-200 dark:border-slate-800 px-4 py-2 text-xs font-semibold text-[#071a3d] dark:text-slate-100 shadow-xl transition-all duration-500 scale-95 origin-right ${
+        className={`hidden sm:block rounded-2xl bg-white dark:bg-[#071a3d] border border-slate-200 dark:border-slate-800 px-4 py-2 text-xs font-semibold text-[#071a3d] dark:text-slate-100 shadow-xl transition-all duration-500 scale-95 origin-right ${
           showTooltip
             ? "opacity-100 translate-x-0 pointer-events-auto"
             : "opacity-0 translate-x-4 pointer-events-none"

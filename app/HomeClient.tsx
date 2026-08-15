@@ -56,7 +56,7 @@ const SERVICES = [
     title: "Reels & Content",
     desc: "Hook-first video scripting, custom video editing, dynamic captioning & platform SEO.",
     link: "/services#video-editing",
-    img: "/images/services/reels-content.webp",
+    img: "/images/services/video-editing.jpg",
     color: "from-[#00a651]/10 to-transparent border-[#00a651]/10"
   },
   {
@@ -64,7 +64,7 @@ const SERVICES = [
     title: "Paid Ads",
     desc: "Meta & Google Ads structures, creative testing grids, pixel tracking & scaling budgets.",
     link: "/services#meta-ads",
-    img: "/images/services/ads-growth.webp",
+    img: "/images/services/meta-google-ads.jpg",
     color: "from-[#0d60c4]/10 to-transparent border-[#0d60c4]/10"
   },
   {
@@ -102,14 +102,42 @@ const SERVICES = [
 ];
 
 const INDUSTRIES = [
-  { name: "D2C Brands", img: "/images/industries/d2c-brands.webp", desc: "Scaling Shopify & Woocommerce revenue" },
-  { name: "Real Estate", img: "/images/industries/real-estate.webp", desc: "Generating qualified site-visit leads" },
-  { name: "Education", img: "/images/industries/education.svg", desc: "Mentorship & admission campaigns" },
-  { name: "B2B SaaS", img: "/images/industries/b2b-saas.webp", desc: "Driving product signups & bookings" },
-  { name: "Creator Economy", img: "/images/industries/creator-economy.webp", desc: "Personal branding & channel growth" },
-  { name: "Finance & Wealth", img: "/images/industries/finance.webp", desc: "High-ticket lead funnels" },
-  { name: "Healthcare", img: "/images/industries/healthcare.webp", desc: "Patient acquisition & automation" },
-  { name: "Fashion & Retail", img: "/images/industries/fashion.webp", desc: "High engagement video creatives" },
+  {
+    category: "TECHNOLOGY & SAAS",
+    name: "Technology & SaaS",
+    img: "/images/industries/tech-saas-card.jpg",
+    desc: "Modern websites, web applications, AI integrations and scalable digital platforms."
+  },
+  {
+    category: "E-COMMERCE",
+    name: "E-Commerce",
+    img: "/images/industries/ecommerce-card.jpg",
+    desc: "High-converting storefronts, automation, marketing systems and customer experiences."
+  },
+  {
+    category: "REAL ESTATE",
+    name: "Real Estate",
+    img: "/images/industries/realestate-card.jpg",
+    desc: "Property websites, lead-generation systems, CRM automation and digital marketing."
+  },
+  {
+    category: "HEALTHCARE",
+    name: "Healthcare",
+    img: "/images/industries/healthcare-card.jpg",
+    desc: "Professional digital experiences, appointment systems, automation and patient engagement."
+  },
+  {
+    category: "EDUCATION",
+    name: "Education",
+    img: "/images/industries/education-card.jpg",
+    desc: "Course platforms, learning websites, student portals and automated lead systems."
+  },
+  {
+    category: "PROFESSIONAL SERVICES",
+    name: "Professional Services",
+    img: "/images/industries/prof-services-card.jpg",
+    desc: "Premium websites, lead generation, branding and business automation."
+  }
 ];
 
 const COURSE_MODULES = [
@@ -308,17 +336,17 @@ export default function HomeClient() {
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link
                   href="/contact"
-                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-[#0d60c4] to-[#00a651] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#0d60c4]/20 transition-all hover:scale-105 active:scale-95 btn-shimmer gap-1.5"
+                  className="btn-primary-green text-base px-8 py-4 shadow-[0_0_25px_rgba(0,166,81,0.45)] group"
                 >
-                  <span>Get a Free Growth Plan</span>
-                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                  <span>Book a Strategy Call</span>
+                  <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
                 <Link
                   href="/services"
-                  className="group inline-flex items-center justify-center rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 px-7 py-3.5 text-sm font-bold text-[#071a3d] dark:text-slate-100 transition-all hover:bg-slate-100 dark:hover:bg-slate-700 hover:shadow-md gap-1.5"
+                  className="btn-secondary-glass text-base px-7 py-4 group"
                 >
                   <span>Explore Services</span>
-                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                  <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>
             </ScrollReveal>
@@ -703,77 +731,71 @@ export default function HomeClient() {
       </section>
 
       {/* ====================================================
-          7. INDUSTRIES SECTION (DRAGGABLE & SWIPABLE CAROUSEL)
+          7. INDUSTRIES SECTION ("Built for ambitious businesses across industries.")
           ==================================================== */}
-      <section id="industries" className="relative py-12 sm:py-16 overflow-hidden">
-        <div className="mx-auto max-w-7xl px-4 text-center mb-8 sm:px-6 lg:px-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Who We Work With</span>
-          <h2 className="mt-2 text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl tracking-tight font-sans">
-            Built for ambitious businesses across industries.
-          </h2>
-        </div>
+      <section id="industries" className="relative py-20 lg:py-28 bg-[#050c1a] text-white overflow-hidden border-t border-white/10">
+        
+        {/* Ambient background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#0d60c4]/5 rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#00a651]/5 rounded-full blur-[130px] pointer-events-none" />
 
-        {/* Draggable & Touch Swipable Slider Wrapper */}
-        <div className="relative group mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Scroll Instruction & Control Arrows */}
-          <div className="flex items-center justify-between mb-4 px-2">
-            <span className="text-xs text-slate-400 font-medium flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#00a651]" />
-              Drag with mouse or swipe to explore all industries
-            </span>
-            <div className="hidden sm:flex items-center gap-2">
-              <button
-                onClick={() => scrollIndustries('left')}
-                className="p-2 rounded-full bg-white dark:bg-[#071a3d] border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-200 hover:border-[#00a651] shadow-sm transition-colors"
-                aria-label="Scroll left"
-              >
-                <ChevronLeft size={18} />
-              </button>
-              <button
-                onClick={() => scrollIndustries('right')}
-                className="p-2 rounded-full bg-white dark:bg-[#071a3d] border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-200 hover:border-[#00a651] shadow-sm transition-colors"
-                aria-label="Scroll right"
-              >
-                <ChevronRight size={18} />
-              </button>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          
+          {/* Header */}
+          <ScrollReveal direction="up">
+            <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#00a651]/10 border border-[#00a651]/30 text-[#00a651] text-xs font-bold uppercase tracking-wider">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#00a651] animate-ping" />
+                <span>BUILT FOR EVERY INDUSTRY</span>
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-sans leading-tight">
+                Built for ambitious businesses across industries.
+              </h2>
+              <p className="text-base sm:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto">
+                From startups to established enterprises, we build digital experiences, automation systems, and growth solutions designed around your business goals.
+              </p>
             </div>
-          </div>
+          </ScrollReveal>
 
-          <div
-            ref={industriesSliderRef}
-            onMouseDown={handleIndustriesMouseDown}
-            onMouseLeave={() => setIsDraggingIndustries(false)}
-            onMouseUp={() => setIsDraggingIndustries(false)}
-            onMouseMove={handleIndustriesMouseMove}
-            className="flex gap-6 overflow-x-auto scrollbar-none py-2 px-1 cursor-grab active:cursor-grabbing select-none snap-x touch-pan-x"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
+          {/* Industry Cards Grid: 3 per row desktop, 2 tablet, 1 mobile */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {INDUSTRIES.map((ind, i) => (
-              <div
-                key={i}
-                className="relative h-64 w-80 shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-[#071a3d] p-6 shadow-xl transition-all duration-300 hover:scale-[1.02] hover:border-white/20 snap-start"
-              >
-                <div className="absolute inset-0 z-0">
+              <ScrollReveal key={ind.name} direction="up" delay={i * 90}>
+                <div className="group relative rounded-[22px] border border-white/10 bg-[#071a3d] overflow-hidden min-h-[360px] sm:min-h-[400px] flex flex-col justify-end p-7 shadow-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:border-[#00a651]/40 hover:shadow-[0_15px_35px_rgba(0,166,81,0.22)]">
+                  
+                  {/* Background Image with smooth zoom on hover */}
                   <Image
                     src={ind.img}
                     alt={ind.name}
                     fill
-                    className="object-cover opacity-60 transition-transform duration-500 hover:scale-105"
-                    sizes="320px"
+                    className="object-cover object-center opacity-45 transition-transform duration-700 ease-out transform group-hover:scale-110 group-hover:opacity-60"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 420px"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#071a3d] via-[#071a3d]/60 to-transparent"></div>
-                </div>
 
-                <div className="relative z-10 flex h-full flex-col justify-end text-white">
-                  <h3 className="text-xl font-extrabold">{ind.name}</h3>
-                  <p className="mt-1.5 text-xs text-slate-300 font-medium leading-relaxed">
-                    {ind.desc}
-                  </p>
+                  {/* Dark Navy Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a] via-[#071a3d]/75 to-transparent pointer-events-none" />
+
+                  {/* Top Category Label */}
+                  <span className="absolute top-5 left-5 z-10 px-3 py-1 rounded-full bg-[#00a651]/20 border border-[#00a651]/40 text-[11px] font-bold uppercase tracking-wider text-[#00a651] backdrop-blur-md">
+                    {ind.category}
+                  </span>
+
+                  {/* Card Content */}
+                  <div className="relative z-10 space-y-2.5 text-left">
+                    <h3 className="text-2xl sm:text-[26px] font-bold text-white tracking-tight leading-snug group-hover:text-white transition-colors">
+                      {ind.name}
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed">
+                      {ind.desc}
+                    </p>
+                  </div>
+
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -1122,19 +1144,19 @@ export default function HomeClient() {
             <div className="mt-8 flex flex-wrap justify-center gap-4 relative z-10">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0d60c4] to-[#00a651] px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:scale-105 btn-shimmer"
+                className="btn-primary-green text-base px-9 py-4 shadow-[0_0_35px_rgba(0,166,81,0.6)] group"
               >
                 <span>Book a Strategy Call</span>
-                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <a
                 href={BUSINESS_CONFIG.whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-full border border-[#00a651]/30 bg-[#00a651]/20 px-8 py-3.5 text-sm font-bold text-white hover:bg-[#00a651]/30"
+                className="btn-secondary-glass text-base px-8 py-4 group"
               >
                 <span>Talk on WhatsApp</span>
-                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </div>
           </div>
