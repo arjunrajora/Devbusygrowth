@@ -304,7 +304,7 @@ export async function POST(req: NextRequest) {
         // Error logged server-side without exposing SMTP secrets or breaking user response
       }
     } else {
-      console.log("SMTP Environment credentials not configured. Enquiry persisted to data/enquiries.json store.");
+      console.log("SMTP Environment credentials not configured. Enquiry persisted to MongoDB database.");
     }
 
     return NextResponse.json({

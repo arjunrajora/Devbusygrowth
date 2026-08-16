@@ -43,13 +43,13 @@ export async function saveEnquiry(newEntry: Omit<SystemEnquiry, "id" | "createdA
   const db = client.db();
   const collection = db.collection("enquiries");
 
-  // Get next sequential ID number
+  // Get next sequential ID number based on document count in MongoDB
   const totalCount = await collection.countDocuments();
   const nextIdNumber = 1000 + totalCount + 1;
   const id = `ENQ-${nextIdNumber}`;
   const now = new Date();
 
-  // Construct MongoDB document, preserving both requested schema and existing form fields
+  // Construct MongoDB document
   const document = {
     id,
     name: newEntry.name,
@@ -84,13 +84,12 @@ export interface MonthlyChartPoint {
 
 export async function getMonthlyEnquiriesChartData(): Promise<MonthlyChartPoint[]> {
   const enquiries = await getAllEnquiries();
-  
+
   const monthNames = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
 
-  // Initialize counts for months Jan to Dec
   const monthCounts: Record<number, number> = {
     0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0,
     6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0
