@@ -12,25 +12,32 @@ jobs:
     steps:
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.2.0
-
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
 
           script: |
+            set -e
+
             cd ~/Devbusygrowth
 
+            echo "Pulling latest code..."
             git fetch origin
-            git checkout main
-            git pull origin main
+            git reset --hard origin/main
 
+            echo "Stopping PM2..."
             pm2 delete devbusygrowth || true
 
+            echo "Installing dependencies..."
             npm ci
 
+            echo "Building Next.js..."
             npm run build
 
+            echo "Starting PM2..."
             pm2 start npm --name devbusygrowth -- start
 
             pm2 save
+
+            echo "Deployment successful!"
