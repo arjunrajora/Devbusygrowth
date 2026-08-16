@@ -37,8 +37,8 @@ export default function AdminDashboardPage() {
   // 1. Calculate Line Chart Data: daily counts for the last 7 days (Mon-Sun format)
   const getLast7DaysData = () => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const last7Days = [];
-    
+    // const last7Days = [];
+    const last7Days: string[] = [];
     for (let i = 6; i >= 0; i--) {
       const d = new Date();
       d.setDate(d.getDate() - i);
