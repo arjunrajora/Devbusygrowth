@@ -1,69 +1,36 @@
-name: Deploy to Production
+name: Deploy to EC2
 
 on:
   push:
     branches:
       - main
 
-  workflow_dispatch:
-
-concurrency:
-  group: production-deploy
-  cancel-in-progress: true
-
 jobs:
   deploy:
-    name: Build and Deploy
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to Server
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          APP_PATH: ${{ secrets.APP_PATH }}
-          PM2_APP_NAME: ${{ secrets.PM2_APP_NAME }}
-        run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.0
 
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
 
-          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+          script: |
+            cd ~/Devbusygrowth
 
-          ssh -i ~/.ssh/deploy_key "$SSH_USER@$SSH_HOST" << EOF
-            set -e
-
-            echo "======================================"
-            echo "Starting deployment..."
-            echo "======================================"
-
-            cd "$APP_PATH"
-
-            echo "Pulling latest code..."
             git fetch origin
-            git reset --hard origin/main
+            git checkout main
+            git pull origin main
 
-            echo "Stopping PM2 application..."
-            pm2 delete "$PM2_APP_NAME" || true
+            pm2 delete devbusygrowth || true
 
-            echo "Installing dependencies..."
             npm ci
 
-            echo "Building application..."
             npm run build
 
-            echo "Starting application..."
-            pm2 start npm --name "$PM2_APP_NAME" -- start
+            pm2 start npm --name devbusygrowth -- start
 
-            echo "Saving PM2 process list..."
             pm2 save
-
-            echo "======================================"
-            echo "Deployment completed successfully!"
-            echo "======================================"
-          EOF
-
-          rm -f ~/.ssh/deploy_key
