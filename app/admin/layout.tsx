@@ -7,6 +7,7 @@ import Logo from "@/components/Logo";
 import {
   LayoutDashboard,
   Users,
+  FileText,
   LogOut,
   Menu,
   X,
@@ -34,6 +35,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       name: "Enquiries",
       href: "/admin/enquiries",
       icon: Users,
+    },
+    {
+      name: "Invoices",
+      href: "/admin/invoices",
+      icon: FileText,
     },
   ];
 
