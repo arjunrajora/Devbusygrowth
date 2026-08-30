@@ -122,7 +122,7 @@ const PACKAGES = [
     tier: "Foundational Lead Engine",
     time: "7-10 Days",
     desc: "Single high-converting landing page with pixel CAPI tracking, form routing & initial ad campaign setup.",
-    color: "border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] text-slate-700 dark:text-slate-100 shadow-sm",
+    color: "border-slate-800 bg-[#0b1c3d] text-slate-100 shadow-sm",
     accent: "text-[#00a651]",
     features: [
       "1 Custom High-Converting Landing Page",
@@ -161,7 +161,7 @@ const PACKAGES = [
     tier: "Online Store",
     time: "30-45 Days",
     desc: "Full-featured shopping platform for D2C scaling brands.",
-    color: "border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] text-slate-700 dark:text-slate-100 shadow-sm",
+    color: "border-slate-800 bg-[#0b1c3d] text-slate-100 shadow-sm",
     accent: "text-[#0d60c4]",
     features: [
       "10+ Responsive Pages",
@@ -235,7 +235,7 @@ export default function ServicesClient() {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-[#050c1a] text-slate-800 dark:text-slate-100 px-4 py-16 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div className="relative min-h-screen bg-[#050c1a] text-slate-100 px-4 py-16 sm:px-6 lg:px-8 transition-colors duration-300">
       <JSONLD type="Breadcrumb" data={{ items: breadcrumbs }} />
       
       {/* Ambient background glows */}
@@ -252,7 +252,7 @@ export default function ServicesClient() {
             </span>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={200}>
-            <h1 className="text-4xl font-extrabold text-[#071a3d] dark:text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-extrabold text-white sm:text-5xl lg:text-6xl">
               Comprehensive{" "}
               <span className="bg-gradient-to-r from-[#0d60c4] via-[#00a651] to-[#0d60c4] bg-clip-text text-transparent">
                 Digital Growth
@@ -261,7 +261,7 @@ export default function ServicesClient() {
             </h1>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={300}>
-            <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600 dark:text-slate-300 sm:text-lg">
+            <p className="mx-auto mt-4 max-w-2xl text-base text-slate-300 sm:text-lg">
               From performance ad campaigns and high-converting Reels editing to autonomous AI automations and lead funnels, we execute end-to-end growth strategies.
             </p>
           </ScrollReveal>
@@ -274,7 +274,7 @@ export default function ServicesClient() {
                 className={`rounded-full px-5 py-2 text-xs font-extrabold transition-all duration-300 ${
                   activeTab === "all"
                     ? "bg-gradient-to-r from-[#0d60c4] to-[#00a651] text-white shadow-md shadow-[#00a651]/20 scale-105"
-                    : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 hover:border-[#00a651]/50"
+                    : "bg-slate-800 text-slate-300 border border-white/10 hover:border-[#00a651]/50"
                 }`}
               >
                 All Services
@@ -286,7 +286,7 @@ export default function ServicesClient() {
                   className={`rounded-full px-5 py-2 text-xs font-extrabold transition-all duration-300 ${
                     activeTab === srv.id
                       ? "bg-gradient-to-r from-[#0d60c4] to-[#00a651] text-white shadow-md shadow-[#00a651]/20 scale-105"
-                      : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 hover:border-[#00a651]/50"
+                      : "bg-slate-800 text-slate-300 border border-white/10 hover:border-[#00a651]/50"
                   }`}
                 >
                   {srv.title.split(" ")[0]} {srv.title.split(" ")[1]}
@@ -302,14 +302,14 @@ export default function ServicesClient() {
             <ScrollReveal direction="up" delay={idx * 100} key={cat.id}>
               <div
                 id={cat.id}
-                className="scroll-mt-24 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b1c3d] p-8 shadow-sm transition-all duration-300 hover:border-white/20"
+                className="scroll-mt-24 rounded-3xl border border-white/10 bg-[#0b1c3d] p-8 shadow-sm transition-all duration-300 hover:border-white/20"
               >
                 <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
                   
                   {/* Category Info */}
                   <div className="lg:col-span-5 space-y-4">
                     {cat.image && (
-                      <div className="overflow-hidden rounded-2xl border border-slate-100 dark:border-white/10 aspect-video w-full bg-slate-900 shadow-md">
+                      <div className="overflow-hidden rounded-2xl border border-white/10 aspect-video w-full bg-slate-900 shadow-md">
                         <img
                           src={cat.image}
                           alt={cat.title}
@@ -318,15 +318,15 @@ export default function ServicesClient() {
                       </div>
                     )}
 
-                    <div className="inline-flex p-3 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-white/10">
+                    <div className="inline-flex p-3 rounded-2xl bg-slate-800/80 border border-white/10">
                       {getCategoryIcon(cat.id)}
                     </div>
                     
-                    <h2 className="text-2xl font-extrabold text-[#071a3d] dark:text-white sm:text-3xl">
+                    <h2 className="text-2xl font-extrabold text-white sm:text-3xl">
                       {cat.title}
                     </h2>
                     
-                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+                    <p className="text-sm text-slate-300 leading-relaxed font-medium">
                       {cat.description}
                     </p>
 
@@ -353,9 +353,9 @@ export default function ServicesClient() {
                           <Link
                             key={sIdx}
                             href={`/services/${slug}`}
-                            className="group flex items-center justify-between rounded-xl border border-slate-100 dark:border-white/5 bg-slate-50 dark:bg-[#050c1a]/60 p-3.5 transition-all hover:border-[#00a651]/40 hover:bg-white dark:hover:bg-[#071a3d]"
+                            className="group flex items-center justify-between rounded-xl border border-white/5 bg-[#050c1a]/60 p-3.5 transition-all hover:border-[#00a651]/40 hover:bg-[#071a3d]"
                           >
-                            <span className="text-xs font-bold text-slate-700 dark:text-slate-200 group-hover:text-[#00a651]">
+                            <span className="text-xs font-bold text-slate-200 group-hover:text-[#00a651]">
                               {srvName}
                             </span>
                             <ChevronRight size={14} className="text-slate-400 group-hover:text-[#00a651] transition-transform group-hover:translate-x-0.5" />
@@ -375,10 +375,10 @@ export default function ServicesClient() {
         <div className="mt-24">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Transparent Execution</span>
-            <h2 className="text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl mt-1">
+            <h2 className="text-3xl font-extrabold text-white sm:text-4xl mt-1">
               Curated Growth Packages
             </h2>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+            <p className="mt-2 text-sm text-slate-300">
               Clear scope packages engineered for predictable turnarounds.
             </p>
           </div>
@@ -403,7 +403,7 @@ export default function ServicesClient() {
                     <p className={`text-xs font-bold mt-1 ${pkg.accent}`}>{pkg.tier}</p>
                     <p className="mt-3 text-xs leading-relaxed opacity-90">{pkg.desc}</p>
 
-                    <div className="mt-6 pt-6 border-t border-slate-200 dark:border-white/10 space-y-2.5">
+                    <div className="mt-6 pt-6 border-t border-white/10 space-y-2.5">
                       <span className="text-[10px] font-extrabold uppercase tracking-wider opacity-70 block mb-2">
                         Deliverable Features
                       </span>

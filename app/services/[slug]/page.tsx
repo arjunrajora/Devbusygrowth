@@ -1,8 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { BUSINESS_CONFIG } from "@/components/businessConfig";
 import JSONLD from "@/components/JSONLD";
 import {
@@ -1012,7 +1010,6 @@ export default async function ServiceDetailPage({ params }: Props) {
     <div className="min-h-screen bg-slate-50 dark:bg-[#050c1a] text-slate-800 dark:text-slate-100 transition-colors duration-300">
       <JSONLD type="Breadcrumb" data={{ items: breadcrumbs }} />
       <JSONLD type="Service" data={{ title: service.title, description: service.description }} />
-      <Navbar />
 
       <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
@@ -1079,9 +1076,6 @@ export default async function ServiceDetailPage({ params }: Props) {
                     alt={`${service.title} visual showcase`}
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  
-                  {/* Subtle Dark Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a]/90 via-[#050c1a]/30 to-transparent pointer-events-none" />
 
                   {/* Glassmorphic Overlay Badge */}
                   <div className="absolute bottom-3 left-3 right-3 rounded-xl bg-[#050c1a]/85 backdrop-blur-md p-3 border border-white/10 shadow-xl">
@@ -1258,8 +1252,6 @@ export default async function ServiceDetailPage({ params }: Props) {
 
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

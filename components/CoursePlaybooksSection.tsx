@@ -242,16 +242,13 @@ export default function CoursePlaybooksSection() {
                 }}
               />
 
-              {/* Dark Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a] via-[#050c1a]/40 to-transparent pointer-events-none" />
-
               {/* Floating Module Badge Overlay */}
               <div className="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-xl bg-[#050c1a]/90 border border-slate-700/90 backdrop-blur-md text-xs font-extrabold text-[#00a651] shadow-lg">
                 {activeModule.badge}
               </div>
 
               {/* Bottom Tag Overlay */}
-              <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-[#050c1a] via-[#050c1a]/80 to-transparent flex items-center justify-between pointer-events-none">
+              <div className="absolute bottom-0 inset-x-0 p-4 bg-[#050c1a]/85 backdrop-blur-md flex items-center justify-between pointer-events-none">
                 <div className="flex items-center gap-2">
                   <span className="h-2.5 w-2.5 rounded-full bg-[#00a651] animate-ping" />
                   <span className="text-sm font-extrabold text-white">{activeModule.title}</span>

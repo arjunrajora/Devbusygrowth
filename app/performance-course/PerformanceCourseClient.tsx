@@ -71,7 +71,7 @@ export default function PerformanceCourseClient() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-[#050c1a] text-slate-800 dark:text-slate-100 px-4 py-16 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div className="relative min-h-screen bg-[#050c1a] text-slate-100 px-4 py-16 sm:px-6 lg:px-8 transition-colors duration-300">
       <JSONLD type="Breadcrumb" data={{ items: breadcrumbs }} />
       <JSONLD
         type="Course"
@@ -96,7 +96,7 @@ export default function PerformanceCourseClient() {
             </span>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={200}>
-            <h1 className="text-4xl font-extrabold text-[#071a3d] dark:text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-extrabold text-white sm:text-5xl lg:text-6xl">
               Performance{" "}
               <span className="bg-gradient-to-r from-[#0d60c4] via-[#00a651] to-[#0d60c4] bg-clip-text text-transparent">
                 Marketing
@@ -105,7 +105,7 @@ export default function PerformanceCourseClient() {
             </h1>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={300}>
-            <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600 dark:text-slate-300 sm:text-lg">
+            <p className="mx-auto mt-4 max-w-2xl text-base text-slate-300 sm:text-lg">
               Master Meta &amp; Google Ads structures, CAPI tracking, creative testing grids, and budget scaling nodes for direct ROAS growth.
             </p>
           </ScrollReveal>
@@ -127,7 +127,7 @@ export default function PerformanceCourseClient() {
         <div className="mb-20">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Curriculum Breakdown</span>
-            <h2 className="text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl mt-1">
+            <h2 className="text-3xl font-extrabold text-white sm:text-4xl mt-1">
               12 Weeks to Media Buying Mastery
             </h2>
           </div>
@@ -135,7 +135,7 @@ export default function PerformanceCourseClient() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {OVERVIEW_WEEKS.map((w, idx) => (
               <ScrollReveal direction="up" delay={idx * 80} key={idx}>
-                <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b1c3d] p-6 shadow-sm flex flex-col justify-between h-full hover:border-white/20 transition-all">
+                <div className="rounded-3xl border border-white/10 bg-[#0b1c3d] p-6 shadow-sm flex flex-col justify-between h-full hover:border-white/20 transition-all">
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <span className="rounded-lg bg-[#071a3d] px-3 py-1 text-xs font-extrabold text-[#00a651]">
@@ -143,13 +143,13 @@ export default function PerformanceCourseClient() {
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-extrabold text-[#071a3d] dark:text-white mb-4">
+                    <h3 className="text-lg font-extrabold text-white mb-4">
                       {w.title}
                     </h3>
 
                     <div className="space-y-2">
                       {w.bullets.map((b, bIdx) => (
-                        <div key={bIdx} className="flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                        <div key={bIdx} className="flex items-center gap-2 text-xs font-semibold text-slate-300">
                           <Check size={14} className="text-[#00a651] shrink-0" />
                           <span>{b}</span>
                         </div>
@@ -163,9 +163,9 @@ export default function PerformanceCourseClient() {
         </div>
 
         {/* Tools Section */}
-        <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b1c3d] p-8 text-center shadow-sm">
+        <div className="rounded-3xl border border-white/10 bg-[#0b1c3d] p-8 text-center shadow-sm">
           <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Industry Tech Stack</span>
-          <h2 className="text-2xl font-extrabold text-[#071a3d] dark:text-white sm:text-3xl mt-1 mb-6">
+          <h2 className="text-2xl font-extrabold text-white sm:text-3xl mt-1 mb-6">
             Tools You Will Master Hands-On
           </h2>
 
@@ -173,7 +173,7 @@ export default function PerformanceCourseClient() {
             {MASTER_TOOLS.map((tool, idx) => (
               <span
                 key={idx}
-                className="rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 px-4 py-2 text-xs font-extrabold text-[#071a3d] dark:text-slate-200 shadow-xs"
+                className="rounded-full bg-slate-800 border border-white/10 px-4 py-2 text-xs font-extrabold text-slate-200 shadow-xs"
               >
                 {tool}
               </span>

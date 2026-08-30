@@ -85,7 +85,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "py-3 bg-white/85 dark:bg-[#050c1a]/85 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm shadow-slate-900/5"
+          ? "py-3 bg-[#050c1a]/85 backdrop-blur-xl border-b border-slate-800/80 shadow-sm shadow-slate-900/5"
           : "py-5 bg-transparent"
       }`}
     >
@@ -97,10 +97,10 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300 md:flex">
+          <nav className="hidden items-center gap-8 text-sm font-medium text-slate-300 md:flex">
             <Link
               href="/"
-              className="transition-colors hover:text-[#0d60c4] dark:hover:text-[#00a651]"
+              className="transition-colors hover:text-[#00a651]"
             >
               Home
             </Link>
@@ -114,14 +114,14 @@ export default function Navbar() {
               <Link
                 href="/services"
                 onClick={(e) => handleServiceClick(e, "/services")}
-                className="inline-flex items-center gap-1.5 transition-colors hover:text-[#0d60c4] dark:hover:text-[#00a651]"
+                className="inline-flex items-center gap-1.5 transition-colors hover:text-[#00a651]"
               >
                 <span>Services</span>
                 <ChevronDown
                   size={14}
                   className={`transition-transform duration-200 ${
                     servicesOpen
-                      ? "rotate-180 text-[#0d60c4] dark:text-[#00a651]"
+                      ? "rotate-180 text-[#00a651]"
                       : "text-slate-400"
                   }`}
                 />
@@ -135,25 +135,25 @@ export default function Navbar() {
                     : "opacity-0 scale-95 pointer-events-none -translate-y-1"
                 }`}
               >
-                <div className="overflow-hidden rounded-2xl border border-slate-200/90 dark:border-slate-800/90 bg-white/95 dark:bg-[#071a3d]/95 p-2 shadow-xl shadow-slate-900/10 backdrop-blur-xl">
+                <div className="overflow-hidden rounded-2xl border border-slate-800/90 bg-[#071a3d]/95 p-2 shadow-xl shadow-slate-900/10 backdrop-blur-xl">
                   <div className="space-y-0.5">
                     {SERVICES_DROPDOWN.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
                         onClick={(e) => handleServiceClick(e, item.href)}
-                        className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-all hover:bg-slate-100/80 dark:hover:bg-white/10 hover:text-[#0d60c4] dark:hover:text-[#00a651]"
+                        className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold text-slate-200 transition-all hover:bg-white/10 hover:text-[#00a651]"
                       >
                         {getServiceIcon(item.name)}
                         <span>{item.name}</span>
                       </Link>
                     ))}
                   </div>
-                  <div className="mt-1.5 border-t border-slate-100 dark:border-slate-800/80 pt-1.5">
+                  <div className="mt-1.5 border-t border-slate-800/80 pt-1.5">
                     <Link
                       href="/services"
                       onClick={(e) => handleServiceClick(e, "/services")}
-                      className="flex items-center justify-between rounded-xl px-3 py-2 text-xs font-bold text-[#0d60c4] dark:text-[#00a651] transition-all hover:bg-[#0d60c4]/10 dark:hover:bg-[#00a651]/10"
+                      className="flex items-center justify-between rounded-xl px-3 py-2 text-xs font-bold text-[#00a651] transition-all hover:bg-[#00a651]/10"
                     >
                       <span>View All Services</span>
                       <ArrowRight size={14} className="transition-transform duration-350 group-hover:translate-x-0.5" />
@@ -165,25 +165,25 @@ export default function Navbar() {
 
             <Link
               href="/#industries"
-              className="transition-colors hover:text-[#0d60c4] dark:hover:text-[#00a651]"
+              className="transition-colors hover:text-[#00a651]"
             >
               Industries
             </Link>
             <Link
               href="/course"
-              className="transition-colors hover:text-[#0d60c4] dark:hover:text-[#00a651]"
+              className="transition-colors hover:text-[#00a651]"
             >
               Courses
             </Link>
             <Link
               href="/#about"
-              className="transition-colors hover:text-[#0d60c4] dark:hover:text-[#00a651]"
+              className="transition-colors hover:text-[#00a651]"
             >
               About
             </Link>
             <Link
               href="/#faq"
-              className="transition-colors hover:text-[#0d60c4] dark:hover:text-[#00a651]"
+              className="transition-colors hover:text-[#00a651]"
             >
               FAQ
             </Link>
@@ -211,7 +211,7 @@ export default function Navbar() {
             {/* Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="relative z-50 flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800 p-2 text-[#071a3d] dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700"
+              className="relative z-50 flex h-9 w-9 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 p-2 text-slate-100 hover:bg-slate-700"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? (
@@ -226,7 +226,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       <div
-        className={`fixed inset-0 z-40 flex flex-col bg-[#071a3d]/95 dark:bg-[#050c1a]/95 backdrop-blur-2xl transition-all duration-500 md:hidden ${
+        className={`fixed inset-0 z-40 flex flex-col bg-[#050c1a]/95 backdrop-blur-2xl transition-all duration-500 md:hidden ${
           mobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"

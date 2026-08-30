@@ -114,16 +114,22 @@ export default function Footer() {
                 </div>
               </a>
               
-              <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-3">
-                <div className="rounded-lg bg-white/10 p-2 text-[#0d60c4]">
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(BUSINESS_CONFIG.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-3 transition-all hover:bg-white/10 hover:border-[#00a651]/40 cursor-pointer"
+                title="View location on Google Maps"
+              >
+                <div className="rounded-lg bg-white/10 p-2 text-[#0d60c4] group-hover:text-[#00a651] transition-colors">
                   <MapPin size={20} className="shrink-0" />
                 </div>
                 <div>
                   <p className="text-xs text-slate-400">Based in</p>
-                  <p className="text-sm font-medium text-white">{BUSINESS_CONFIG.address}</p>
-                  <p className="text-xs text-slate-400">Working worldwide 🌍</p>
+                  <p className="text-sm font-medium text-white group-hover:text-[#00a651] transition-colors">{BUSINESS_CONFIG.address}</p>
+                  <p className="text-xs text-slate-400 mt-0.5">Working worldwide 🌍</p>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>

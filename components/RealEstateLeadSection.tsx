@@ -124,9 +124,6 @@ export default function RealEstateLeadSection() {
                   className="w-full h-full object-cover transition-transform duration-700 transform group-hover:scale-105"
                 />
 
-                {/* Dark Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a] via-[#050c1a]/30 to-transparent" />
-
                 {/* Floating UI Lead Notification Badges (Overlays) */}
                 <div className="absolute top-4 left-4 right-4 sm:left-6 sm:right-6 space-y-2 z-10 pointer-events-none">
                   

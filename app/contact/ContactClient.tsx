@@ -154,7 +154,7 @@ export default function ContactClient() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-[#050c1a] text-slate-800 dark:text-slate-100 px-4 py-16 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div className="relative min-h-screen bg-[#050c1a] text-slate-100 px-4 py-16 sm:px-6 lg:px-8 transition-colors duration-300">
       <JSONLD type="Breadcrumb" data={{ items: breadcrumbs }} />
 
       {/* Background ambient glows */}
@@ -171,30 +171,30 @@ export default function ContactClient() {
                 <span className="inline-flex items-center rounded-full border border-[#00a651]/30 bg-[#00a651]/10 px-3.5 py-1 text-xs font-bold text-[#00a651]">
                   Let's Grow Your Business
                 </span>
-                <h1 className="text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl lg:text-5xl tracking-tight leading-tight">
+                <h1 className="text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl tracking-tight leading-tight">
                   Have a project, business idea or growth challenge?
                 </h1>
-                <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-base text-slate-300 leading-relaxed">
                   Let's talk about how Reels, Ads, AI Automation and Lead Generation can help your business grow.
                 </p>
               </div>
             </ScrollReveal>
 
             <ScrollReveal direction="left" delay={200}>
-              <div className="space-y-6 rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b1c3d] p-6 sm:p-8 shadow-sm transition-colors hover:border-[#00a651]/30 duration-500">
-                <h2 className="text-lg font-bold text-[#071a3d] dark:text-white pb-3 border-b border-slate-100 dark:border-white/5">
+              <div className="space-y-6 rounded-3xl border border-white/10 bg-[#0b1c3d] p-6 sm:p-8 shadow-sm transition-colors hover:border-[#00a651]/30 duration-500">
+                <h2 className="text-lg font-bold text-white pb-3 border-b border-white/5">
                   Contact Information
                 </h2>
                 
                 <div className="space-y-5">
                   {/* Phone */}
                   <div className="flex items-start gap-4">
-                    <div className="rounded-xl bg-[#0d60c4]/10 dark:bg-[#0d60c4]/20 p-2.5 text-[#0d60c4] shrink-0">
+                    <div className="rounded-xl bg-[#0d60c4]/20 p-2.5 text-[#0d60c4] shrink-0">
                       <Phone size={20} />
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Phone</p>
-                      <a href="tel:+919352757834" className="text-base font-bold text-slate-700 dark:text-slate-100 hover:text-[#00a651] transition-colors mt-0.5 block">
+                      <a href="tel:+919352757834" className="text-base font-bold text-slate-100 hover:text-[#00a651] transition-colors mt-0.5 block">
                         9352757834
                       </a>
                     </div>
@@ -202,12 +202,12 @@ export default function ContactClient() {
 
                   {/* WhatsApp */}
                   <div className="flex items-start gap-4">
-                    <div className="rounded-xl bg-[#00a651]/10 dark:bg-[#00a651]/20 p-2.5 text-[#00a651] shrink-0">
+                    <div className="rounded-xl bg-[#00a651]/20 p-2.5 text-[#00a651] shrink-0">
                       <MessageCircle size={20} />
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">WhatsApp</p>
-                      <a href="https://wa.me/919352757834" target="_blank" rel="noopener noreferrer" className="text-base font-bold text-slate-700 dark:text-slate-100 hover:text-[#00a651] transition-colors mt-0.5 block">
+                      <a href="https://wa.me/919352757834" target="_blank" rel="noopener noreferrer" className="text-base font-bold text-slate-100 hover:text-[#00a651] transition-colors mt-0.5 block">
                         Chat with us
                       </a>
                     </div>
@@ -215,12 +215,12 @@ export default function ContactClient() {
 
                   {/* Email */}
                   <div className="flex items-start gap-4">
-                    <div className="rounded-xl bg-[#0d60c4]/10 dark:bg-[#0d60c4]/20 p-2.5 text-[#0d60c4] shrink-0">
+                    <div className="rounded-xl bg-[#0d60c4]/20 p-2.5 text-[#0d60c4] shrink-0">
                       <Mail size={20} />
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email</p>
-                      <a href="mailto:thebusygrowth@gmail.com" className="text-base font-bold text-slate-700 dark:text-slate-100 hover:text-[#00a651] transition-colors mt-0.5 block">
+                      <a href="mailto:thebusygrowth@gmail.com" className="text-base font-bold text-slate-100 hover:text-[#00a651] transition-colors mt-0.5 block">
                         thebusygrowth@gmail.com
                       </a>
                     </div>
@@ -228,12 +228,12 @@ export default function ContactClient() {
 
                   {/* Address */}
                   <div className="flex items-start gap-4">
-                    <div className="rounded-xl bg-[#00a651]/10 dark:bg-[#00a651]/20 p-2.5 text-[#00a651] shrink-0">
+                    <div className="rounded-xl bg-[#00a651]/20 p-2.5 text-[#00a651] shrink-0">
                       <MapPin size={20} />
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Address</p>
-                      <p className="text-sm font-medium text-slate-600 dark:text-slate-200 mt-1 leading-relaxed">
+                      <p className="text-sm font-medium text-slate-200 mt-1 leading-relaxed">
                         A95, Mathur's Villa,<br />
                         Patel Nagar, Block 1,<br />
                         Bindayaka,<br />
@@ -244,13 +244,13 @@ export default function ContactClient() {
                 </div>
 
                 {/* Social Links */}
-                <div className="pt-6 border-t border-slate-100 dark:border-white/5 flex items-center gap-4">
+                <div className="pt-6 border-t border-white/5 flex items-center gap-4">
                   <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Follow Us:</span>
                   <a
                     href="https://www.instagram.com/thebusygrowth"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-pink-400 hover:bg-pink-500/10 hover:text-pink-500 transition-all hover:scale-110"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-pink-400 hover:bg-pink-500/10 hover:text-pink-500 transition-all hover:scale-110"
                     aria-label="Instagram"
                   >
                     <svg className="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 24 24">
@@ -261,7 +261,7 @@ export default function ContactClient() {
                     href="https://www.youtube.com/@THEBUSYGROWTH"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-red-400 hover:bg-red-500/10 hover:text-red-500 transition-all hover:scale-110"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 text-red-400 hover:bg-red-500/10 hover:text-red-500 transition-all hover:scale-110"
                     aria-label="YouTube"
                   >
                     <svg className="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 24 24">
@@ -277,8 +277,8 @@ export default function ContactClient() {
           {/* Right Column: Tell Us About Your Project Form */}
           <div>
             <ScrollReveal direction="right" delay={200}>
-              <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-6 shadow-sm backdrop-blur-sm sm:p-8 transition-colors hover:border-[#00a651]/30 duration-500">
-                <h2 className="mb-6 text-xl font-bold text-[#071a3d] dark:text-white sm:text-2xl">
+              <div className="rounded-3xl border border-slate-800 bg-[#0b1c3d] p-6 shadow-sm backdrop-blur-sm sm:p-8 transition-colors hover:border-[#00a651]/30 duration-500">
+                <h2 className="mb-6 text-xl font-bold text-white sm:text-2xl">
                   Tell Us About Your Project
                 </h2>
 
@@ -286,7 +286,7 @@ export default function ContactClient() {
                   <div className="rounded-2xl border border-[#00a651]/30 bg-[#00a651]/10 p-6 text-center flex flex-col items-center">
                     <CheckCircle2 size={44} className="text-[#00a651] mb-3 animate-bounce" />
                     <h3 className="text-lg font-bold text-[#00a651]">Enquiry Submitted Successfully!</h3>
-                    <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 max-w-sm leading-relaxed">
+                    <p className="mt-2 text-xs text-slate-300 max-w-sm leading-relaxed">
                       Thank you for reaching out to <strong>TheBusyGrowth</strong>. A confirmation email has been sent to your address. Our team will review your project and get back to you within 24 hours.
                     </p>
                     <button
@@ -308,7 +308,7 @@ export default function ContactClient() {
 
                     {/* 1. Full Name Field */}
                     <div>
-                      <label htmlFor="contact-name" className="mb-1.5 block text-xs font-bold text-slate-700 dark:text-slate-300">
+                      <label htmlFor="contact-name" className="mb-1.5 block text-xs font-bold text-slate-300">
                         Full Name <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -319,10 +319,10 @@ export default function ContactClient() {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         placeholder="Enter your full name"
-                        className={`w-full rounded-xl border bg-slate-50 dark:bg-slate-800/50 px-4 py-3 text-xs text-[#071a3d] dark:text-white placeholder-slate-400 focus:outline-none transition-all duration-200 ${
+                        className={`w-full rounded-xl border bg-slate-800/50 px-4 py-3 text-xs text-white placeholder-slate-400 focus:outline-none transition-all duration-200 ${
                           validationErrors.name
                             ? "border-red-500 text-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
-                            : "border-slate-200 dark:border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
+                            : "border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
                         }`}
                       />
                       {validationErrors.name && (
@@ -335,7 +335,7 @@ export default function ContactClient() {
 
                     {/* 2. Email Address Field */}
                     <div>
-                      <label htmlFor="contact-email" className="mb-1.5 block text-xs font-bold text-slate-700 dark:text-slate-300">
+                      <label htmlFor="contact-email" className="mb-1.5 block text-xs font-bold text-slate-300">
                         Email Address <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -346,10 +346,10 @@ export default function ContactClient() {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         placeholder="you@company.com"
-                        className={`w-full rounded-xl border bg-slate-50 dark:bg-slate-800/50 px-4 py-3 text-xs text-[#071a3d] dark:text-white placeholder-slate-400 focus:outline-none transition-all duration-200 ${
+                        className={`w-full rounded-xl border bg-slate-800/50 px-4 py-3 text-xs text-white placeholder-slate-400 focus:outline-none transition-all duration-200 ${
                           validationErrors.email
                             ? "border-red-500 text-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
-                            : "border-slate-200 dark:border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
+                            : "border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
                         }`}
                       />
                       {validationErrors.email && (
@@ -362,7 +362,7 @@ export default function ContactClient() {
 
                     {/* 3. Phone / WhatsApp Field */}
                     <div>
-                      <label htmlFor="contact-phone" className="mb-1.5 block text-xs font-bold text-slate-700 dark:text-slate-300">
+                      <label htmlFor="contact-phone" className="mb-1.5 block text-xs font-bold text-slate-300">
                         WhatsApp / Phone Number <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -373,10 +373,10 @@ export default function ContactClient() {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         placeholder="+91 98765 43210"
-                        className={`w-full rounded-xl border bg-slate-50 dark:bg-slate-800/50 px-4 py-3 text-xs text-[#071a3d] dark:text-white placeholder-slate-400 focus:outline-none transition-all duration-200 ${
+                        className={`w-full rounded-xl border bg-slate-800/50 px-4 py-3 text-xs text-white placeholder-slate-400 focus:outline-none transition-all duration-200 ${
                           validationErrors.phone
                             ? "border-red-500 text-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
-                            : "border-slate-200 dark:border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
+                            : "border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
                         }`}
                       />
                       {validationErrors.phone && (
@@ -389,7 +389,7 @@ export default function ContactClient() {
 
                     {/* 4. Business Type / Company Field */}
                     <div>
-                      <label htmlFor="contact-business" className="mb-1.5 block text-xs font-bold text-slate-700 dark:text-slate-300">
+                      <label htmlFor="contact-business" className="mb-1.5 block text-xs font-bold text-slate-300">
                         Business Type / Company <span className="text-red-500">*</span>
                       </label>
                       <select
@@ -398,10 +398,10 @@ export default function ContactClient() {
                         value={formData.businessType}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className={`w-full rounded-xl border bg-slate-50 dark:bg-slate-800/50 px-4 py-3 text-xs text-[#071a3d] dark:text-white focus:outline-none transition-all duration-200 ${
+                        className={`w-full rounded-xl border bg-slate-800/50 px-4 py-3 text-xs text-white focus:outline-none transition-all duration-200 ${
                           validationErrors.businessType
                             ? "border-red-500 text-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
-                            : "border-slate-200 dark:border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
+                            : "border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
                         }`}
                       >
                         <option value="" disabled>Select your business type</option>
@@ -424,7 +424,7 @@ export default function ContactClient() {
 
                     {/* 5. Services Required / Interest Field */}
                     <div>
-                      <label htmlFor="contact-interest" className="mb-1.5 block text-xs font-bold text-slate-700 dark:text-slate-300">
+                      <label htmlFor="contact-interest" className="mb-1.5 block text-xs font-bold text-slate-300">
                         Services Required <span className="text-red-500">*</span>
                       </label>
                       <select
@@ -433,10 +433,10 @@ export default function ContactClient() {
                         value={formData.interest}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className={`w-full rounded-xl border bg-slate-50 dark:bg-slate-800/50 px-4 py-3 text-xs text-[#071a3d] dark:text-white focus:outline-none transition-all duration-200 ${
+                        className={`w-full rounded-xl border bg-slate-800/50 px-4 py-3 text-xs text-white focus:outline-none transition-all duration-200 ${
                           validationErrors.interest
                             ? "border-red-500 text-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
-                            : "border-slate-200 dark:border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
+                            : "border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
                         }`}
                       >
                         <option value="" disabled>Select service required</option>
@@ -458,7 +458,7 @@ export default function ContactClient() {
 
                     {/* 6. Project Description / Message Field */}
                     <div>
-                      <label htmlFor="contact-message" className="mb-1.5 block text-xs font-bold text-slate-700 dark:text-slate-300">
+                      <label htmlFor="contact-message" className="mb-1.5 block text-xs font-bold text-slate-300">
                         Project Description / Message <span className="text-red-500">*</span>
                       </label>
                       <textarea
@@ -469,10 +469,10 @@ export default function ContactClient() {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         placeholder="Tell us about your business goals, sales targets, or current marketing bottlenecks..."
-                        className={`w-full rounded-xl border bg-slate-50 dark:bg-slate-800/50 px-4 py-3 text-xs text-[#071a3d] dark:text-white placeholder-slate-400 focus:outline-none transition-all duration-200 ${
+                        className={`w-full rounded-xl border bg-slate-800/50 px-4 py-3 text-xs text-white placeholder-slate-400 focus:outline-none transition-all duration-200 ${
                           validationErrors.message
                             ? "border-red-500 text-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500"
-                            : "border-slate-200 dark:border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
+                            : "border-slate-700 focus:border-[#00a651] focus:ring-1 focus:ring-[#00a651]/20"
                         }`}
                       />
                       {validationErrors.message && (

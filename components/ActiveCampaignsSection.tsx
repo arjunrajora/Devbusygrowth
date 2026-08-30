@@ -156,9 +156,6 @@ export default function ActiveCampaignsSection() {
                   </motion.div>
                 </AnimatePresence>
 
-                {/* Ambient dark gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a] via-[#050c1a]/30 to-transparent pointer-events-none" />
-
                 {/* Floating Top Badge overlay */}
                 <div className="absolute top-4 left-4 z-10 p-2.5 rounded-xl bg-[#050c1a]/95 border border-white/10 flex items-center gap-2 pointer-events-none">
                   <span className="h-2 w-2 rounded-full bg-[#00a651] animate-ping" />

@@ -157,7 +157,7 @@ export default function CaseStudySlider() {
 
   return (
     <div
-      className="relative w-full rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b1c3d] p-6 sm:p-10 shadow-lg overflow-hidden transition-all duration-500 hover:border-[#00a651]/30"
+      className="relative w-full rounded-3xl border border-slate-800 bg-[#0b1c3d] p-6 sm:p-10 shadow-lg overflow-hidden transition-all duration-500 hover:border-[#00a651]/30"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
@@ -169,7 +169,7 @@ export default function CaseStudySlider() {
       <div className="absolute -bottom-12 -left-12 h-44 w-44 rounded-full bg-[#0d60c4]/5 blur-2xl z-0 pointer-events-none"></div>
 
       {/* Progress Timeline bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-slate-100 dark:bg-slate-800 z-10 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-1 bg-slate-800 z-10 overflow-hidden">
         <div
           className="h-full bg-gradient-to-r from-[#0d60c4] to-[#00a651] transition-all duration-75 ease-out"
           style={{ width: `${progress}%` }}
@@ -194,21 +194,21 @@ export default function CaseStudySlider() {
             </span>
 
             {/* Slide Title */}
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#071a3d] dark:text-white transition-all duration-700">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white transition-all duration-700">
               {activeSlide.title}
             </h3>
 
             {/* Slide Description */}
-            <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            <p className="text-sm leading-relaxed text-slate-300">
               {activeSlide.desc}
             </p>
           </div>
 
           {/* Staggered Metrics Display */}
-          <div className="grid grid-cols-2 gap-4 border-t border-slate-100 dark:border-slate-800 pt-6">
+          <div className="grid grid-cols-2 gap-4 border-t border-slate-800 pt-6">
             {activeSlide.metrics.map((metric, idx) => (
               <div key={idx} className="space-y-1">
-                <div className="text-3xl font-extrabold tracking-tight text-[#071a3d] dark:text-white font-mono flex items-baseline">
+                <div className="text-3xl font-extrabold tracking-tight text-white font-mono flex items-baseline">
                   <span className="text-[#00a651] mr-0.5">{metric.prefix}</span>
                   {counts[idx] !== undefined ? counts[idx] : 0}
                   <span className="text-slate-400 text-lg font-bold ml-0.5">{metric.suffix}</span>
@@ -234,9 +234,9 @@ export default function CaseStudySlider() {
 
         {/* Slide Visual Graph Representation (Columns 5) */}
         <div className="lg:col-span-5 flex items-center justify-center">
-          <div className="relative w-full aspect-[4/3] rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 p-6 flex flex-col justify-between overflow-hidden shadow-inner group">
+          <div className="relative w-full aspect-[4/3] rounded-2xl border border-slate-800 bg-slate-900/60 p-6 flex flex-col justify-between overflow-hidden shadow-inner group">
             
-            <div className="flex justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200/50 dark:border-slate-800 pb-2">
+            <div className="flex justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-800 pb-2">
               <span>Performance Chart</span>
               <span className="flex h-2 w-2 rounded-full bg-[#00a651] animate-ping"></span>
             </div>
@@ -265,7 +265,7 @@ export default function CaseStudySlider() {
               </svg>
             </div>
 
-            <div className="flex justify-between items-center text-[9px] text-slate-500 font-semibold pt-2 border-t border-slate-200/50 dark:border-slate-800">
+            <div className="flex justify-between items-center text-[9px] text-slate-500 font-semibold pt-2 border-t border-slate-800">
               <span>Day 1</span>
               <span>Day 30</span>
               <span>Day 90</span>
@@ -277,7 +277,7 @@ export default function CaseStudySlider() {
       </div>
 
       {/* Control Dots & Arrow Buttons */}
-      <div className="mt-8 flex justify-between items-center border-t border-slate-100 dark:border-slate-800/80 pt-6 z-10 relative">
+      <div className="mt-8 flex justify-between items-center border-t border-slate-800/80 pt-6 z-10 relative">
         {/* Nav dots */}
         <div className="flex gap-2">
           {SLIDES_DATA.map((_, idx) => (
@@ -288,7 +288,7 @@ export default function CaseStudySlider() {
                 setActiveIndex(idx);
               }}
               className={`h-2.5 rounded-full transition-all duration-300 ${
-                activeIndex === idx ? "w-8 bg-[#00a651]" : "w-2.5 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400"
+                activeIndex === idx ? "w-8 bg-[#00a651]" : "w-2.5 bg-slate-700 hover:bg-slate-600"
               }`}
               aria-label={`Go to slide ${idx + 1}`}
             ></button>
@@ -299,14 +299,14 @@ export default function CaseStudySlider() {
         <div className="flex gap-2.5">
           <button
             onClick={handlePrev}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-[#071a3d] hover:text-white transition-colors"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-800 bg-slate-900 text-slate-300 hover:bg-[#071a3d] hover:text-white transition-colors"
             aria-label="Previous slide"
           >
             <ArrowLeft size={16} className="shrink-0" />
           </button>
           <button
             onClick={handleNext}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-[#071a3d] hover:text-white transition-colors"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-800 bg-slate-900 text-slate-300 hover:bg-[#071a3d] hover:text-white transition-colors"
             aria-label="Next slide"
           >
             <ArrowRight size={16} className="shrink-0" />

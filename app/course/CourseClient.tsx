@@ -90,7 +90,7 @@ export default function CourseClient() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-[#050c1a] text-slate-800 dark:text-slate-100 px-4 py-16 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div className="relative min-h-screen bg-[#050c1a] text-slate-100 px-4 py-16 sm:px-6 lg:px-8 transition-colors duration-300">
       <JSONLD type="Breadcrumb" data={{ items: breadcrumbs }} />
       <JSONLD
         type="Course"
@@ -115,7 +115,7 @@ export default function CourseClient() {
             </span>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={200}>
-            <h1 className="text-4xl font-extrabold text-[#071a3d] dark:text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-extrabold text-white sm:text-5xl lg:text-6xl">
               TheBusyGrowth{" "}
               <span className="bg-gradient-to-r from-[#0d60c4] via-[#00a651] to-[#0d60c4] bg-clip-text text-transparent">
                 Digital Marketing
@@ -124,7 +124,7 @@ export default function CourseClient() {
             </h1>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={300}>
-            <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600 dark:text-slate-300 sm:text-lg">
+            <p className="mx-auto mt-4 max-w-2xl text-base text-slate-300 sm:text-lg">
               Learn the exact playbooks we run on client accounts. Build real funnels, direct real budgets, and implement AI automation workflows.
             </p>
           </ScrollReveal>
@@ -140,7 +140,7 @@ export default function CourseClient() {
               </Link>
               <Link
                 href="/performance-course"
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 px-7 py-3.5 text-sm font-bold text-[#071a3d] dark:text-slate-100 shadow-sm transition-all hover:bg-slate-100 dark:hover:bg-slate-700"
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800 px-7 py-3.5 text-sm font-bold text-slate-100 shadow-sm transition-all hover:bg-slate-700"
               >
                 <span>View Performance Marketing Course (12 Wks)</span>
               </Link>
@@ -152,12 +152,12 @@ export default function CourseClient() {
         <div className="mb-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PROGRAM_HIGHLIGHTS.map((item, idx) => (
             <ScrollReveal direction="up" delay={idx * 80} key={idx}>
-              <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b1c3d] p-6 shadow-sm">
+              <div className="rounded-2xl border border-white/10 bg-[#0b1c3d] p-6 shadow-sm">
                 <div className="flex items-center gap-2.5 text-[#00a651] mb-2">
                   <Check size={18} className="shrink-0" />
-                  <h3 className="text-base font-extrabold text-[#071a3d] dark:text-white">{item.title}</h3>
+                  <h3 className="text-base font-extrabold text-white">{item.title}</h3>
                 </div>
-                <p className="text-xs text-slate-600 dark:text-slate-300 pl-7">{item.desc}</p>
+                <p className="text-xs text-slate-300 pl-7">{item.desc}</p>
               </div>
             </ScrollReveal>
           ))}
@@ -167,7 +167,7 @@ export default function CourseClient() {
         <div className="mb-16">
           <div className="text-center mb-8">
             <span className="text-xs font-bold uppercase tracking-widest text-[#00a651]">Curriculum Roadmap</span>
-            <h2 className="text-3xl font-extrabold text-[#071a3d] dark:text-white sm:text-4xl mt-1">
+            <h2 className="text-3xl font-extrabold text-white sm:text-4xl mt-1">
               5 Core Mastery Modules
             </h2>
           </div>
@@ -182,7 +182,7 @@ export default function CourseClient() {
                   className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-extrabold transition-all duration-300 ${
                     isActive
                       ? "bg-gradient-to-r from-[#0d60c4] to-[#00a651] text-white shadow-md shadow-[#00a651]/20 scale-105"
-                      : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 hover:border-[#00a651]/50"
+                      : "bg-slate-800 text-slate-300 border border-white/10 hover:border-[#00a651]/50"
                   }`}
                 >
                   <span className="rounded-md bg-white/20 px-1.5 py-0.5 text-[10px]">{mod.num}</span>
@@ -194,7 +194,7 @@ export default function CourseClient() {
 
           {/* Module Detailed Box */}
           <ScrollReveal direction="up">
-            <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b1c3d] p-8 shadow-md">
+            <div className="rounded-3xl border border-white/10 bg-[#0b1c3d] p-8 shadow-md">
               <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
                 
                 <div className="lg:col-span-6 space-y-4">
@@ -202,17 +202,17 @@ export default function CourseClient() {
                     <span className="rounded-lg bg-[#071a3d] px-3 py-1 text-xs font-extrabold text-[#00a651]">
                       {activeMod.num}
                     </span>
-                    <span className="text-xs font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                    <span className="text-xs font-bold text-slate-400 flex items-center gap-1">
                       <Clock size={12} />
                       {activeMod.duration} • {activeMod.sessions}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-extrabold text-[#071a3d] dark:text-white sm:text-3xl">
+                  <h3 className="text-2xl font-extrabold text-white sm:text-3xl">
                     {activeMod.title}
                   </h3>
 
-                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="text-sm text-slate-300 leading-relaxed">
                     {activeMod.desc}
                   </p>
 
@@ -222,7 +222,7 @@ export default function CourseClient() {
                     </h4>
                     <div className="grid grid-cols-2 gap-2">
                       {activeMod.topics.map((t, tIdx) => (
-                        <div key={tIdx} className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-200 font-semibold">
+                        <div key={tIdx} className="flex items-center gap-2 text-xs text-slate-200 font-semibold">
                           <Check size={14} className="text-[#00a651] shrink-0" />
                           <span>{t}</span>
                         </div>
@@ -238,7 +238,6 @@ export default function CourseClient() {
                       alt={activeMod.title}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a] via-transparent to-transparent opacity-60" />
                     <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#050c1a]/90 border border-white/10 text-xs font-extrabold text-white flex justify-between items-center">
                       <span>Practical Project Focus</span>
                       <span className="text-[#00a651]">{activeMod.projects}</span>

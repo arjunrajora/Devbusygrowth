@@ -242,27 +242,24 @@ export default function TechPartnersSection() {
               >
                 <div className="relative rounded-[22px] border border-white/10 bg-[#071a3d] shadow-xl overflow-hidden min-h-[320px] sm:min-h-[360px] flex flex-col justify-end p-6 group-hover:border-[#00a651]/40 group-hover:shadow-[0_15px_35px_rgba(0,166,81,0.18)] transition-all duration-500">
                   
-                  {/* Visual Background with smooth hover zoom */}
+                  {/* Visual Background */}
                   <Image
                     src={tool.img}
                     alt={tool.name}
                     fill
-                    className="object-cover opacity-45 transition-transform duration-700 ease-out transform group-hover:scale-110 group-hover:opacity-55"
+                    className="object-cover transition-transform duration-700 ease-out transform group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
                     loading="lazy"
                   />
 
-                  {/* Dark Gradient Overlay for text contrast */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050c1a] via-[#050c1a]/75 to-transparent pointer-events-none" />
-
                   {/* Green Category Label */}
-                  <span className="absolute top-4 left-4 z-10 px-2.5 py-1 rounded-full bg-[#00a651]/20 border border-[#00a651]/40 text-[10px] font-bold uppercase tracking-wider text-[#00a651] pointer-events-none backdrop-blur-md">
+                  <span className="absolute top-4 left-4 z-10 px-2.5 py-1 rounded-full bg-[#050c1a]/85 border border-[#00a651]/40 text-[10px] font-bold uppercase tracking-wider text-[#00a651] pointer-events-none backdrop-blur-md">
                     {tool.category}
                   </span>
 
                   {/* Text Content */}
-                  <div className="relative z-10 space-y-2 text-left">
-                    <span className="text-xs font-semibold text-slate-400 tracking-wide">{tool.logo}</span>
+                  <div className="relative z-10 space-y-2 text-left bg-[#050c1a]/85 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                    <span className="text-xs font-semibold text-slate-300 tracking-wide">{tool.logo}</span>
                     <h3 className="text-2xl font-bold text-white tracking-tight leading-tight group-hover:text-[#00a651] transition-colors">
                       {tool.name}
                     </h3>
