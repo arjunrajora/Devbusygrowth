@@ -4,16 +4,18 @@ import { ObjectId } from "mongodb";
 export interface SystemInvoice {
   _id?: string;
   id: string;
+  title?: string;
   invoiceNumber: string;
   userName: string;
   mobile: string;
   email: string;
   invoiceDate: string;
-  dueDate: string;
+  dueDate?: string;
   description: string;
   totalAmount: number;
   advanceAmount: number;
   remainingAmount: number;
+  status?: "active" | "disabled";
   pdfFile?: string;
   emailSent: boolean;
   emailSentAt?: string;
@@ -48,6 +50,8 @@ export async function getAllInvoices(options?: {
           { mobile: regex },
           { email: regex },
           { description: regex },
+          { title: regex },
+          { status: regex },
         ],
       };
     }
@@ -65,16 +69,18 @@ export async function getAllInvoices(options?: {
       return {
         _id: idStr,
         id: idStr,
+        title: doc.title || doc.billTitle || doc.invoiceTitle || "TAX INVOICE",
         invoiceNumber: doc.invoiceNumber || "",
         userName: doc.userName || "",
         mobile: doc.mobile || "",
         email: doc.email || "",
         invoiceDate: doc.invoiceDate ? new Date(doc.invoiceDate).toISOString().split("T")[0] : "",
-        dueDate: doc.dueDate ? new Date(doc.dueDate).toISOString().split("T")[0] : "",
+        dueDate: doc.dueDate ? new Date(doc.dueDate).toISOString().split("T")[0] : undefined,
         description: doc.description || "",
         totalAmount: typeof doc.totalAmount === "number" ? doc.totalAmount : parseFloat(doc.totalAmount || 0),
         advanceAmount: typeof doc.advanceAmount === "number" ? doc.advanceAmount : parseFloat(doc.advanceAmount || 0),
         remainingAmount: typeof doc.remainingAmount === "number" ? doc.remainingAmount : parseFloat(doc.remainingAmount || 0),
+        status: doc.status === "disabled" ? "disabled" : "active",
         pdfFile: doc.pdfFile || undefined,
         emailSent: Boolean(doc.emailSent),
         emailSentAt: doc.emailSentAt ? new Date(doc.emailSentAt).toISOString() : undefined,
@@ -119,16 +125,18 @@ export async function getInvoiceById(id: string): Promise<SystemInvoice | null> 
     return {
       _id: idStr,
       id: idStr,
+      title: doc.title || doc.billTitle || doc.invoiceTitle || "TAX INVOICE",
       invoiceNumber: doc.invoiceNumber || "",
       userName: doc.userName || "",
       mobile: doc.mobile || "",
       email: doc.email || "",
       invoiceDate: doc.invoiceDate ? new Date(doc.invoiceDate).toISOString().split("T")[0] : "",
-      dueDate: doc.dueDate ? new Date(doc.dueDate).toISOString().split("T")[0] : "",
+      dueDate: doc.dueDate ? new Date(doc.dueDate).toISOString().split("T")[0] : undefined,
       description: doc.description || "",
       totalAmount: typeof doc.totalAmount === "number" ? doc.totalAmount : parseFloat(doc.totalAmount || 0),
       advanceAmount: typeof doc.advanceAmount === "number" ? doc.advanceAmount : parseFloat(doc.advanceAmount || 0),
       remainingAmount: typeof doc.remainingAmount === "number" ? doc.remainingAmount : parseFloat(doc.remainingAmount || 0),
+      status: doc.status === "disabled" ? "disabled" : "active",
       pdfFile: doc.pdfFile || undefined,
       emailSent: Boolean(doc.emailSent),
       emailSentAt: doc.emailSentAt ? new Date(doc.emailSentAt).toISOString() : undefined,
@@ -189,15 +197,17 @@ export async function isInvoiceNumberUnique(invoiceNumber: string, excludeId?: s
 }
 
 export async function saveInvoice(data: {
+  title?: string;
   invoiceNumber: string;
   userName: string;
   mobile: string;
   email: string;
   invoiceDate: string;
-  dueDate: string;
+  dueDate?: string;
   description: string;
   totalAmount: number;
   advanceAmount: number;
+  status?: "active" | "disabled";
   createdBy?: string;
 }): Promise<SystemInvoice> {
   const client = await clientPromise;
@@ -207,19 +217,23 @@ export async function saveInvoice(data: {
   const totalAmount = typeof data.totalAmount === "number" ? data.totalAmount : parseFloat(data.totalAmount);
   const advanceAmount = typeof data.advanceAmount === "number" ? data.advanceAmount : parseFloat(data.advanceAmount);
   const remainingAmount = totalAmount - advanceAmount;
+  const title = data.title && data.title.trim() ? data.title.trim() : "TAX INVOICE";
+  const status = data.status === "disabled" ? "disabled" : "active";
 
   const now = new Date();
   const doc = {
+    title,
     invoiceNumber: data.invoiceNumber.trim(),
     userName: data.userName.trim(),
     mobile: data.mobile.trim(),
     email: data.email.trim().toLowerCase(),
     invoiceDate: new Date(data.invoiceDate),
-    dueDate: new Date(data.dueDate),
+    dueDate: data.dueDate ? new Date(data.dueDate) : new Date(data.invoiceDate),
     description: data.description.trim(),
     totalAmount,
     advanceAmount,
     remainingAmount,
+    status,
     emailSent: false,
     emailSentAt: null,
     createdBy: data.createdBy || "Admin",
@@ -233,16 +247,18 @@ export async function saveInvoice(data: {
   return {
     _id: insertedId,
     id: insertedId,
+    title: doc.title,
     invoiceNumber: doc.invoiceNumber,
     userName: doc.userName,
     mobile: doc.mobile,
     email: doc.email,
     invoiceDate: data.invoiceDate,
-    dueDate: data.dueDate,
+    dueDate: data.dueDate || data.invoiceDate,
     description: doc.description,
     totalAmount,
     advanceAmount,
     remainingAmount,
+    status,
     emailSent: false,
     createdBy: doc.createdBy,
     createdAt: now.toISOString(),
@@ -277,6 +293,30 @@ export async function updateInvoiceEmailStatus(
     return res.modifiedCount > 0 || res.matchedCount > 0;
   } catch (error) {
     console.error(`Error updating email status for invoice ${id}:`, error);
+    return false;
+  }
+}
+
+export async function updateInvoiceStatus(
+  id: string,
+  status: "active" | "disabled"
+): Promise<boolean> {
+  try {
+    const client = await clientPromise;
+    const db = client.db();
+    const collection = db.collection("invoices");
+
+    let filter: any = { invoiceNumber: id };
+    if (ObjectId.isValid(id)) {
+      filter = { $or: [{ _id: new ObjectId(id) }, { invoiceNumber: id }, { id: id }] };
+    }
+
+    const res = await collection.updateOne(filter, {
+      $set: { status, updatedAt: new Date() },
+    });
+    return res.modifiedCount > 0 || res.matchedCount > 0;
+  } catch (error) {
+    console.error(`Error updating status for invoice ${id}:`, error);
     return false;
   }
 }

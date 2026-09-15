@@ -6,35 +6,30 @@ import {
   FileText,
   Plus,
   Search,
-  Eye,
-  Download,
   Mail,
   RefreshCw,
   ChevronLeft,
   ChevronRight,
   X,
-  Printer,
   CheckCircle2,
   AlertCircle,
-  Clock,
-  Phone,
-  User,
-  Calendar,
 } from "lucide-react";
 
 interface Invoice {
   _id: string;
   id: string;
+  title?: string;
   invoiceNumber: string;
   userName: string;
   mobile: string;
   email: string;
   invoiceDate: string;
-  dueDate: string;
+  dueDate?: string;
   description: string;
   totalAmount: number;
   advanceAmount: number;
   remainingAmount: number;
+  status?: "active" | "disabled";
   emailSent: boolean;
   emailSentAt?: string;
   createdBy?: string;
@@ -52,9 +47,6 @@ export default function ViewInvoicesPage() {
   // Action states
   const [resendingId, setResendingId] = useState<string | null>(null);
   const [toastMsg, setToastMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
-
-  // View Modal state
-  const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null);
 
   useEffect(() => {
     fetchInvoices();
@@ -96,7 +88,6 @@ export default function ViewInvoicesPage() {
           type: "success",
           text: `Email resent successfully to ${invoice.email}`,
         });
-        // Refresh invoice list to update status
         fetchInvoices();
       } else {
         throw new Error(data.error || "Failed to resend email");
@@ -109,11 +100,6 @@ export default function ViewInvoicesPage() {
     } finally {
       setResendingId(null);
     }
-  };
-
-  const handleDownloadPdf = (invoice: Invoice) => {
-    const id = invoice.id || invoice._id || invoice.invoiceNumber;
-    window.open(`/api/admin/invoices/${id}/pdf`, "_blank");
   };
 
   const formatCurrency = (val: number) => {
@@ -157,7 +143,7 @@ export default function ViewInvoicesPage() {
             <span>Invoice Management</span>
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            View, download, manage, and resend customer invoices.
+            View, manage, and resend customer invoices.
           </p>
         </div>
 
@@ -211,7 +197,7 @@ export default function ViewInvoicesPage() {
                 <th className="py-4 px-6">Invoice #</th>
                 <th className="py-4 px-6">Customer / User</th>
                 <th className="py-4 px-6">Contact Info</th>
-                <th className="py-4 px-6">Dates</th>
+                <th className="py-4 px-6">Date</th>
                 <th className="py-4 px-6">Total (₹)</th>
                 <th className="py-4 px-6">Advance (₹)</th>
                 <th className="py-4 px-6">Remaining (₹)</th>
@@ -233,7 +219,7 @@ export default function ViewInvoicesPage() {
                       <div className="h-3 bg-slate-200 dark:bg-slate-800 rounded w-32"></div>
                       <div className="h-3 bg-slate-200 dark:bg-slate-800 rounded w-24"></div>
                     </td>
-                    <td className="py-4 px-6 space-y-1">
+                    <td className="py-4 px-6">
                       <div className="h-3 bg-slate-200 dark:bg-slate-800 rounded w-20"></div>
                     </td>
                     <td className="py-4 px-6">
@@ -305,13 +291,10 @@ export default function ViewInvoicesPage() {
                       </div>
                     </td>
 
-                    {/* Dates */}
-                    <td className="py-4 px-6 space-y-0.5">
-                      <div className="text-slate-700 dark:text-slate-300 text-[11px]">
-                        Inv: <span className="font-semibold">{inv.invoiceDate}</span>
-                      </div>
-                      <div className="text-slate-400 text-[11px]">
-                        Due: <span className="font-semibold text-slate-600 dark:text-slate-400">{inv.dueDate}</span>
+                    {/* Date */}
+                    <td className="py-4 px-6">
+                      <div className="text-slate-700 dark:text-slate-300 text-xs font-semibold">
+                        {inv.invoiceDate}
                       </div>
                     </td>
 
@@ -339,41 +322,20 @@ export default function ViewInvoicesPage() {
                     </td>
 
                     {/* Actions */}
-                    <td className="py-4 px-6 text-right space-x-2">
-                      <div className="inline-flex items-center justify-end gap-1.5">
-                        {/* View Action */}
-                        <button
-                          onClick={() => setSelectedInvoice(inv)}
-                          title="View Invoice Details"
-                          className="p-2 rounded-xl bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 hover:bg-[#0d60c4] hover:text-white dark:hover:bg-[#00a651] transition-all"
-                        >
-                          <Eye size={15} />
-                        </button>
-
-                        {/* Download PDF Action */}
-                        <button
-                          onClick={() => handleDownloadPdf(inv)}
-                          title="Download Invoice PDF"
-                          className="p-2 rounded-xl bg-blue-500/10 text-[#0d60c4] dark:text-[#00a651] hover:bg-[#0d60c4] hover:text-white dark:hover:bg-[#00a651] transition-all"
-                        >
-                          <Download size={15} />
-                        </button>
-
-                        {/* Resend Email Action */}
-                        <button
-                          onClick={() => handleResendEmail(inv)}
-                          disabled={resendingId === (inv.id || inv._id || inv.invoiceNumber)}
-                          title="Resend Invoice Email"
-                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all text-xs font-bold disabled:opacity-50"
-                        >
-                          {resendingId === (inv.id || inv._id || inv.invoiceNumber) ? (
-                            <RefreshCw size={13} className="animate-spin" />
-                          ) : (
-                            <Mail size={13} />
-                          )}
-                          <span className="hidden md:inline">Resend Email</span>
-                        </button>
-                      </div>
+                    <td className="py-4 px-6 text-right">
+                      <button
+                        onClick={() => handleResendEmail(inv)}
+                        disabled={resendingId === (inv.id || inv._id || inv.invoiceNumber)}
+                        title="Resend Invoice Email"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all text-xs font-bold disabled:opacity-50"
+                      >
+                        {resendingId === (inv.id || inv._id || inv.invoiceNumber) ? (
+                          <RefreshCw size={13} className="animate-spin" />
+                        ) : (
+                          <Mail size={13} />
+                        )}
+                        <span>Resend Email</span>
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -408,148 +370,6 @@ export default function ViewInvoicesPage() {
           </div>
         )}
       </div>
-
-      {/* View Invoice Modal */}
-      {selectedInvoice && (
-        <div className="fixed inset-0 z-50 bg-[#050c1a]/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto animate-in fade-in">
-          <div className="relative w-full max-w-2xl bg-white dark:bg-[#071a3d] border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden my-8">
-            {/* Modal Header */}
-            <div className="bg-[#071a3d] text-white p-6 border-b border-[#00a651] flex items-center justify-between">
-              <div>
-                <div className="text-2xl font-black tracking-tight">
-                  The<span className="text-[#00a651]">Busy</span>Growth
-                </div>
-                <div className="text-xs text-slate-300 mt-0.5">
-                  Official Invoice Preview
-                </div>
-              </div>
-              <button
-                onClick={() => setSelectedInvoice(null)}
-                className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            {/* Modal Body: Invoice Card */}
-            <div className="p-6 sm:p-8 space-y-6 text-slate-800 dark:text-slate-100 max-h-[75vh] overflow-y-auto">
-              {/* Top Meta Info */}
-              <div className="flex flex-col sm:flex-row justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
-                <div>
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#0d60c4] dark:text-[#00a651] mb-1">
-                    Issued To
-                  </div>
-                  <div className="text-lg font-extrabold text-slate-900 dark:text-white">
-                    {selectedInvoice.userName}
-                  </div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1.5">
-                    <Phone size={12} /> {selectedInvoice.mobile}
-                  </div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
-                    <Mail size={12} /> {selectedInvoice.email}
-                  </div>
-                </div>
-
-                <div className="sm:text-right bg-slate-50 dark:bg-[#050c1a] p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800">
-                  <div className="text-sm font-extrabold text-[#0d60c4] dark:text-[#00a651]">
-                    {selectedInvoice.invoiceNumber}
-                  </div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    Invoice Date: <span className="font-semibold text-slate-700 dark:text-slate-300">{selectedInvoice.invoiceDate}</span>
-                  </div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">
-                    Due Date: <span className="font-semibold text-slate-700 dark:text-slate-300">{selectedInvoice.dueDate}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Items Table */}
-              <div>
-                <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                  Description & Scope
-                </div>
-                <div className="rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-                  <div className="bg-[#071a3d] text-white text-xs font-bold p-3 flex justify-between">
-                    <span>Item / Service Description</span>
-                    <span>Amount</span>
-                  </div>
-                  <div className="p-4 bg-slate-50/50 dark:bg-[#050c1a]/50 text-xs font-medium flex justify-between items-start gap-4">
-                    <span className="leading-relaxed whitespace-pre-wrap">{selectedInvoice.description}</span>
-                    <span className="font-bold text-sm whitespace-nowrap text-[#0d60c4] dark:text-[#00a651]">
-                      ₹ {formatCurrency(selectedInvoice.totalAmount)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Financial Calculation Box */}
-              <div className="flex flex-col sm:flex-row justify-between items-start gap-6 pt-2">
-                {/* Payment & QR details */}
-                <div className="flex-1 bg-slate-50 dark:bg-[#050c1a] p-4 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs space-y-2">
-                  <div className="font-bold text-[#0d60c4] dark:text-[#00a651] uppercase tracking-wider text-[10px]">
-                    Payment Methods & QR Code
-                  </div>
-                  <div className="text-slate-600 dark:text-slate-400">
-                    Accepts UPI (GPay, PhonePe, Paytm) & Bank Transfer.
-                  </div>
-                  <div className="font-mono text-[11px] font-bold text-slate-800 dark:text-slate-200">
-                    UPI ID: standardupi@busygrowth
-                  </div>
-                </div>
-
-                {/* Amount Totals */}
-                <div className="w-full sm:w-64 space-y-2 text-xs font-semibold">
-                  <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800">
-                    <span className="text-slate-400">Total Amount:</span>
-                    <span className="font-bold text-slate-900 dark:text-white">₹ {formatCurrency(selectedInvoice.totalAmount)}</span>
-                  </div>
-                  <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800">
-                    <span className="text-slate-400">Advance Paid:</span>
-                    <span className="font-bold text-emerald-600 dark:text-emerald-400">₹ {formatCurrency(selectedInvoice.advanceAmount)}</span>
-                  </div>
-                  <div className="flex justify-between p-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-extrabold text-sm">
-                    <span>Remaining Due:</span>
-                    <span>₹ {formatCurrency(selectedInvoice.remainingAmount)}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Actions Footer */}
-            <div className="p-4 sm:p-6 bg-slate-50 dark:bg-[#050c1a] border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
-              <button
-                onClick={() => setSelectedInvoice(null)}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 dark:hover:text-white"
-              >
-                Close
-              </button>
-
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => handleResendEmail(selectedInvoice)}
-                  disabled={resendingId === (selectedInvoice.id || selectedInvoice._id || selectedInvoice.invoiceNumber)}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold hover:bg-emerald-500/20 transition-all disabled:opacity-50"
-                >
-                  {resendingId === (selectedInvoice.id || selectedInvoice._id || selectedInvoice.invoiceNumber) ? (
-                    <RefreshCw size={14} className="animate-spin" />
-                  ) : (
-                    <Mail size={14} />
-                  )}
-                  <span>Resend Email</span>
-                </button>
-
-                <button
-                  onClick={() => handleDownloadPdf(selectedInvoice)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#0d60c4] to-[#00a651] text-white text-xs font-extrabold shadow-md hover:opacity-95 transition-all cursor-pointer"
-                >
-                  <Download size={14} />
-                  <span>Download PDF</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

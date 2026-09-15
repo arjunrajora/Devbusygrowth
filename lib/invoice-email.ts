@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import nodemailer from "nodemailer";
 import { SystemInvoice, updateInvoiceEmailStatus } from "./invoices-store";
 
@@ -20,7 +22,8 @@ export async function sendInvoiceEmail(
     const smtpPass = process.env.SMTP_PASS || process.env.SMTP_PASSWORD;
     const senderEmail = process.env.SENDER_EMAIL || "thebusygrowth@gmail.com";
 
-    const subject = `Invoice ${invoice.invoiceNumber} - BUSYGROWTH`;
+    const billTitle = invoice.title || "TAX INVOICE";
+    const subject = `${billTitle} ${invoice.invoiceNumber} - BUSYGROWTH`;
 
     const totalAmtStr = formatCurrency(invoice.totalAmount);
     const advanceAmtStr = formatCurrency(invoice.advanceAmount);
@@ -28,12 +31,16 @@ export async function sendInvoiceEmail(
 
     const plainTextBody = `Hello ${invoice.userName},
 
-Please find attached your invoice ${invoice.invoiceNumber}.
+Please find attached your ${billTitle.toLowerCase()} ${invoice.invoiceNumber}.
 
+Document: ${billTitle}
+Invoice Number: ${invoice.invoiceNumber}
+Invoice Date: ${invoice.invoiceDate}
 Invoice Amount: ₹${totalAmtStr}
 Advance Amount: ₹${advanceAmtStr}
 Remaining Amount: ₹${remainingAmtStr}
-Due Date: ${invoice.dueDate}
+
+UPI Payment ID: standardupi@busygrowth (PhonePe / GPay / Paytm)
 
 Thank you,
 BUSYGROWTH`;
@@ -57,6 +64,8 @@ BUSYGROWTH`;
             .label { color: #64748b; font-weight: 500; }
             .value { font-weight: 700; color: #0f172a; }
             .remaining-value { color: #00a651; font-weight: 800; font-size: 15px; }
+            .qr-box { text-align: center; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 12px; padding: 18px; margin: 24px 0; }
+            .qr-img { width: 130px; max-width: 130px; height: auto; border-radius: 10px; border: 1px solid #cbd5e1; background: #ffffff; padding: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
             .footer { background: #071a3d; padding: 20px; text-align: center; font-size: 12px; color: #94a3b8; }
           </style>
         </head>
@@ -67,12 +76,20 @@ BUSYGROWTH`;
             </div>
             <div class="content">
               <h2 class="title">Hello ${invoice.userName},</h2>
-              <p>Please find attached your invoice <strong>${invoice.invoiceNumber}</strong>.</p>
+              <p>Please find attached your ${billTitle.toLowerCase()} <strong>${invoice.invoiceNumber}</strong>.</p>
               
               <div class="info-card">
                 <div class="info-row">
+                  <span class="label">Bill Title / Type:</span>
+                  <span class="value">${billTitle}</span>
+                </div>
+                <div class="info-row">
                   <span class="label">Invoice Number:</span>
                   <span class="value">${invoice.invoiceNumber}</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">Invoice Date:</span>
+                  <span class="value">${invoice.invoiceDate}</span>
                 </div>
                 <div class="info-row">
                   <span class="label">Invoice Amount:</span>
@@ -86,10 +103,17 @@ BUSYGROWTH`;
                   <span class="label">Remaining Amount:</span>
                   <span class="remaining-value">₹${remainingAmtStr}</span>
                 </div>
-                <div class="info-row">
-                  <span class="label">Due Date:</span>
-                  <span class="value">${invoice.dueDate}</span>
-                </div>
+              </div>
+
+              <!-- Inline Payment QR Code Box -->
+              <div class="qr-box">
+                <p style="font-size: 13px; font-weight: 700; color: #071a3d; margin: 0 0 10px 0;">
+                  Scan & Pay via PhonePe / GPay / Paytm
+                </p>
+                <img src="cid:paymentqr" alt="Payment QR Code" class="qr-img" />
+                <p style="font-size: 12px; font-weight: 700; color: #00a651; margin: 10px 0 0 0; font-family: monospace;">
+                  UPI ID: standardupi@busygrowth
+                </p>
               </div>
 
               <p style="margin-top: 24px; color: #475569;">
@@ -106,6 +130,24 @@ BUSYGROWTH`;
     `;
 
     const attachmentFilename = `Invoice_${invoice.invoiceNumber.replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`;
+    const qrPath = path.join(process.cwd(), "public", "assets", "images", "payment-qr.jpg");
+    const hasQrFile = fs.existsSync(qrPath);
+
+    const attachmentsList: any[] = [
+      {
+        filename: attachmentFilename,
+        content: pdfBuffer,
+        contentType: "application/pdf",
+      },
+    ];
+
+    if (hasQrFile) {
+      attachmentsList.push({
+        filename: "payment-qr.jpg",
+        path: qrPath,
+        cid: "paymentqr",
+      });
+    }
 
     if (smtpHost && smtpUser && smtpPass) {
       const transporter = nodemailer.createTransport({
@@ -127,13 +169,7 @@ BUSYGROWTH`;
         subject: subject,
         text: plainTextBody,
         html: htmlBody,
-        attachments: [
-          {
-            filename: attachmentFilename,
-            content: pdfBuffer,
-            contentType: "application/pdf",
-          },
-        ],
+        attachments: attachmentsList,
       });
 
       await updateInvoiceEmailStatus(invoice.id || invoice.invoiceNumber, true, new Date());

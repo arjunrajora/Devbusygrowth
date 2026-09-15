@@ -1,25 +1,16 @@
-import fs from "fs";
-import path from "path";
-import { SystemInvoice } from "./invoices-store";
+const fs = require('fs');
+const path = require('path');
 
-/**
- * Escapes characters for PDF text literal syntax: ( ... )
- */
-function escapePdfText(text: string): string {
+function escapePdfText(text) {
   if (!text) return "";
-  // PDF WinAnsi / Standard encoding text escaping
-  const cleaned = text
+  return text
     .replace(/\\/g, "\\\\")
     .replace(/\(/g, "\\(")
     .replace(/\)/g, "\\)")
     .replace(/[\r\n]+/g, " ");
-  return cleaned;
 }
 
-/**
- * Format numbers as standard currency string with 2 decimal places
- */
-function formatAmount(val: number): string {
+function formatAmount(val) {
   const num = typeof val === "number" ? val : parseFloat(val || "0");
   return num.toLocaleString("en-IN", {
     minimumFractionDigits: 2,
@@ -27,16 +18,27 @@ function formatAmount(val: number): string {
   });
 }
 
-/**
- * Generates a valid standard PDF 1.4 binary buffer for an invoice
- */
-export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer> {
+async function testGeneratePDF() {
+  const invoice = {
+    invoiceNumber: "BG-INV-1001",
+    userName: "Sandeep Kumawat",
+    mobile: "9876543210",
+    email: "sandeep@example.com",
+    invoiceDate: "2026-09-15",
+    dueDate: "2026-09-22",
+    description: "Website Development & Performance Marketing Retainer (Phase 1)",
+    totalAmount: 25000,
+    advanceAmount: 10000,
+    remainingAmount: 15000,
+    title: "TAX INVOICE",
+  };
+
   const invoiceNum = escapePdfText(invoice.invoiceNumber);
   const userName = escapePdfText(invoice.userName);
   const mobile = escapePdfText(invoice.mobile);
   const email = escapePdfText(invoice.email);
   const invoiceDate = escapePdfText(invoice.invoiceDate);
-  const dueDate = escapePdfText(invoice.dueDate || "");
+  const dueDate = escapePdfText(invoice.dueDate);
   const description = escapePdfText(invoice.description);
   const billTitle = escapePdfText(invoice.title || "TAX INVOICE");
 
@@ -44,44 +46,31 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   const advanceStr = `INR ${formatAmount(invoice.advanceAmount)}`;
   const remainingStr = `INR ${formatAmount(invoice.remainingAmount)}`;
 
-  // Page dimensions (A4 in points: 595.28 x 841.89)
   const W = 595.28;
   const H = 841.89;
 
-  // Load static QR image from project public assets folder
-  let qrBuffer: Buffer | null = null;
-  try {
-    const qrPath = path.join(process.cwd(), "public", "assets", "images", "payment-qr.jpg");
-    if (fs.existsSync(qrPath)) {
-      qrBuffer = fs.readFileSync(qrPath);
-    }
-  } catch (err) {
-    console.error("Error reading static QR image for PDF:", err);
+  let qrBuffer = null;
+  const qrPath = path.join(__dirname, '../public/assets/images/payment-qr.jpg');
+  if (fs.existsSync(qrPath)) {
+    qrBuffer = fs.readFileSync(qrPath);
+    console.log(`Loaded QR buffer: ${qrBuffer.length} bytes`);
   }
 
-  // Build PDF Graphics Commands Stream
-  const streamCommands: string[] = [];
-  const add = (cmd: string) => streamCommands.push(cmd);
+  const streamCommands = [];
+  const add = (cmd) => streamCommands.push(cmd);
 
-  // --- BACKGROUND & HEADER ---
-  // Top Header Banner (Deep Navy #071a3d)
-  add("0.027 0.102 0.239 rg"); // #071a3d
+  add("0.027 0.102 0.239 rg");
   add(`0 ${H - 110} ${W} 110 re f`);
-
-  // Green accent bar below header (#00a651)
-  add("0.000 0.651 0.318 rg"); // #00a651
+  add("0.000 0.651 0.318 rg");
   add(`0 ${H - 114} ${W} 4 re f`);
 
-  // --- HEADER TEXT (White / Green) ---
   add("BT");
-  // BUSYGROWTH Logo Text
   add("/F2 26 Tf");
   add("1 0 0 1 40 " + (H - 52) + " Tm");
   add("1.0 1.0 1.0 rg");
   add("(BUSYGROWTH) Tj");
   add("ET");
 
-  // Tagline
   add("BT");
   add("/F1 9 Tf");
   add("1 0 0 1 40 " + (H - 72) + " Tm");
@@ -89,7 +78,6 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add("(Predictable Digital Growth & Performance Agency) Tj");
   add("ET");
 
-  // Contact Info in Header
   add("BT");
   add("/F1 8 Tf");
   add("1 0 0 1 40 " + (H - 92) + " Tm");
@@ -97,40 +85,44 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add("(thebusygrowth@gmail.com  |  +91 9352757834  |  Jaipur, Rajasthan) Tj");
   add("ET");
 
-  // DYNAMIC BILL TITLE Heading on Header Right
   add("BT");
   add("/F2 22 Tf");
   add("1 0 0 1 " + (W - 220) + " " + (H - 55) + " Tm");
-  add("0.000 0.651 0.318 rg"); // Green #00a651
+  add("0.000 0.651 0.318 rg");
   add(`(${billTitle}) Tj`);
   add("ET");
 
-  // --- INVOICE METADATA BOX (Top Right below header) ---
-  const metaBoxY = H - 180;
-  add("0.96 0.97 0.98 rg"); // light bg
-  add(`${W - 240} ${metaBoxY} 200 45 re f`);
-  add("0.85 0.88 0.92 RG"); // border color
+  const metaBoxY = H - 200;
+  add("0.96 0.97 0.98 rg");
+  add(`${W - 240} ${metaBoxY} 200 65 re f`);
+  add("0.85 0.88 0.92 RG");
   add("1 w");
-  add(`${W - 240} ${metaBoxY} 200 45 re s`);
+  add(`${W - 240} ${metaBoxY} 200 65 re s`);
 
   add("BT");
   add("/F2 10 Tf");
   add("0.1 0.15 0.25 rg");
-  add("1 0 0 1 " + (W - 230) + " " + (metaBoxY + 26) + " Tm");
+  add("1 0 0 1 " + (W - 230) + " " + (metaBoxY + 46) + " Tm");
   add("(Invoice No:) Tj");
   add("/F1 10 Tf");
-  add("1 0 0 1 " + (W - 140) + " " + (metaBoxY + 26) + " Tm");
+  add("1 0 0 1 " + (W - 140) + " " + (metaBoxY + 46) + " Tm");
   add(`(${invoiceNum}) Tj`);
 
   add("/F2 10 Tf");
-  add("1 0 0 1 " + (W - 230) + " " + (metaBoxY + 10) + " Tm");
+  add("1 0 0 1 " + (W - 230) + " " + (metaBoxY + 28) + " Tm");
   add("(Invoice Date:) Tj");
   add("/F1 10 Tf");
-  add("1 0 0 1 " + (W - 140) + " " + (metaBoxY + 10) + " Tm");
+  add("1 0 0 1 " + (W - 140) + " " + (metaBoxY + 28) + " Tm");
   add(`(${invoiceDate}) Tj`);
+
+  add("/F2 10 Tf");
+  add("1 0 0 1 " + (W - 230) + " " + (metaBoxY + 10) + " Tm");
+  add("(Due Date:) Tj");
+  add("/F1 10 Tf");
+  add("1 0 0 1 " + (W - 140) + " " + (metaBoxY + 10) + " Tm");
+  add(`(${dueDate}) Tj`);
   add("ET");
 
-  // --- ISSUED TO SECTION (Top Left) ---
   const issuedY = H - 200;
   add("BT");
   add("/F2 12 Tf");
@@ -152,31 +144,26 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add(`(Email: ${email}) Tj`);
   add("ET");
 
-  // --- SEPARATOR LINE ---
   const sepY = H - 230;
   add("0.85 0.88 0.92 RG");
   add("1 w");
   add(`40 ${sepY} ${W - 80} 0 m ${W - 40} ${sepY} l S`);
 
-  // --- DESCRIPTION / ITEMS TABLE ---
   const tableY = H - 275;
   const tableW = W - 80;
 
-  // Table Header Bar (Navy #071a3d)
   add("0.027 0.102 0.239 rg");
   add(`40 ${tableY} ${tableW} 28 re f`);
 
   add("BT");
   add("/F2 11 Tf");
-  add("1.0 1.0 1.0 rg"); // White text
+  add("1.0 1.0 1.0 rg");
   add("1 0 0 1 52 " + (tableY + 9) + " Tm");
   add("(DESCRIPTION / SERVICES) Tj");
-
   add("1 0 0 1 " + (W - 150) + " " + (tableY + 9) + " Tm");
   add("(AMOUNT) Tj");
   add("ET");
 
-  // Table Body Row
   const rowY = tableY - 60;
   add("0.98 0.98 0.99 rg");
   add(`40 ${rowY} ${tableW} 60 re f`);
@@ -188,7 +175,6 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add("0.15 0.2 0.3 rg");
   add("1 0 0 1 52 " + (rowY + 36) + " Tm");
 
-  // Simple multi-line wrap if description is long
   const descLines = description.length > 55
     ? [description.substring(0, 55), description.substring(55, 110)]
     : [description];
@@ -208,7 +194,6 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add(`(${totalStr}) Tj`);
   add("ET");
 
-  // --- SUMMARY BREAKDOWN BOX (Right align under table) ---
   const sumY = rowY - 110;
   const sumW = 230;
   const sumX = W - 40 - sumW;
@@ -219,7 +204,6 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add(`${sumX} ${sumY} ${sumW} 95 re s`);
 
   add("BT");
-  // Subtotal
   add("/F1 10 Tf");
   add("0.35 0.4 0.48 rg");
   add("1 0 0 1 " + (sumX + 15) + " " + (sumY + 70) + " Tm");
@@ -229,22 +213,19 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add("1 0 0 1 " + (sumX + 120) + " " + (sumY + 70) + " Tm");
   add(`(${totalStr}) Tj`);
 
-  // Advance
   add("/F1 10 Tf");
   add("0.35 0.4 0.48 rg");
   add("1 0 0 1 " + (sumX + 15) + " " + (sumY + 48) + " Tm");
   add("(Advance Paid:) Tj");
   add("/F2 10 Tf");
-  add("0.0 0.5 0.25 rg"); // Green
+  add("0.0 0.5 0.25 rg");
   add("1 0 0 1 " + (sumX + 120) + " " + (sumY + 48) + " Tm");
   add(`(${advanceStr}) Tj`);
-
-  // Divider
   add("ET");
+
   add("0.82 0.85 0.9 RG");
   add(`${sumX + 15} ${sumY + 38} ${sumW - 30} 0 m ${sumX + sumW - 15} ${sumY + 38} l S`);
 
-  // Current Remaining Box (Highlight in Green #00a651)
   add("0.000 0.651 0.318 rg");
   add(`${sumX + 10} ${sumY + 8} ${sumW - 20} 24 re f`);
 
@@ -257,7 +238,6 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add(`(${remainingStr}) Tj`);
   add("ET");
 
-  // --- PAYMENT & QR CODE SECTION (Left side under table) ---
   const payY = rowY - 110;
   const payW = 250;
   const payX = 40;
@@ -285,27 +265,17 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add("(Scan QR Code below or use UPI ID for settlement) Tj");
   add("ET");
 
-  // --- QR CODE DISPLAY BOX ---
   const qrY = payY - 120;
   add("0.95 0.96 0.98 rg");
   add(`40 ${qrY} 100 100 re f`);
   add("0.8 0.85 0.9 RG");
   add(`40 ${qrY} 100 100 re s`);
 
-  // Render static JPEG QR code image inside the box if available
   if (qrBuffer) {
     add("q");
-    // Standard PDF matrix (48w, 94h) for right-side up upright image rendering
-    add(`48 0 0 94 46 ${qrY + 3} cm`);
+    add(`46 0 0 88 45 ${qrY + 6} cm`);
     add("/Im1 Do");
     add("Q");
-  } else {
-    // Vector fallback placeholder graphic
-    add("0.1 0.15 0.25 rg");
-    add(`52 ${qrY + 12} 76 76 re s`);
-    add(`58 ${qrY + 58} 24 24 re f`);
-    add(`98 ${qrY + 58} 20 20 re f`);
-    add(`58 ${qrY + 18} 20 20 re f`);
   }
 
   add("BT");
@@ -322,13 +292,11 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add("(Thank you for your prompt payment!) Tj");
   add("ET");
 
-  // --- SIGNATURE & FOOTER SECTION ---
   const sigY = 90;
   add("0.85 0.88 0.92 RG");
   add("1 w");
   add(`40 ${sigY} ${W - 80} 0 m ${W - 40} ${sigY} l S`);
 
-  // Company Signature Block on Right
   add("BT");
   add("/F2 10 Tf");
   add("0.027 0.102 0.239 rg");
@@ -340,7 +308,6 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add("1 0 0 1 " + (W - 200) + " " + (sigY - 55) + " Tm");
   add("(Authorized Signatory) Tj");
 
-  // Left Footer Note
   add("/F1 8 Tf");
   add("0.4 0.45 0.5 rg");
   add("1 0 0 1 40 " + (sigY - 20) + " Tm");
@@ -349,76 +316,55 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
   add("(Official Website: https://thebusygrowth.com) Tj");
   add("ET");
 
-  // Bottom Green Accent Strip
   add("0.000 0.651 0.318 rg");
   add(`0 0 ${W} 8 re f`);
 
-  // Construct PDF Stream
   const contentsBody = streamCommands.join("\n");
   const contentsLength = Buffer.byteLength(contentsBody, "utf-8");
 
-  // Assemble Objects
-  const pdfChunks: Buffer[] = [];
+  const pdfChunks = [];
   let currentOffset = 0;
-  const offsets: number[] = [];
+  const offsets = [];
 
-  function pushString(str: string) {
+  function pushString(str) {
     const buf = Buffer.from(str, "utf-8");
     pdfChunks.push(buf);
     currentOffset += buf.length;
   }
 
-  function pushBuffer(buf: Buffer) {
+  function pushBuffer(buf) {
     pdfChunks.push(buf);
     currentOffset += buf.length;
   }
 
   pushString("%PDF-1.4\n");
 
-  // Object 1: Catalog
   offsets[1] = currentOffset;
   pushString("1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n");
 
-  // Object 2: Pages
   offsets[2] = currentOffset;
   pushString("2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n");
 
-  // Object 3: Page
   offsets[3] = currentOffset;
-  const xObjResource = qrBuffer ? " /XObject << /Im1 7 0 R >>" : "";
-  pushString(
-    `3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 4 0 R /F2 5 0 R >>${xObjResource} >> /Contents 6 0 R >>\nendobj\n`
-  );
+  const xObjRes = qrBuffer ? " /XObject << /Im1 7 0 R >>" : "";
+  pushString(`3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 4 0 R /F2 5 0 R >>${xObjRes} >> /Contents 6 0 R >>\nendobj\n`);
 
-  // Object 4: Font F1 (Helvetica)
   offsets[4] = currentOffset;
-  pushString(
-    "4 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>\nendobj\n"
-  );
+  pushString("4 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>\nendobj\n");
 
-  // Object 5: Font F2 (Helvetica-Bold)
   offsets[5] = currentOffset;
-  pushString(
-    "5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>\nendobj\n"
-  );
+  pushString("5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>\nendobj\n");
 
-  // Object 6: Stream Contents
   offsets[6] = currentOffset;
-  pushString(
-    `6 0 obj\n<< /Length ${contentsLength} >>\nstream\n${contentsBody}\nendstream\nendobj\n`
-  );
+  pushString(`6 0 obj\n<< /Length ${contentsLength} >>\nstream\n${contentsBody}\nendstream\nendobj\n`);
 
-  // Object 7: Image XObject (if static QR code buffer loaded)
   if (qrBuffer) {
     offsets[7] = currentOffset;
-    pushString(
-      `7 0 obj\n<< /Type /XObject /Subtype /Image /Width 533 /Height 1024 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${qrBuffer.length} >>\nstream\n`
-    );
+    pushString(`7 0 obj\n<< /Type /XObject /Subtype /Image /Width 533 /Height 1024 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${qrBuffer.length} >>\nstream\n`);
     pushBuffer(qrBuffer);
     pushString("\nendstream\nendobj\n");
   }
 
-  // Xref table
   const startXref = currentOffset;
   const totalObjCount = qrBuffer ? 8 : 7;
   pushString(`xref\n0 ${totalObjCount}\n`);
@@ -427,8 +373,12 @@ export async function generateInvoicePDF(invoice: SystemInvoice): Promise<Buffer
     pushString(offsets[i].toString().padStart(10, "0") + " 00000 n \n");
   }
 
-  pushString(`trailer\n<< /Size ${totalObjCount} /Root 1 0 R >>\n`);
-  pushString("startxref\n" + startXref + "\n%%EOF\n");
+  pushString(`trailer\n<< /Size ${totalObjCount} /Root 1 0 R >>\nstartxref\n${startXref}\n%%EOF\n`);
 
-  return Buffer.concat(pdfChunks);
+  const finalPdf = Buffer.concat(pdfChunks);
+  const outputPath = path.join(__dirname, 'test_output.pdf');
+  fs.writeFileSync(outputPath, finalPdf);
+  console.log(`Generated test PDF at ${outputPath}, size: ${finalPdf.length} bytes`);
 }
+
+testGeneratePDF();

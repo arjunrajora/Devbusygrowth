@@ -38,6 +38,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const {
+      title,
       invoiceNumber,
       userName,
       mobile,
@@ -79,13 +80,6 @@ export async function POST(req: NextRequest) {
     if (!invoiceDate) {
       return NextResponse.json(
         { error: "Invoice Date is required." },
-        { status: 400 }
-      );
-    }
-
-    if (!dueDate) {
-      return NextResponse.json(
-        { error: "Due Date is required." },
         { status: 400 }
       );
     }
@@ -140,6 +134,7 @@ export async function POST(req: NextRequest) {
 
     // 2. Save Invoice in MongoDB
     const savedInvoice = await saveInvoice({
+      title: typeof title === "string" ? title.trim() : undefined,
       invoiceNumber: finalInvoiceNumber,
       userName: cleanUserName,
       mobile: cleanMobile,

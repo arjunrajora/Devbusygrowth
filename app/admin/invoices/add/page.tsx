@@ -24,9 +24,9 @@ export default function AddInvoicePage() {
   const [userName, setUserName] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
+  const [title, setTitle] = useState("TAX INVOICE");
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [invoiceDate, setInvoiceDate] = useState("");
-  const [dueDate, setDueDate] = useState("");
   const [description, setDescription] = useState("");
   const [totalAmount, setTotalAmount] = useState<string>("");
   const [advanceAmount, setAdvanceAmount] = useState<string>("");
@@ -45,12 +45,7 @@ export default function AddInvoicePage() {
     const today = new Date();
     const todayStr = today.toISOString().split("T")[0];
 
-    const nextWeek = new Date();
-    nextWeek.setDate(today.getDate() + 7);
-    const nextWeekStr = nextWeek.toISOString().split("T")[0];
-
     setInvoiceDate(todayStr);
-    setDueDate(nextWeekStr);
 
     fetchNextInvoiceNumber();
   }, []);
@@ -124,11 +119,6 @@ export default function AddInvoicePage() {
       return;
     }
 
-    if (!dueDate) {
-      setErrorMsg("Due Date is required.");
-      return;
-    }
-
     if (!description.trim()) {
       setErrorMsg("Description cannot be empty.");
       return;
@@ -158,12 +148,12 @@ export default function AddInvoicePage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          title: title.trim() || "TAX INVOICE",
           invoiceNumber: invoiceNumber.trim(),
           userName: userName.trim(),
           mobile: cleanMobile,
           email: email.trim(),
           invoiceDate,
-          dueDate,
           description: description.trim(),
           totalAmount: totalVal,
           advanceAmount: advanceVal,
@@ -305,6 +295,21 @@ export default function AddInvoicePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {/* Bill Title */}
+            <div className="space-y-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
+                Bill Title / Document Type <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="e.g. TAX INVOICE"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#050c1a] text-slate-900 dark:text-white text-sm font-bold tracking-wide focus:outline-none focus:ring-2 focus:ring-[#0d60c4] dark:focus:ring-[#00a651]"
+              />
+            </div>
+
             {/* Invoice Number */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
@@ -342,23 +347,6 @@ export default function AddInvoicePage() {
                   required
                   value={invoiceDate}
                   onChange={(e) => setInvoiceDate(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#050c1a] text-slate-900 dark:text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#0d60c4] dark:focus:ring-[#00a651]"
-                />
-              </div>
-            </div>
-
-            {/* Due Date */}
-            <div className="space-y-2">
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300">
-                Due Date <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <Calendar size={16} className="absolute left-3.5 top-3.5 text-slate-400" />
-                <input
-                  type="date"
-                  required
-                  value={dueDate}
-                  onChange={(e) => setDueDate(e.target.value)}
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#050c1a] text-slate-900 dark:text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#0d60c4] dark:focus:ring-[#00a651]"
                 />
               </div>
