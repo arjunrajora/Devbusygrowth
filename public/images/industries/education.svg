@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="eduBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071a3d"/>
+      <stop offset="100%" stop-color="#050c1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#eduBg)"/>
+  <!-- Graduation Mortarboard & Book -->
+  <g transform="translate(250, 120)">
+    <polygon points="150,40 280,100 150,160 20,100" fill="none" stroke="#00a651" stroke-width="10" stroke-linejoin="round"/>
+    <rect x="70" y="160" width="160" height="90" rx="10" fill="none" stroke="#0d60c4" stroke-width="8"/>
+    <path d="M260 110 L260 210 M260 210 C260 230, 240 230, 240 210" fill="none" stroke="#00a651" stroke-width="6"/>
+  </g>
+  <text x="400" y="480" text-anchor="middle" fill="#ffffff" font-family="-apple-system, sans-serif" font-size="28" font-weight="bold">Education &amp; Coaching</text>
+  <text x="400" y="520" text-anchor="middle" fill="#0d60c4" font-family="-apple-system, sans-serif" font-size="18" font-weight="600">Student Admissions &amp; Funnels</text>
+</svg>

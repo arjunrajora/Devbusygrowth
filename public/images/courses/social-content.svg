@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="c3Bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071a3d"/>
+      <stop offset="100%" stop-color="#0b2857"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#c3Bg)"/>
+  <g transform="translate(250, 110)">
+    <polygon points="60,80 180,40 180,240 60,200" fill="none" stroke="#00a651" stroke-width="10"/>
+    <path d="M180 80 L240 60 V220 L180 200" fill="none" stroke="#0d60c4" stroke-width="8"/>
+  </g>
+  <text x="400" y="480" text-anchor="middle" fill="#ffffff" font-family="-apple-system, sans-serif" font-size="28" font-weight="bold">Module 3: Social &amp; Content</text>
+  <text x="400" y="520" text-anchor="middle" fill="#00a651" font-family="-apple-system, sans-serif" font-size="18" font-weight="600">Platform-Led Growth Engines</text>
+</svg>

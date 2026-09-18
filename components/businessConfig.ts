@@ -1,0 +1,21 @@
+export const BUSINESS_CONFIG = {
+  name: "TheBusyGrowth",
+  email: "thebusygrowth@gmail.com",
+  phone: "+919352757834",
+  phoneFormatted: "9352757834",
+  whatsapp: "919352757834",
+  whatsappFormatted: "+91 9352757834",
+  whatsappLink: "https://wa.me/919352757834",
+  address: "A95, Mathur's Villa, Patel Nagar, Block 1, Bindayaka, Jaipur, Rajasthan – 302041, India",
+  city: "Jaipur",
+  state: "Rajasthan",
+  country: "India",
+  postalCode: "302041",
+  socials: {
+    instagram: "https://www.instagram.com/thebusygrowth",
+    youtube: "https://www.youtube.com/@THEBUSYGROWTH",
+  },
+  websiteUrl: "https://thebusygrowth.com",
+  tagline: "Predictable Digital Growth & Performance Agency",
+  description: "Jaipur-based performance marketing team scaling founders and creators with Reels, Ads, and AI automation. No fluff — just real growth.",
+};

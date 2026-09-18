@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="reelsBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050c1a"/>
+      <stop offset="50%" stop-color="#071a3d"/>
+      <stop offset="100%" stop-color="#00a651"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="20" fill="url(#reelsBg)"/>
+  <circle cx="400" cy="250" r="160" fill="#00a651" opacity="0.18" filter="blur(45px)"/>
+  
+  <rect x="50" y="50" width="220" height="30" rx="15" fill="#00a651" fill-opacity="0.2" stroke="#00a651"/>
+  <text x="65" y="70" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="11">REELS &amp; VIDEO EDITING SHOWCASE</text>
+  
+  <text x="50" y="120" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="900" font-size="28">Hook-First Video Production &amp; Editing</text>
+
+  <!-- Video Phone Bezel Graphic -->
+  <rect x="290" y="150" width="220" height="300" rx="24" fill="#050c1a" stroke="#00a651" stroke-width="2"/>
+  <polygon points="380,270 420,300 380,330" fill="#00a651"/>
+  <rect x="310" y="170" width="180" height="30" rx="8" fill="#071a3d"/>
+  <text x="325" y="190" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="800" font-size="11">Sub-3s Viral Hook</text>
+
+  <rect x="50" y="170" width="210" height="110" rx="16" fill="#071a3d" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="70" y="200" fill="#38bdf8" font-family="system-ui, sans-serif" font-weight="800" font-size="12">DYNAMIC SUBTITLES</text>
+  <text x="70" y="230" fill="#ffffff" font-family="system-ui, sans-serif" font-weight="700" font-size="13">Animated Captions &amp; SoundFX</text>
+  <text x="70" y="255" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Optimized for Silent Autoplay</text>
+
+  <rect x="540" y="170" width="210" height="110" rx="16" fill="#071a3d" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="560" y="200" fill="#00a651" font-family="system-ui, sans-serif" font-weight="800" font-size="12">RETENTION RATE</text>
+  <text x="560" y="235" fill="#00a651" font-family="system-ui, sans-serif" font-weight="900" font-size="24">68% Watch</text>
+  <text x="560" y="260" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Average View Duration</text>
+</svg>
